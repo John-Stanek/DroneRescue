@@ -22,4 +22,3 @@
     #Usage bin/run-env.sh <port - optional(default 8081)>
     bin/run-env.sh
     ```
->>>>>>> ce6e6552e02eaf633bcaed81e2430af30cdccc8c
