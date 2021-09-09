@@ -1,6 +1,3 @@
-
-# repo-lu000097
-
 ## Pre-requisites
   * [Git](https://git-scm.com/)
 
