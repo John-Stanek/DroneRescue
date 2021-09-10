@@ -163,6 +163,10 @@ $ git remote -v
 ```
 **_What just happened?_** You added a remote target to the local repository, which can now be referred to as _upstream_. This will allow you to pull the branch _support-code_ from the shared-upstream repository. Then, to verify it worked, you listed the remote targets that are currently available. You should see two sets of two: a fetch and push for origin (your repo) and a fetch and push for the shared-upstream repo.
 
+First let's create a main branch.
+
+    $ git checkout -b main
+
 Now, let's add the _support-code_ branch to your local repository before getting what you need from shared-upstream.
 
     $ git checkout -b support-code
