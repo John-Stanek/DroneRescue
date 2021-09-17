@@ -1,5 +1,6 @@
 ## Pre-requisites
   * [Git](https://git-scm.com/)
+    * [Windows Instructions](https://positive-stud.medium.com/how-to-download-install-git-for-windows-23ae8c12c5c7) - Enable experimental support for pseudo consoles.
 
 ## Docker Pre-requisites
   * Windows 10 Home
@@ -9,6 +10,8 @@
     * Use [docker group instead of sudo](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04)
 
 ## Getting Started with Docker
+
+On Windows use the "Git Bash" terminal.
 
 1. Build docker image
 
