@@ -343,7 +343,7 @@ Try building the main.o object file again now that we set the include directorie
 
 You should now see that the main.o is created.  You will also need to add the include directories to the drone_app.o rule.
 
-### Step 4: Build the application!
+### Step 4: Build the application
 
 Finally, we need to build the drone_app executable by linking all the *.o files together.  To start, lets add a rule for building drone_app, where the dependencies are each object file (*.o) file.  Edit your Makefile to build the drone_app at the top of the file below the variable definitions (so it will be the default target).  Refer to the previous makefile where we built the vector_app in the lab.  After adding, we will try to build the app by running ```make```.
 
@@ -452,7 +452,7 @@ THIS CHECKPOINT IS COMPLETE.
 
 Congratulations!
 
-# Optional: Actually make the drone move!
+# Optional: Actually make the drone move
 
 The main purpose of the checkpoint was to learn how to build a larger program using multiple libraries.  Now you have a working system connected to the visualization that you can begin to modify.  Making the drone move is perhaps a team effort.  Throughout iteration 1 we will provide hints on how drones move and how to accomplish this.  You may start prototyping movement now using the methods in the Drone class.  Here are a description of each method:
 
