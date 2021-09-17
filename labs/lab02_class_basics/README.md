@@ -196,7 +196,7 @@ This extended lab checkpoint uses the results above as a starting place for movi
 2. How Makefiles compile and link C++ programs.
 3. How to build a Makefile to automate the build process.
 4. How to link external libraries.
-5. Optional: How to start interacting with a drone.
+5. **Optional:** How to start interacting with a drone.
 
 ## The 2D interface for graphics
 
