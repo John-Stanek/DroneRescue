@@ -277,7 +277,13 @@ You do not need to change or understand these files, as they are beyond the scop
 
 ### Step 1: Import your Vector3 class
 
-Follow the aproach below:
+If you are working on the lab machines, you may need to first load a version of g++ that support c++ 11 standard (-std=c++11) with the following command:
+
+```bash
+module load soft/gcc/7.1
+```
+
+Then follow the steps below:
 
 1. The first step of this checkpoint is to copy your vector3.h and vector3.cc to this folder:
 2. Create a file named Makefile and add a rule to create the vector.o object file.  You may refer to the Makefile from earlier.
@@ -325,7 +331,7 @@ This will create a variable called INCLUDE_DIRS that the compiler will look for 
 
 ```
 main.o: main.cc
-	g++ $(INCLUDE_DIRS) -c main.cc -o main.o
+	g++ -std=c++11 $(INCLUDE_DIRS) -c main.cc -o main.o
 ```
 
 Try building the main.o object file again now that we set the include directories:
@@ -387,7 +393,7 @@ Notice we use -L to define the library directories and -l to define which librar
 
 ```
 drone_app: drone.o drone_app.o main.o vector3.o
-	g++ $(LIB_DIRS) drone.o drone_app.o main.o vector3.o $(LIBS) -o drone_app
+	g++ -std=c++11 $(LIB_DIRS) drone.o drone_app.o main.o vector3.o $(LIBS) -o drone_app
 ```
 
 Unfortunately, you should get another underfinded reference error:
