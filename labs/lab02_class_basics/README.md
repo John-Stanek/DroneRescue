@@ -280,7 +280,7 @@ You do not need to change or understand these files, as they are beyond the scop
 If you are working on the lab machines, you may need to first load a version of g++ that support c++ 11 standard (-std=c++11) with the following command:
 
 ```bash
-module load soft/gcc/7.1
+% module load soft/gcc/7.1
 ```
 
 Then follow the steps below:
