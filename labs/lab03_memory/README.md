@@ -339,7 +339,7 @@ Create a data folder to store your input and output *.png images (copy the image
 
 ![](https://github.umn.edu/umn-csci-3081-f21/examples/blob/main/data/images/green_gradient.png?raw=true)
 
-**Optional:** Feel free to add more.  Consider resizing an image or try applying a threshold filter.  To apply a threshold filter, iterate through the pixels and set any pixel to black if red is less than 0.5 and white if red is greater than 0.5.
+**Optional:** Feel free to add more.  Consider resizing an image or try applying a threshold filter.  To apply a simple threshold filter, iterate through the pixels and set any pixel to black if red is less than 0.5 and white if red is greater than 0.5.
 
 ### Submitting your Checkpoint 2 (staring Monday, 9/27/2021)
 
