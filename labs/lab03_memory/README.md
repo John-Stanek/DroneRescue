@@ -152,7 +152,8 @@ Note it builds all the applications. Let's execute them:
 
 We are now ready to start Part A of this assignment.
 
-### Part A - Understanding C++ Memory (Gradescope assignment - 50% of Lab03 Grade)
+### Part A - Understanding C++ Memory (Gradescope assignment)
+_(50% of Lab03 Grade)_
 
 Part A consists of running the `memory_app` program and answering questions on the Gradescope Lab 3 assignment.  You can take the multiple times and the highest score will be used.  **Note:** You are welcome to modify `memory.cc` to help answer any questions.
 
@@ -197,7 +198,8 @@ Run the following and study the `arrays()` function within `memory.cc`.  This fu
 Answer questions 9-10 in the Gradescope assignment.
 
 
-### Part B - Modifying an Image (50% of Lab03 Grade)
+### Part B - Modifying an Image
+_(50% of Lab03 Grade)_
 
 Create a folder named `data`.  Add an image of your choice and name it: `data/input.png`.
 
