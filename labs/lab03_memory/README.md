@@ -308,7 +308,7 @@ Navigate to lab02_memory/checkpoint2 in one of the development environments (VOL
 % ./image_processor
 ```
 
-Create a new `Image` class that includes both an interface (image.h) and abmplementation (image.cc).  This image class should be able to load and save images.  It should also give users the ability to edit images by setting pixel values.  The following are constructors and methods that should be implemented to help reach this goal:
+Create a new `Image` class that includes both an interface (image.h) and an implementation (image.cc).  This image class should be able to load and save images.  It should also give users the ability to edit images by setting pixel values.  The following are constructors and methods that should be implemented to help reach this goal:
  * **Constructors**
    * `Image(width, height)` - Creates a "blank" image of a given width and height.
    * `Image(filename)` - Load an image from the hard drive if a string (or character array) is passed into the constructor.  **Hint:** Use stb_image (see image.cc in Lab03 above).
