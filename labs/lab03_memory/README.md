@@ -308,7 +308,7 @@ Navigate to lab02_memory/checkpoint2 in one of the development environments (VOL
 % ./image_processor
 ```
 
-Create a new `Image` class including the interface (image.h) and the implementation (image.cc).  This image class should be able to do the following:
+Create a new `Image` class that includes both an interface (image.h) and abmplementation (image.cc).  This image class should be able to load and save images.  It should also give users the ability to edit images by setting pixel values.  The following are constructors and methods that should be implemented to help reach this goal:
  * **Constructors**
    * `Image(width, height)` - Creates a "blank" image of a given width and height.
    * `Image(filename)` - Load an image from the hard drive if a string (or character array) is passed into the constructor.  **Hint:** Use stb_image (see image.cc in Lab03 above).
@@ -322,11 +322,11 @@ We highly recommend that you refer to image.cc (from Lab03) to help you create a
 
 ### Guidelines for building your image class
 
-The following are guidelines for implementing your image class.  We will be reviewing your classes to make sure these are followed:
+The following are guidelines for implementing your image class.  We will be reviewing your classes to make sure these items are followed:
 
  * **Classes / Constructors / Methods** - You have freedom to design these image classes and any other class as you like.  We are interested in how you would solve the problem.
- * **Memory Management** - Be sure to use best practices for dynamic memory management (No memory leaks, the Big Three, etc...).  You may also use smart pointers if you use them correctly (more detail to come).
- * **Efficient** - Write as efficient and safe code.  For example, be sure to use a const reference wherever possible to save space on the stack and avoid copying too much information.  In fact, you may want to go back and modify your Vector3 class to include const references whenever you pass a value that is larger than a pointer.  
+ * **Memory Management** - Be sure to use best practices for dynamic memory management (No memory leaks, the Big Three, etc...).  You may also use smart pointers if you use them correctly (we will cover these in class).
+ * **Efficient** - Write efficient and safe code.  For example, be sure to use a const reference wherever possible to save space on the stack and avoid copying too much information.  In fact, you may want to go back and modify your Vector3 class to include const references whenever you pass a value that is larger than a pointer.  
  * **Useful** - After creating your class, you will need to accomplish the tasks in `main.cc` detailed in the next section.  These are also commented in the `main.cc` to help with implementation.
 
 ### Editing Images
