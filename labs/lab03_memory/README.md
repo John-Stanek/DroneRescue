@@ -85,7 +85,7 @@ In case you are interested, here are many other useful header file libraries for
 
 ### Configuring Makefiles
 
-Depending on the system, environment being used, or customized compiler options it is common to configure your makefile based on the specific machine.  For example, we may want to specify the specifically compiler that should be used.  We often use variables to accomplish this as we have seen in lab02.  Notice the top of the Makefile provided:
+Depending on the system, environment being used, or customized compiler options it is common to configure your makefile based on the specific machine.  For example, we may want to specify the compiler that should be used.  We often use variables to accomplish this as we have seen in lab02.  Notice the top of the Makefile provided:
 
 ```
 CXX=g++
@@ -124,6 +124,8 @@ Notice we are using the configuration variables defined above.
 
 - `$^` : is a synonym for the slightly longer shortcut `$(inputs)`, which is just the list of all dependencies listed after the target.
     > e.g. all the `.cc` files listed as dependencies
+
+- `$<` : similar to the `$^` command, the `$<` only appends one of the `$(inputs)` following the target. Since, we are only working with one .cc file, `$<` is more logical but if there were multiple .cc, `$^` would be more appropriate.
 
 - `$@` : is a shortcut meaning the name of the target without the .o extension.
 
