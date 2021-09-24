@@ -71,7 +71,7 @@ will output the branch you are currently working in and indicate if there are an
 ### Goal
 
 <hr>
-  **The primary goal of this lab is for you to understand C++ memory concepts (Part A) and to start modifying images (Part B).**
+  **The primary goal of this lab is for you to understand C++ memory concepts (Part A - 50%) and to start modifying images (Part B - 50%).**
 <hr>
 
 ### Prerequisites
