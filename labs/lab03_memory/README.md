@@ -343,7 +343,7 @@ Create a data folder to store your input and output *.png images (copy the image
 
 ### Submitting your Checkpoint 2 (staring Monday, 9/27/2021)
 
-Submit your work by uploading the following files to Gradescope for the Checkpoint2 assignment (which will be available starting Monday evening, September 27, 2021).  We will inspect your code quality (no memory leaks, efficient memory paradignms, secure, etc...) and design in grading this assignment.
+Submit your work by uploading the following files to Gradescope for the Checkpoint 2 assignment (which will be available starting Monday evening, September 27, 2021).  We will inspect your code quality (no memory leaks, efficient memory paradigms, secure, etc...) and design in grading this assignment.
 
  - Makefile
  - image.h
