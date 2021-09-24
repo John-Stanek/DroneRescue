@@ -271,14 +271,6 @@ This extended lab checkpoint uses the results above as a starting place for imag
 4. How to load, modify, copy, and save images.
 5. Simple image editing techniques.
 
-### Getting Started
-
-Navigate to lab02_memory/checkpoint2 in one of the development environments (VOLE / CSE Labs, SSH, Docker):
-
-```bash
-% cd x500-repo/labs/lab03_memory/checkpoint2
-```
-
 ### What's in labs/lab03_memory/checkpoint2
 
 - Makefile:
