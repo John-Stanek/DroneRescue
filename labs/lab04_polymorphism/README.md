@@ -308,7 +308,7 @@ _commit_ and _push_ is what separates git from centralized version control syste
 
     $ git status
     $ git add -A
-    $ git commit -m "add(lab07): Adding lab07 deliverables"
+    $ git commit -m "Adding lab04 deliverables"
     $ git push
 
 **_What just happened?_** Double-checking the files to be staged using the _git status_ command. All of the tracked changes are staged with `git add -A`. Those staged changes were committed to your local repository and tagged with the message that follows `-m`, then pushed to the server in your remote repository.
