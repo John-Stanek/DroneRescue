@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
             step2.SetPixel(x, y, pixel, rgba);
         }
     }
+    // Set each pixel to Red or [255, 0, 0, 255] => [red, green, blue, alpha]
     // Save the image as "data/red.png"
     step2.SaveAs("data/red.png");
 
