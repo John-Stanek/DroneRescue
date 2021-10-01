@@ -336,7 +336,7 @@ The following are guidelines for implementing your image class.  We will be revi
 Create a data folder to store your input and output *.png images (copy the images from <https://github.umn.edu/umn-csci-3081-f21/examples/tree/main/data/images>).  Then follow these steps:
 
 1. Inside your main() method, load in “data/statue.png” (found here: <https://github.umn.edu/umn-csci-3081-f21/examples/blob/main/data/images/statue.png>) using the Image class.  Print out the width and height.  Save a new file as “data/statue_copy.png”.  Verify that the new image is a copy of the old one.
-2. Next create a new image by specifying the width = 256 and height = 256 in the constructor.  Set each pixel color to Color(1, 0, 0, 1), which is red.  Save the image as “data/red.png”.  Verify that the image created is completely red.
+2. Next create a new image by specifying the width = 256 and height = 256 in the constructor.  Set each pixel color to (255, 0, 0, 255), which is red.  Save the image as “data/red.png”.  Verify that the image created is completely red.
 3. Finally, create a gradient image from left to right (width = 256, height = 32) that increases the green intensity.  So at the left the intensity is black and the right it is green.  Save the image as “data/green_gradient.png”.  Verify the image looks similar to the following gradient:
 
 ![](https://github.umn.edu/umn-csci-3081-f21/examples/blob/main/data/images/green_gradient.png?raw=true)

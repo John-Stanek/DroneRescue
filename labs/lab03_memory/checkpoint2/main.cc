@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 
     // Step 2:
     // Create an image of size 256 x 256.
-    // Set each pixel to Red or [1, 0, 0, 1] => [red, green, blue, alpha]
+    // Set each pixel to Red or [255, 0, 0, 255] => [red, green, blue, alpha]
     // Save the image as "data/red.png"
 
     // Step 3:

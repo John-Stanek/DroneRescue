@@ -18,16 +18,21 @@ RUN apt-get update && apt-get install -y \
 
 ARG USER_ID
 ARG GROUP_ID
-ARG SRC_DIR
 ARG DEP_DIR
+ARG SRC_DIR
+
+ENV DEP_DIR=/${DEP_DIR}
+RUN echo ${DEP_DIR}
+ENV SRC_DIR=/${SRC_DIR}
+RUN echo ${SRC_DIR}
+
 
 RUN addgroup --gid $GROUP_ID user
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
 
-RUN echo ${DEP_DIR}
 RUN mkdir -p ${SRC_DIR}
 WORKDIR ${SRC_DIR}
-RUN git clone https://github.com/dtorban/CppWebServer.git CppWebServer 
+RUN git clone https://github.com/dtorban/CppWebServer.git CppWebServer
 RUN mkdir -p ${SRC_DIR}/CppWebServer/build
 RUN git clone https://github.com/google/googletest.git gtest
 RUN mkdir -p ${SRC_DIR}/gtest/build
