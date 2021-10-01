@@ -11,11 +11,11 @@ Vector3::Vector3(float xVal, float yVal, float zVal) {
     x = xVal, y = yVal; z = zVal;
 }
 
-Vector3 Vector3::operator+(Vector3 vec) {
+Vector3 Vector3::operator+(const Vector3 &vec) {
     return Vector3(x + vec.x, y + vec.y, z + vec.z); 
 }
 
-Vector3 Vector3::operator-(Vector3 vec) {
+Vector3 Vector3::operator-(const Vector3 &vec) {
     return Vector3(x - vec.x, y - vec.y, z - vec.z);
 }
 
