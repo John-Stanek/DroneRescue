@@ -505,6 +505,21 @@ The following are examples that show how to filter images:
 
 If your program correctly filters the images with the commands above, you are done with this checkpoint!
 
+### Add Changes to Repo both Locally and on the Server
+
+[This text is the same as in previous labs.] You need to _stage_ all changes to the repository, which prepares those items to
+be permanently part of the repository. When you _commit_ those changes, they are saved to your local repository, which lives in your cselabs account (or your
+personal computer if that is what you are working on). When you _push_ those changes, they will be copied to the repo on the server. The difference between
+_commit_ and _push_ is what separates git from centralized version control systems.
+
+    $ git status
+    $ git add -A
+    $ git commit -m "Adding lab04 deliverables"
+    $ git push
+
+**_What just happened?_** Double-checking the files to be staged using the _git status_ command. All of the tracked changes are staged with `git add -A`. Those staged changes were committed to your local repository and tagged with the message that follows `-m`, then pushed to the server in your remote repository.
+
+
 ### Submitting your Checkpoint 3 (staring Tuesday, 10/5/2021)
 
 Submit your work by uploading the following files to Gradescope for the Checkpoint2 assignment (which will be available starting Tuesday evening, October 5, 2021).  Your code will be automatically graded and your score recorded.  Upload the following:
