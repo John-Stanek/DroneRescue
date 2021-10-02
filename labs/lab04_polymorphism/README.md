@@ -439,7 +439,9 @@ Navigate to lab04_polymorphism/checkpoint3 in one of the development environment
 
 ### Getting Started
 
-Navigate to lab04_polymorphism/checkpoint3 in one of the development environments (VOLE / CSE Labs, SSH, Docker).  Copy your code from Checkpoint 2 and import the stbi_image libraries along with the Image class you created.  Include any additional files you may have created for Checkpoint 2.
+Navigate to lab04_polymorphism/checkpoint3 in one of the development environments (VOLE / CSE Labs, SSH, Docker).  Copy your code from Checkpoint 2 and import the stbi_image libraries along with the Image class you created.  Include any additional files you may have created for Checkpoint 2.  
+
+**Note:** If for some reason you were not able to complete or had issues with Checkpoint 2, you are welcome to use a teammate's solution to complete checkpoint 3.  In other words, you can copy the Checkpoint 2 files from a teammate.
 
 You can run the program with the following commands using the provided `Makefile` and `main.cc`.  **Note:** Initially the program will not compile because you will need to add the filter code.
 
