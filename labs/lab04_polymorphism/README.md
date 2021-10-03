@@ -504,6 +504,11 @@ The following are examples that show how to filter images:
 % # Apply a mean blur filter
 % ./image_processor data/statue.png mean_blur data/statue-mean_blur.png
 ```
+**Note:** If you are debugging multiple argument programs with _gdb_, use the `--args` parameter after _gdb_.  For example:
+
+```bash
+% gdb --args ./image_processor data/statue.png mean_blur data/statue-mean_blur.png
+```
 
 If your program correctly filters the images with the commands above, you are done with this checkpoint!
 
