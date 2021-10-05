@@ -390,4 +390,155 @@ Search for "gdb tutorial" on the web: (http://lmgtfy.com/?q=gdb+tutorial)
 
 
 # Iteration 1: Checkpoint 3 - Image Filters
-_(To be released late Friday, October 1st, 2021)_
+_(Due Thursday, October 7, 2021 @ 11:59)_
+
+This extended lab checkpoint continues to investigate polymorphism by adding image filtering to our image processing project.  Use the skills you learned in Lab04 to help debug your code and build more stable software.  In this checkpoint, your goal is to create a set of image filters using inheritence and polymorphism.
+
+## What You Will Learn
+
+1. How to read a UML diagram and use it to create a class structure.
+2. How to override virtual methods.
+3. How to call methods from a base class.
+4. Examples of how to use unique pointers, vectors, and maps.
+5. How to create simple image filters.
+
+### Getting Started
+
+Navigate to lab04_polymorphism/checkpoint3 in one of the development environments (VOLE / CSE Labs, SSH, Docker):
+
+```bash
+% cd x500-repo/labs/lab04_polymorphism/checkpoint3
+```
+
+### What's in labs/lab04_polymorphism/checkpoint3
+
+- Makefile:
+  - This makefile is provided to automate the building of your project.  You may edit this if you need.
+
+- main.cc:
+  - This file contains the main application that handles image processing (loading in an image, filtering it, and saving the results).  You may edit this file to meet your needs.
+
+### What You Will Add
+
+- filter.h
+
+- greyscale_filter.h/.cc
+
+- threshold_filter.h/.cc
+
+- mean_blur_filter.h/.cc
+
+- Other Necessary Files 
+  - Any other file or classes needed to read in images (e.g. image.h/.cc, stb_image.h, and stb_image_write.h).  You are welcome to add other classes that could be helpful.
+
+### Goal
+
+<hr>
+  **The primary goal of this checkpoint is for you to create a set of filters that can be applied to images.  To do this, you will need to use inheritence and polymorphism.**
+<hr>
+
+### Getting Started
+
+Navigate to lab04_polymorphism/checkpoint3 in one of the development environments (VOLE / CSE Labs, SSH, Docker).  Copy your code from Checkpoint 2 and import the stbi_image libraries along with the Image class you created.  Include any additional files you may have created for Checkpoint 2.  
+
+**Note:** If for some reason you were not able to complete or had issues with Checkpoint 2, you are welcome to use a teammate's solution to complete checkpoint 3.  In other words, you can copy the Checkpoint 2 files from a teammate.
+
+You can run the program with the following commands using the provided `Makefile` and `main.cc`.  **Note:** Initially the program will not compile because you will need to add the filter code.
+
+```bash
+% cd x500-repo/labs/lab03_memory/checkpoint2
+% make
+% ./image_processor
+```
+
+### Study the Filter UML
+
+Study the UML below depicting a simple Filter inheritance hierarchy:
+
+<img src="checkpoint3/Filters.png" alt="" width="1000"/>
+
+The diagram shows Filter as a base class and three derived classes.  Each subclass overrides the Apply(...) method.  This is shown as psuedocode in the UML class diagram.  We will implement all of these classes:
+
+ * **Filter** - The Filter class is an abstract class that defines the pure virtual method Apply(original, filtered).  Original is a set of input images and filtered is a set of output images.  For the filters we will write in this checkpoint, we only need to use the first image, however, for future filters we may need more than one input or output images.
+ * **GreyScaleFilter** - Changes the image into a grey scale image based on image luminance (see calculation below).  It takes each pixel, calculates the luminance by aggregrating each component, and sets a new output pixel that uses this luminance value for red, green, and blue.
+ * **ThresholdFilter** - Calculates the luminance for each pixel and sets the output pixel as black or write depending on the threshold value passed in through the constructor.
+ * **MeanBlurFilter** - This is actually a convolution filter (which we will talk about soon in class).  For each pixel, it takes an average of all surrounding pixels including itself.  So, since there are 9 pixels total in the neighborhood, we add all pixels together and divide by 9.0.  This math should be done using floating point arithmetic verses integer arithmetic.
+
+### Working with Colors
+
+It is recommended that you create a Color class to handle the calculations needed for adding colors together and multiplying by constants.  Colors can be added, subtracted, and multiplied by scalars (e.g. +, -, and * operators).  It is sometimes easier to treat the red, green, blue, and alpha channels as numbers between 0 and 1, rather than between 0 and 255.  Therefore, to translate a pixel value from a byte to a floating point value you can use the following formula: `color.red = 1.0(pixel.red)/255.0`.  To change it back into a byte, you can use: `pixel.red = color.red*255`.  Instead of working with raw bytes, consider using this Color class in `Image::GetPixel(...)` and `Image::SetPixel(...)`.  It may make this project much more manageable.
+
+You can calculate the luminance with the following function:
+
+```c++
+float GetLuminance() {
+     return 0.2126*red + 0.7152*green + 0.0722*blue;
+}
+```
+
+For more information on the theory behind this calculation, please refer to <https://en.wikipedia.org/wiki/Luma_(video)>.  
+
+### Apply the Filters
+
+After creating the filters and including them in _main.cc_, you should be able to use them to filter images.  You can build and run with the following command:
+
+```bash
+% make clean
+% make
+% ./image_processor <inputPath> <filterType> <outputPath>
+```
+
+The input path can be any path to a PNG file.  The output path is a PNG where the output is saved.  Finally, the filter type allows us to specify the specific filter operation we would like to accomplish.  In _main.cc_ there is a map (similar to a dictionary in Javascript or Python), which maps strings to Filters.  The filter type that is passed in will find the associated filter and call Apply(...).  Since Apply(...) is a vitual method, it will call the overriden Apply(...) method in the subclass though polymorphism.
+
+The following are examples that show how to filter images:
+
+```bash
+% # Apply a threshold filter
+% ./image_processor data/statue.png threshold data/statue-threshold.png
+% # Apply a threshold at 0.25
+% ./image_processor data/statue.png threshold-low data/statue-threshold-low.png
+% # Apply a threshold at 0.75
+% ./image_processor data/statue.png threshold-high data/statue-threshold-high.png
+% # Apply a greyscale filter
+% ./image_processor data/statue.png greyscale data/statue-greyscale.png
+% # Apply a mean blur filter
+% ./image_processor data/statue.png mean_blur data/statue-mean_blur.png
+```
+**Note:** If you are debugging multiple argument programs with _gdb_, use the `--args` parameter after _gdb_.  For example:
+
+```bash
+% gdb --args ./image_processor data/statue.png mean_blur data/statue-mean_blur.png
+```
+
+If your program correctly filters the images with the commands above, you are done with this checkpoint!
+
+### Add Changes to Repo both Locally and on the Server
+
+[This text is the same as in previous labs.] You need to _stage_ all changes to the repository, which prepares those items to
+be permanently part of the repository. When you _commit_ those changes, they are saved to your local repository, which lives in your cselabs account (or your
+personal computer if that is what you are working on). When you _push_ those changes, they will be copied to the repo on the server. The difference between
+_commit_ and _push_ is what separates git from centralized version control systems.
+
+    $ git status
+    $ git add -A
+    $ git commit -m "Adding lab04 deliverables"
+    $ git push
+
+**_What just happened?_** Double-checking the files to be staged using the _git status_ command. All of the tracked changes are staged with `git add -A`. Those staged changes were committed to your local repository and tagged with the message that follows `-m`, then pushed to the server in your remote repository.
+
+
+### Submitting your Checkpoint 3 (staring Tuesday, 10/5/2021)
+
+Submit your work by uploading the following files to Gradescope for the Checkpoint2 assignment (which will be available starting Tuesday evening, October 5, 2021).  Your code will be automatically graded and your score recorded.  Upload the following:
+
+ - Makefile
+ - *.h
+ - *.cc
+ - Any other relevant files
+ - *Note:* You do not need to submit PNG images or the stbi_image*.h libraries.
+
+You are welcome to keep changing and submitting this checkpoint up to the deadline.  Gradescope will recompile and test your code.
+
+THIS CHECKPOINT IS COMPLETE.
+
+Congratulations!
