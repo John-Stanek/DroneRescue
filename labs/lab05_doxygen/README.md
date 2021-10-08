@@ -74,6 +74,13 @@ installed.***
   ```
   Also, to generate the UML, set the **UML_LOOK** (~ `line 2368`) and **HAVE_DOT** (~ `line 2302`) tag to **YES**.
 
+  ***NOTE: Make sure that there is only a single space after the `=` sign, or else the autograder would not pass.***
+
+  
+  e.g. <pre><code>= YES</code></pre> 
+  and not
+  <pre><code>=      NO</code></pre>
+
   The path is relative to the directory from which you run/compile the doxygen. ***It is important that you set it up to run from `docs/`*** because Doxygen will not inform you if it does not find the src directory -- it just won't generate any files from your classes.
 
 3. Generate the html pages for this lab. Run the following commands:
