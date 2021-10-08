@@ -19,9 +19,3 @@ image_processor: $(OBJFILES)
 
 clean:
 	rm -f *.o image_processor
-
-
-
-
-
-
