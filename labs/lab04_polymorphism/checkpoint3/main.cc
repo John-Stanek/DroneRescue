@@ -4,9 +4,12 @@
 #include <string>
 #include <memory>
 #include "image.h"
+<<<<<<< HEAD
 #include "greyscale_filter.h"
 #include "threshold_filter.h"
 #include "mean_blur_filter.h"
+=======
+>>>>>>> support-code
 
 using namespace std;
 
@@ -17,7 +20,7 @@ int main(int argc, const char* argv[]) {
     const char* inputFile = argv[1];
     std::string filterType(argv[2]);
     const char* outputFile(argv[3]);
-
+    
     // Create available filters (unique_ptr handles dynamic memory)
     std::map<std::string, unique_ptr<Filter>> filters;
     filters["greyscale"] = unique_ptr<Filter>(new GreyScaleFilter());

@@ -7,15 +7,15 @@ ROOT_DIR := $(shell git rev-parse --show-toplevel)
 SOURCES = $(wildcard *.cc)
 OBJFILES = $(notdir $(SOURCES:.cc=.o))
 
-
-all: image_processor
+all: lab5_app
 
 # Applicaiton Targets:
-image_processor: $(OBJFILES)
+%_app: $(OBJFILES)
 	$(CXX) $(CXXFLAGS) $(OBJFILES) -o $@
 
-%.o: %.cc %.h
+# Object File Targets:
+%.o:  %.cc %.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-clean: 
-	rm -f *.o image_processor
+clean:
+	rm -f *.o *_app *.exe
