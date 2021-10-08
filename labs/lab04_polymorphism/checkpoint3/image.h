@@ -1,8 +1,6 @@
 #include<iostream>
 #include<string>
 
-#include "color.h"
-
 #ifndef IMAGE_H_
 #define IMAGE_H_
 

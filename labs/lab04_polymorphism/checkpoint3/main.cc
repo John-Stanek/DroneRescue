@@ -4,12 +4,9 @@
 #include <string>
 #include <memory>
 #include "image.h"
-<<<<<<< HEAD
 #include "greyscale_filter.h"
 #include "threshold_filter.h"
 #include "mean_blur_filter.h"
-=======
->>>>>>> support-code
 
 using namespace std;
 

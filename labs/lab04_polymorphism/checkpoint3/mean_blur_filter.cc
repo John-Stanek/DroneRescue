@@ -5,8 +5,8 @@ void MeanBlurFilter::Apply(std::vector<Image*> original, std::vector<Image*> fil
     for (int x=0; x<filtered[0]->GetWidth(); x++) {
         for (int y=0; y<filtered[0]->GetHeight(); y++) {
             unsigned char* pixel = filtered[0]->GetPixel(x, y);
+            float add[3] = {0,0,0};
             for (int i=x-1; i<=x+1; i++) {
-                float add[3] = {0,0,0};
                 for (int j=y-1; j<=y+1; j++) {
                     if (i != -1 && j != -1 && i != filtered[0]->GetWidth() && j != filtered[0]->GetHeight()) {
                         unsigned char* neighbor = original[0]->GetPixel(i, j);
