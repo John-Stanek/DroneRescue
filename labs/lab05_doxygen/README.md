@@ -48,8 +48,7 @@ class. Doxygen also generates documentation for all functions of a class.
 <br>
 
 ***NOTE: Students working on their personal machines will have to [download](https://www.doxygen.nl/manual/install.html) the
-doxygen executable before continuing. CSE labs machines already have doxygen
-installed.***
+doxygen executable before continuing. If a student is using Docker on their personal machine, the Docker image already has doxygen pre-installed, so no additional installation will be necessary. CSE labs machines have doxygen pre-installed as well.***
 
 <br>
 
