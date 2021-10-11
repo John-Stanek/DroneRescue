@@ -1,6 +1,6 @@
 #include<iostream>
 #include<string>
-
+#include "color.h"
 #ifndef IMAGE_H_
 #define IMAGE_H_
 
@@ -21,8 +21,9 @@ public:
     int GetHeight();
     int GetWidth();
     int GetComponentNum();
-    unsigned char* GetPixel(int x, int y);
-    void SetPixel(int x, int y, unsigned char* pixel, const float rgba[3]);
+    unsigned char* testpixel(int x, int y);
+    Color GetPixel(int x, int y);
+    void SetPixel(int x, int y, Color& rgba);
     void SaveAs(const char* filename);
     void swap(Image& first, Image& second);
 };

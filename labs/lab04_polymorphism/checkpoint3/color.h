@@ -17,10 +17,11 @@ public:
     float Green();
     float Blue();
     float Alpha();
+    Color operator=(float scalar);
     Color operator=(const Color& color);
     Color operator+(float scalar);
+    Color operator+(const Color& color);
     Color operator*(float scalar);
-    Color operator-(float scalar);
 };
 
 #endif
