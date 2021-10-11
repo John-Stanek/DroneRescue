@@ -5,7 +5,10 @@ Color::Color() {
 }
 
 Color::Color(float red, float green, float blue, float alpha) {
-    red = red, green = green, blue = blue, alpha = alpha;
+    this->red = red;
+    this->green = green; 
+    this->blue = blue;
+    this->alpha = alpha;
 }
 
 float Color::Red() {
@@ -24,6 +27,13 @@ float Color::Alpha() {
     return alpha;
 }
 
+Color Color::operator=(float scalar) {
+    this->red = scalar;
+    this->green = scalar;
+    this->blue = scalar;
+    return *this;
+}
+
 Color Color::operator=(const Color& color) {
     this->red = color.red;
     this->green = color.green;
@@ -32,11 +42,17 @@ Color Color::operator=(const Color& color) {
     return *this;
 }
 
+Color Color::operator+(const Color& color) {
+    this->red += color.red;
+    this->green += color.green;
+    this->blue += color.blue;
+    return *this;
+}
+
 Color Color::operator+(float scalar) {
     this->red += scalar;
     this->green += scalar;
     this->blue += scalar;
-    this->alpha += scalar;
     return *this;
 }
 
@@ -44,14 +60,6 @@ Color Color::operator*(float scalar) {
     this->red *= scalar;
     this->green *= scalar;
     this->blue *= scalar;
-    this->alpha *= scalar;
     return *this;
 }
 
-Color Color::operator-(float scalar) {
-    this->red -= scalar;
-    this->green -= scalar;
-    this->blue -= scalar;
-    this->alpha -= scalar;
-    return *this;
-}

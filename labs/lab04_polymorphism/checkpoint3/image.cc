@@ -74,14 +74,22 @@ int Image::GetComponentNum() {
     return components;
 }
 
-unsigned char* Image::GetPixel(int x, int y) {
-    return &image[(y*width + x)*4];
+unsigned char* Image::testpixel(int x, int y) {
+    unsigned char* pixel = &image[(y*width + x)*4];
 }
 
-void Image::SetPixel(int x, int y, unsigned char* pixel, const float rgba[3]) {
-    pixel[0] = rgba[0];
-    pixel[1] = rgba[1];
-    pixel[2] = rgba[2];
+Color Image::GetPixel(int x, int y) {
+    unsigned char* pixel = &image[(y*width + x)*4];
+    Color rgba(pixel[0]/255.0, pixel[1]/255.0, pixel[2]/255.0, pixel[3]/255.0);
+    return rgba;
+}
+
+void Image::SetPixel(int x, int y, Color& rgba) {
+    unsigned char* pixel = &image[(y*width + x)*4];
+    pixel[0] = (rgba.Red())*255.0;
+    pixel[1] = (rgba.Green())*255.0;
+    pixel[2] = (rgba.Blue())*255.0;
+    pixel[3] = (rgba.Alpha())*255.0;
 }
 
 void Image::SaveAs(const char* filename) {
