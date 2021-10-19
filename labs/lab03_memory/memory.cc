@@ -116,7 +116,7 @@ void private_variables() {
 
 void byte_arrays() {
   std::cout << "Byte Arrays:" << "\n-----------" << std::endl;
-  int intValue = 300;
+  int intValue = 1701013838;
   unsigned char* bytes = reinterpret_cast<unsigned char*>(&intValue);
   std::cout << (int)bytes[0] << " " << (int)bytes[1] << " " << (int)bytes[2] << " " << (int)bytes[3] << std::endl;
   std::cout << std::endl;

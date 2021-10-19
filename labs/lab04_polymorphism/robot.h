@@ -1,6 +1,7 @@
 #ifndef ROBOT_H_
 #define ROBOT_H_
 
+#include<vector>
 #include "entity.h"
 
 // Represents a robot in a physical system.
@@ -12,13 +13,13 @@ public:
     // Gets the robot name
     const std::string& GetName() { return name; }
     // Gets the robot position
-    double* GetPosition() { return pos; }
+    std::vector<double> GetPosition() { return pos; }
     // Updates the robot's position
     void Update(double dt);
 
 private:
     std::string name;
-    double pos[2];
+    std::vector<double> pos;
     double angle;
     double radius;
 };
