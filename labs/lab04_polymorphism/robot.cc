@@ -3,8 +3,8 @@
 #include <cmath>
 
 Robot::Robot(const std::string& name, float radius) : name(name), angle(0.0), radius(radius) {
-    pos[0] = radius*std::cos(angle);
-    pos[1] = radius*std::sin(angle);
+    pos.push_back(radius*std::cos(angle));
+    pos.push_back(radius*std::sin(angle));
 }
 
 void Robot::Update(double dt) {

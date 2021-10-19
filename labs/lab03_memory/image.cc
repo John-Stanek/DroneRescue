@@ -26,12 +26,11 @@ int main(int argc, char**argv) {
     for (int y = 0; y < height; y++) {
       // Get the pixel as a byte array
       unsigned char* pixel = &image[(y*width + x)*4];
-
       // Edit these [red, green, blue, alpha / transparency] values below (values between 0 and 255):
-      pixel[0] = 255*x/width;
-      //pixel[1] = 0;      
-      //pixel[2] = 0;
-      //pixel[3] = 255;
+      //pixel[0] = 200*(y/(1.5)); 
+      //pixel[1] = 255*(y/(width*1.5));
+      pixel[2] = 50*(x/(width*1.5));
+      pixel[3] = 150;
     }
   }
 

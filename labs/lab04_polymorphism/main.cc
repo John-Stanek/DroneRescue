@@ -6,6 +6,9 @@
 #include "drone.h"
 #include "robot.h"
 #include "tree.h"
+#include <vector>
+#include <memory>
+using namespace std;
 
 int main(int argc, char**argv) {
 
@@ -16,57 +19,58 @@ int main(int argc, char**argv) {
     iterations = std::atoi(argv[1]);
     dt = std::atof(argv[2]);
   }
-
   // Create two drones (Drone-A and Drone-X) and set their
   // initial velocity and rotation.
-  Drone mainDrone("Drone-A");
+  Drone* mainDrone = new Drone("Drone-A");
   Drone* droneX = new Drone("Drone-X");
-  double* velocity = new double[3];
-  velocity[0] = 1;
-  velocity[1] = 0;
-  velocity[2] = 1;
-  mainDrone.SetVelocity(velocity);
-  mainDrone.Rotate(M_PI/4.0);
+  vector<double> velocity;
+  velocity.push_back(1);
+  velocity.push_back(0);
+  velocity.push_back(1);
+  mainDrone->SetVelocity(velocity);
+  mainDrone->Rotate(M_PI/4.0);
   droneX->SetVelocity(velocity);
-  delete[] velocity;
 
   // Create a vector that holds entities (simulation entities).
   // This includes anything that inherits from Entity.
   // Add some entities to the vector.
-  std::vector<Entity*> entities;
-  entities.push_back(&mainDrone);
+  vector<Entity*> entities;
+  entities.push_back(mainDrone);
   entities.push_back(new Tree("Oak", 50.0, 50.0));
   entities.push_back(new Robot("Johnny-Five", 1.0));
   entities.push_back(new Tree("Maple", 100.0, 100.0));
   entities.push_back(droneX);
-  entities.push_back(new Robot("Dave", 4));
-
+  entities.push_back(new Robot("Dave", 4.0));
   // Iteratively call several simulation steps (iterations)
   for (int iteration = 0; iteration < iterations; iteration++) {
     // Output the time step
     std::cout << "Time = " << (iteration*dt) << ":" << std::endl;
     std::cout << "--------------" << std::endl;
 
+    std::cout<<endl;
     // Loop through the entities
     for (int i = 0; i < entities.size(); i++) {
       // Print out the current entity
       Entity& entity = *entities[i];
-      std::cout << entity.GetName();
-      double* pos = entity.GetPosition();
-      std::cout << ", " << pos[0] << ", " << pos[1] << ", " << pos[2] << std::endl;
-
+      cout << entity.GetName();
+      vector<double> pos = entity.GetPosition();
+      for (int i=0; i<pos.size(); i++) {
+        cout << ", " << pos[i];        
+      }
+      cout << endl;
       // Update all movable entities (entities that have an update function)
       // E.g. Trees do not update, but drones and robots will.
-      MovableEntity* movable = static_cast<MovableEntity*>(entities[i]);
-      movable->Update(dt);
-
+      MovableEntity* movable = dynamic_cast<MovableEntity*>(entities[i]);
+      if (movable) {
+        movable->Update(dt);
+      }
     }
     std::cout << std::endl;
   }
-  
-  // Delete Entities
-  for (int i = 0; i < entities.size(); i++) {
-      delete entities[i];
+
+  // delete entities
+  for (int i=0; i<entities.size(); i++) {
+    delete entities[i];
   }
 
   std::cout << "Simulation Complete" << std::endl;
