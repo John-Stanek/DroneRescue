@@ -1,11 +1,30 @@
+/**
+ * @file Entity.h
+ *
+ * @copyright 2021 3081W, All rights reserved.
+ */
+
 #ifndef ENTITY_H
 #define ENTITY_H
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <iostream>
 #include <string>
 #include <vector>
 #include <chrono>
 
+/*******************************************************************************
+ * Class Definitions
+ ******************************************************************************/
+/**
+ * @brief The base class for all entities.
+ *
+ *  All other entities inherit from this class.
+ *  Sub Classes of this class include Drone, Tree, and Robot.
+ *  
+ */
 class Entity
 { 
     public:
@@ -21,7 +40,11 @@ class Entity
       void report();
 
       double getLifeTime() const;
-
+      /**
+       * @brief Sets position of an entity to the argument vector position.
+       * 
+       * @returns Updates the entity's position and returns nothing.
+       */
       void setPosition(std::vector<double> position);
 
       void setVelocity(std::vector<double> velocity);

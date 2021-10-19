@@ -17,11 +17,5 @@ image_processor: $(OBJFILES)
 %.o: %.cc %.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-clean:
+clean: 
 	rm -f *.o image_processor
-
-
-
-
-
-
