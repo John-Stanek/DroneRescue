@@ -9,4 +9,3 @@ vector3.o: vector3.cc vector3.h
 
 clean:
 	rm -f *.o vector_app
-
