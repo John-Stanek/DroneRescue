@@ -31,7 +31,6 @@ Color Color::operator=(float scalar) {
     this->red = scalar;
     this->green = scalar;
     this->blue = scalar;
-    this->alpha = color.scalar;
     return *this;
 }
 

@@ -1,4 +1,3 @@
-*.png
-data
-*_app
 *.o
+*_app
+data
