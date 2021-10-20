@@ -16,15 +16,19 @@ void DoubleThresholdFilter::Apply(std::vector<Image*> original, std::vector<Imag
     for(int x=0; x<filtered[0]->GetWidth(); x++) {
         for(int y=0; y<filtered[0]->GetHeight(); y++) {
             Color pixel = filtered[0]->GetPixel(x, y);
+            float alpha = pixel.Alpha();
             if(pixel.Red() < highThreshold && pixel.Red() >= weakThreshold) {
                 pixel = weak;
+                pixel.SetAlpha(alpha);
                 filtered[0]->SetPixel(x, y, pixel);                
             } else if(pixel.Red() > highThreshold) {
                 pixel = strong;
+                pixel.SetAlpha(alpha);
                 filtered[0]->SetPixel(x, y, pixel);
             } else {
                 pixel = none;
-                filtered[0]->SetPixel(x, y, pixel);
+                pixel.SetAlpha(alpha);
+                filtered[0]->SetPixel(x, y, pixel); 
             } 
         }
     }

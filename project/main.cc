@@ -27,7 +27,7 @@ int main(int argc, const char* argv[]) {
     filters["threshold-low"] = unique_ptr<Filter>(new ThresholdFilter(0.25));
     filters["threshold-high"] = unique_ptr<Filter>(new ThresholdFilter(0.75));
     filters["mean_blur"] = unique_ptr<Filter>(new MeanBlurFilter());
-    filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(0.35, 0.45));
+    filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(.35, .45));
     filters["hysteresis"] = unique_ptr<Filter>(new HysteresisFilter());
 
     // Create input and output vectors
