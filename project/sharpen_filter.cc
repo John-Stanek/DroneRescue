@@ -10,7 +10,7 @@ void SharpenFilter::Apply(std::vector<Image*> original, std::vector<Image*> filt
 	*filtered[0] = *original[0];
     for (int x=0; x<original[0]->GetWidth(); x++) {
         for (int y=0; y<original[0]->GetHeight(); y++) {
-            Color pixel = Color(0.0,0.0,0.0,1.0);
+            Color pixel = Color();
             for (int i=-1; i<=1; i++) {
                 for (int j=-1; j<=1; j++) {
                     if (i+x != -1 && j+y != -1 && i+x != original[0]->GetWidth() && j+y != original[0]->GetHeight()) {
@@ -20,22 +20,28 @@ void SharpenFilter::Apply(std::vector<Image*> original, std::vector<Image*> filt
                 }
             }
             if (pixel.Red() < 0){
-				pixel = Color(0, pixel.Green(), pixel.Blue(), pixel.Alpha());
+				pixel.SetRed(0);
 			}
-			if (pixel.Red() > 1.0){
-				pixel = Color(1, pixel.Green(), pixel.Blue(), pixel.Alpha());
+			if (pixel.Red() > 1){
+				pixel.SetRed(1);
 			}
 			if (pixel.Green() < 0){
-				pixel = Color(pixel.Red(), 0, pixel.Blue(), pixel.Alpha());
+				pixel.SetGreen(0);
 			}
-			if (pixel.Green() > 1.0){
-				pixel = Color(pixel.Red(), 1, pixel.Blue(), pixel.Alpha());
+			if (pixel.Green() > 1){
+				pixel.SetGreen(1);
 			}
 			if (pixel.Blue() < 0){
-				pixel = Color(pixel.Red(), pixel.Green(), 0, pixel.Alpha());	
+				pixel.SetBlue(0);	
 			}
-			if (pixel.Blue() > 1.0){
-				pixel = Color(pixel.Red(), pixel.Green(), 1, pixel.Alpha());
+			if (pixel.Blue() > 1){
+				pixel.SetBlue(1);
+			}
+			if (pixel.Alpha() < 0){
+				pixel.SetAlpha(0);	
+			}
+			if (pixel.Alpha() > 1){
+				pixel.SetAlpha(1);
 			}
             filtered[0]->SetPixel(x, y, pixel);
         }
