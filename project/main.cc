@@ -7,7 +7,6 @@
 #include "greyscale_filter.h"
 #include "threshold_filter.h"
 #include "mean_blur_filter.h"
-#include "double_threshold_filter.h"
 #include "hysteresis_filter.h"
 
 using namespace std;
@@ -27,7 +26,6 @@ int main(int argc, const char* argv[]) {
     filters["threshold-low"] = unique_ptr<Filter>(new ThresholdFilter(0.25));
     filters["threshold-high"] = unique_ptr<Filter>(new ThresholdFilter(0.75));
     filters["mean_blur"] = unique_ptr<Filter>(new MeanBlurFilter());
-    filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(.35, .45));
     filters["hysteresis"] = unique_ptr<Filter>(new HysteresisFilter());
 
     // Create input and output vectors
