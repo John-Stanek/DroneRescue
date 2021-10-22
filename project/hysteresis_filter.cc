@@ -9,6 +9,7 @@ void HysteresisFilter::Apply(std::vector<Image*> original, std::vector<Image*> f
     for(int x=0; x<filtered[0]->GetWidth(); x++) {
         for(int y=0; y<filtered[0]->GetHeight(); y++) {
             Color pixel = filtered[0]->GetPixel(x, y);
+            std::cout<<pixel.Red() << " " << pixel.Green() << " " << pixel.Blue() << std::endl;
             if(pixel.Red() == weak) {
                 if(filtered[0]->GetPixel(x, y-1).Red() == strong || filtered[0]->GetPixel(x, y+1).Red() == strong ||
                     filtered[0]->GetPixel(x-1, y-1).Red() == strong || filtered[0]->GetPixel(x-1, y).Red() == strong ||
