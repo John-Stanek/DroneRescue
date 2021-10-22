@@ -1,8 +1,8 @@
 #include "double_threshold_filter.h"
 
-DoubleThresholdFilter::DoubleThresholdFilter(float sThresh, float wThresh) {
-    strong_threshold_ratio = sThresh;
-    weak_threshold_ratio = wThresh;
+DoubleThresholdFilter::DoubleThresholdFilter(float strong, float weak) {
+    strong_threshold_ratio = strong;
+    weak_threshold_ratio = weak;
 }
 
 void DoubleThresholdFilter::Apply(std::vector<Image*> original, std::vector<Image*> filtered) {
