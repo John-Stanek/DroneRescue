@@ -187,3 +187,7 @@ Submit your work by uploading the following files to Gradescope for the Lab06 as
 </ul>
 
 You are welcome to keep changing and submitting this lab up to the deadline. Gradescope will recompile and test your code. If for some reason the automated feedback does not work for you, TAs can also manually verify your submission.
+
+THIS LAB IS COMPLETE.
+
+Congratulations!
