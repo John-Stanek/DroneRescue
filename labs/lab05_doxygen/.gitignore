@@ -1,5 +1,0 @@
-*.o
-*_app
-*.exe
-/docs/html/*
-/docs/latex/*
