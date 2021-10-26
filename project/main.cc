@@ -26,7 +26,7 @@ int main(int argc, const char* argv[]) {
     filters["threshold-low"] = unique_ptr<Filter>(new ThresholdFilter(0.25));
     filters["threshold-high"] = unique_ptr<Filter>(new ThresholdFilter(0.75));
     filters["mean_blur"] = unique_ptr<Filter>(new MeanBlurFilter());
-    filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(0.08, 0.40));
+    filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(0.10, 0.35));
 
     // Create input and output vectors
     Image input(inputFile);
