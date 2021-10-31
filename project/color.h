@@ -17,10 +17,16 @@ public:
     float Green();
     float Blue();
     float Alpha();
+    void SetRed(float red);
+    void SetGreen(float green);
+    void SetBlue(float blue);
+    void SetAlpha(float alpha);
     Color operator=(float scalar);
     Color operator=(const Color& color);
     Color operator+(float scalar);
     Color operator+(const Color& color);
+    Color operator-(float scalar);
+    Color operator-(const Color& color);
     Color operator*(float scalar);
 };
 
