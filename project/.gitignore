@@ -1,3 +1,6 @@
 *.o
 *_app
-data
+*.exe
+/docs/html/*
+/docs/latex/*
+/data/
