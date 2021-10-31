@@ -4,3 +4,5 @@ data
 *.o
 /docs/html/*
 /docs/latex/*
+.vscode*
+.vscode/*
