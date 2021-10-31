@@ -9,6 +9,7 @@
 #include "mean_blur_filter.h"
 #include "double_threshold_filter.h"
 #include "sobel.h"
+#include "gaussian.h"
 
 using namespace std;
 
@@ -30,6 +31,7 @@ int main(int argc, const char* argv[]) {
     filters["mean_blur"] = unique_ptr<Filter>(new MeanBlurFilter());
     filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(0.10, 0.35));
     filters["sobel"] = unique_ptr<Filter>(new SobelFilter());
+    filters["gaussian"] = unique_ptr<Filter>(new GaussianBlurFilter(1.0, 5.0));
     // Create input and output vectors
     Image input(inputFile);
     Image output;

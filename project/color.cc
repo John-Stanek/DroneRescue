@@ -102,3 +102,8 @@ Color Color::operator*(float scalar) {
     return *this;
 }
 
+Color Color::operator/(const Color& c){
+    return Color(red/c.red, green/c.green, blue/c.blue, alpha/c.alpha);
+}
+
+
