@@ -1,0 +1,8 @@
+*.png
+data
+*_app
+*.o
+/docs/html/*
+/docs/latex/*
+.vscode*
+.vscode/*
