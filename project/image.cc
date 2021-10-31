@@ -74,10 +74,6 @@ int Image::GetComponentNum() {
     return components;
 }
 
-unsigned char* Image::testpixel(int x, int y) {
-    unsigned char* pixel = &image[(y*width + x)*4];
-}
-
 Color Image::GetPixel(int x, int y) {
     unsigned char* pixel = &image[(y*width + x)*4];
     Color rgba(pixel[0]/255.0, pixel[1]/255.0, pixel[2]/255.0, pixel[3]/255.0);

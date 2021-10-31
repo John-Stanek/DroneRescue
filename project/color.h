@@ -4,8 +4,8 @@
 #define COLOR_H_
 
 /**
- * @brief The Color Class represents the RGB value of a pixel.
- * 
+ * @brief The Color Class represents the RGBA values of a pixel.
+ *   Has no parent or child classes.
  */
 
 class Color{
