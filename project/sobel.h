@@ -4,14 +4,42 @@
 
 class SobelFilter : public Filter {
     public:
+    /**
+     * @brief Construct a new Sobel Filter object
+     * 
+     */
     SobelFilter(){};
+    /**
+     * @brief Destroy the Sobel Filter object
+     * 
+     */
     ~SobelFilter(){}
+    /**
+     * @brief Appply manipulates the image and creates two output images
+     * 
+     * @param original 
+     * @param filtered 
+     * 
+     */
     void Apply(std::vector<Image*> original, std::vector<Image*> filtered);
-    //char *Gaussian_Kernel(float size, float signma);
+    /**
+     * @brief Get the Hypotonuse of the image color values
+     * @param Ix
+     * @param Iy
+     * @return float
+     * 
+     */
     float GetHypot(float Ix, float Iy);
+    /**
+     * @brief Get the Arc Tan of the image color values
+     * 
+     * @param Ix 
+     * @param Iy 
+     * @return float 
+     */
     float GetArcTan(float Ix, float Iy);
-    void DirectionConv(Image& image, Image& image1);
-    void IntensityConv(Image& image, Image& image1);
+
+
     
 };
 #endif
