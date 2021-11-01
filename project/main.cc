@@ -25,24 +25,27 @@ int main(int argc, const char* argv[]) {
     
     // Create available filters (unique_ptr handles dynamic memory)
     std::map<std::string, unique_ptr<Filter>> filters;
-    //filters["greyscale"] = unique_ptr<Filter>(new GreyScaleFilter());
-    //filters["gaussian"] = unique_ptr<Filter>(new GaussianBlurFilter(1,5));
-    //filters["sobel"] = unique_ptr<Filter>(new SobelFilter());
-    //filters["non-max-suppression"] = unique_ptr<Filter>(new NonMaxSuppression());
-    //filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(0.05 , 0.09));
+    filters["greyscale"] = unique_ptr<Filter>(new GreyScaleFilter());
+    filters["gaussian"] = unique_ptr<Filter>(new GaussianBlurFilter(2,5));
+    filters["sobel"] = unique_ptr<Filter>(new SobelFilter());
+    filters["non-max-suppression"] = unique_ptr<Filter>(new NonMaxSuppression());
+    filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(0.05 , 0.09));
     filters["canny-edge-detect"] = unique_ptr<Filter>(new CannyEdgeDetectFilter());
 
     // Create input and output vectors
     Image input(inputFile);
     Image output;
+    Image output2;
     std::vector<Image*> inputs;
     std::vector<Image*> outputs;
     inputs.push_back(&input);
     outputs.push_back(&output);
+    outputs.push_back(&output2);
 
     // Apply filter based on filter type
     filters[filterType]->Apply(inputs, outputs);
     
     // Save output image
+    //output2.SaveAs("data/statue_direction");
     output.SaveAs(outputFile);
 }
