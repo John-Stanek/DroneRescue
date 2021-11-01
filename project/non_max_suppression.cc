@@ -10,8 +10,8 @@ void NonMaxSuppression::Apply(std::vector<Image*> original, std::vector<Image*> 
 	
 	double angle =0;
 	
-	for (int x = 1; x < originalWidth; x++) {
-		for (int y = 1; y < originalHeight; y++) {
+	for (int x = 1; x < filtered[0]->GetWidth(); x++) {
+		for (int y = 1; y < filtered[0]->GetHeight(); y++) {
 			Color pixel = filtered[0]->GetPixel(x,y);
 			pixel = 0.0;
 			angle = original[1]->GetPixel(x,y).Red();

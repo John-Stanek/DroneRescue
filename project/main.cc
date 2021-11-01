@@ -8,6 +8,10 @@
 #include "threshold_filter.h"
 #include "mean_blur_filter.h"
 #include "double_threshold_filter.h"
+#include "gaussian.h"
+#include "non_max_suppression.h"
+#include "sobel.h"
+#include "canny_edge_detect_filter.h"
 
 using namespace std;
 
@@ -27,7 +31,7 @@ int main(int argc, const char* argv[]) {
     filters["threshold-high"] = unique_ptr<Filter>(new ThresholdFilter(0.75));
     filters["mean_blur"] = unique_ptr<Filter>(new MeanBlurFilter());
     filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(0.10, 0.35));
-
+    filters["canny-edge-detect"] = unique_ptr<Filter>(new CannyEdgeDetectFilter());
     // Create input and output vectors
     Image input(inputFile);
     Image output;

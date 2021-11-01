@@ -2,6 +2,12 @@
 #define CANNY_FILTER_H
 
 #include "filter.h"
+#include "greyscale_filter.h"
+#include "gaussian.h"
+#include "sobel.h"
+#include "double_threshold_filter.h"
+#include "hysteresis_filter.h"
+#include "non_max_suppression.h"
 
 /**
  * @brief The Canny Edge Detect Filter class
