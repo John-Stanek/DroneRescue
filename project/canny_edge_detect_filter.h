@@ -7,6 +7,7 @@
 #include "sobel.h"
 #include "non_max_suppression.h"
 #include "double_threshold_filter.h"
+#include "hysteresis_filter.h"
 
 /**
  * @brief The Canny Edge Detect Filter class
