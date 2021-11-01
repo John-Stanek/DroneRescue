@@ -6,16 +6,20 @@
 
 void SobelFilter::Apply(std::vector<Image*> original, std::vector<Image*> filtered){
     *filtered[0] = *original[0];
-    *filtered[1] = *original[0];
+    filtered.push_back(original[0]);
+    
     Image Dx = *original[0];
     Image Dy = *original[0];
     Image Ix = *original[0]; 
     Image Iy = *original[0];
+    
     Image direction = *original[0];
     Image intensity = *original[0];
+    
     float xkernel[3][3] = {{-1,0,1}, {-2,0,2}, {-1,0,1}};
     float ykernel[3][3] = {{1,2,1}, {0,0,0}, {-1,-2,-1}};
     int size = 3;
+    
     for(int x = 0; x < original[0]->GetWidth(); x++){
         for(int y = 0; y < original[0]->GetHeight(); y++){
             Color xColor(0,0,0,1);

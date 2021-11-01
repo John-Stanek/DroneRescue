@@ -10,6 +10,7 @@ void GreyScaleFilter::Apply(std::vector<Image*> original, std::vector<Image*> fi
             Color pixel = filtered[0]->GetPixel(x, y);        
             float lum = (0.2126*pixel.Red() + 0.7152*pixel.Green() + 0.0722*pixel.Blue());
             pixel = lum;
+            pixel.SetAlpha(1);
             filtered[0]->SetPixel(x, y, pixel);
         }
     }

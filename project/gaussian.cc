@@ -25,15 +25,15 @@ void GaussianBlurFilter::Apply(std::vector<Image*> original, std::vector<Image*>
             Color add(0,0,0,1);
             for(int i = -size/2; i <= size/2; i++){
                 for(int j = -size/2; j <= size/2; j++){
-                    if(i < original[0]->GetWidth() && j < original[0]->GetHeight() && i > -1 && j > -1){
+                    if(i+x < original[0]->GetWidth() && j+y < original[0]->GetHeight() && i+x > -1 && j +y> -1){
                         add = add + original[0]->GetPixel(i+x,j+y)*(kernel[i+size/2][j+size/2]);   
                     }
                 }
             }
             add.SetAlpha(1.0);
-            add.SetRed(add.Red() * size * size);
-            add.SetGreen(add.Green() * size * size);
-            add.SetBlue(add.Blue() * size * size);
+            add.SetRed(add.Red() * 3);
+            add.SetGreen(add.Green() * 3);
+            add.SetBlue(add.Blue()* 3);
             
             
             if (add.Red() < 0) {

@@ -3,10 +3,12 @@
 #include <cmath>
 
 void NonMaxSuppression::Apply(std::vector<Image*> original, std::vector<Image*> filtered){
+
 	*filtered[0] = *original[0];
 	//original[0] = intensity
 	//original[1] = direction
-
+	int originalWidth = original[0]->GetWidth();
+	int originalHeight = original[0]->GetHeight();
 	
 	double angle =0;
 	
