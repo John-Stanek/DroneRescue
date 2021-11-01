@@ -6,9 +6,12 @@
 #include "image.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 class Filter {
 public:
 =======
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
 /**
  * @brief This is the abstract Filter class which handles all types of image processing filters.
  *  All filters inherit from this class.
@@ -24,7 +27,10 @@ public:
      * @param original - A vector of images to be filtered.
      * @param filtered - A vector of images after filter has been applied.
      */
+<<<<<<< HEAD
 >>>>>>> 7e2e8d21cf6e8d747e5349630cdd94e55e4699aa
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
     virtual void Apply(std::vector<Image*> original, std::vector<Image*> filtered);
 };
 

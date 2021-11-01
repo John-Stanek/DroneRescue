@@ -4,13 +4,19 @@
 #define COLOR_H_
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
 /**
  * @brief The Color Class represents the RGBA values of a pixel.
  *   Has no parent or child classes.
  */
 
+<<<<<<< HEAD
 >>>>>>> 7e2e8d21cf6e8d747e5349630cdd94e55e4699aa
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
 class Color{
 private:
     float red;
@@ -19,6 +25,7 @@ private:
     float alpha;
 
 public:
+<<<<<<< HEAD
 <<<<<<< HEAD
     Color();
     Color(float red, float green, float blue, float alpha);
@@ -37,6 +44,8 @@ public:
     Color operator-(float scalar);
     Color operator-(const Color& color);
 =======
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
     /**
      * @brief Construct a new Color object
      * @return
@@ -180,7 +189,10 @@ public:
      * @return Color - The modified Color object, this.
      */
 
+<<<<<<< HEAD
 >>>>>>> 7e2e8d21cf6e8d747e5349630cdd94e55e4699aa
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
     Color operator*(float scalar);
 };
 

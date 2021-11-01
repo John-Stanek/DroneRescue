@@ -5,15 +5,21 @@
 #include <memory>
 #include "image.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 #include "sharpen_filter.h"
 =======
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
 #include "greyscale_filter.h"
 #include "threshold_filter.h"
 #include "mean_blur_filter.h"
 #include "double_threshold_filter.h"
+<<<<<<< HEAD
 #include "sobel.h"
 >>>>>>> 7e2e8d21cf6e8d747e5349630cdd94e55e4699aa
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
 
 using namespace std;
 
@@ -28,12 +34,12 @@ int main(int argc, const char* argv[]) {
     
     // Create available filters (unique_ptr handles dynamic memory)
     std::map<std::string, unique_ptr<Filter>> filters;
-    filters["sharpen"] = unique_ptr<Filter>(new SharpenFilter());
-    //filters["greyscale"] = unique_ptr<Filter>(new GreyScaleFilter());
-    //filters["threshold"] = unique_ptr<Filter>(new ThresholdFilter(0.5));
-    //filters["threshold-low"] = unique_ptr<Filter>(new ThresholdFilter(0.25));
-    //filters["threshold-high"] = unique_ptr<Filter>(new ThresholdFilter(0.75));
-    //filters["mean_blur"] = unique_ptr<Filter>(new MeanBlurFilter());
+    filters["greyscale"] = unique_ptr<Filter>(new GreyScaleFilter());
+    filters["threshold"] = unique_ptr<Filter>(new ThresholdFilter(0.5));
+    filters["threshold-low"] = unique_ptr<Filter>(new ThresholdFilter(0.25));
+    filters["threshold-high"] = unique_ptr<Filter>(new ThresholdFilter(0.75));
+    filters["mean_blur"] = unique_ptr<Filter>(new MeanBlurFilter());
+    filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(0.10, 0.35));
 
     // Create input and output vectors
     Image input(inputFile);
