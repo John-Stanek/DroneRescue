@@ -122,8 +122,6 @@ public:
 
     void SaveAs(const char* filename);
 
-    void Normalize();
-
 };
 
 #endif

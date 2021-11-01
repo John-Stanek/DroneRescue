@@ -91,28 +91,3 @@ void Image::SetPixel(int x, int y, Color& rgba) {
 void Image::SaveAs(const char* filename) {
     stbi_write_png(filename, width, height, components, image, width*4);
 }
-
-void Image::Normalize(){
-    float r, g, b, a = 0;
-    for(int x = 0; x < width; x++){
-        for(int y = 0; y < height; y++){
-            Color temp_pixel = GetPixel(x, y);
-            //Color pixel_color (1.0(temp_pixel[0])/255.0, 1.0(temp_pixel[1])/255.0, 1.0(temp_pixel[2])/255.0, 1.0(temp_pixel[3])/255.0);
-            if(temp_pixel.Red() > r){r = temp_pixel.Red();}
-            if(temp_pixel.Green() > g){g = temp_pixel.Green();}
-            if(temp_pixel.Blue() > b){b = temp_pixel.Blue();}
-            if(temp_pixel.Alpha() > a){a = temp_pixel.Alpha();}
-        }
-    }
-    Color temp(r, g, b, a);
-    for(int x = 0; x < width; x++){
-        for(int y = 0; y < height; y++){
-            Color pixel_pixel = GetPixel(x, y);
-
-            Color newcolor = pixel_pixel/temp;
-            //std::cout<<newcolor.getRed()<<std::endl;
-            newcolor.SetAlpha(1);
-            SetPixel(x, y, newcolor);
-        }
-    }
-}

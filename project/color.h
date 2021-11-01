@@ -160,8 +160,6 @@ public:
      */
 
     Color operator*(float scalar);
-
-    Color operator/(const Color& c);
 };
 
 #endif
