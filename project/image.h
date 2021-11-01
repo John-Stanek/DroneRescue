@@ -4,11 +4,20 @@
 #ifndef IMAGE_H_
 #define IMAGE_H_
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
 /**
  * @brief The class for loading and saving images.
  *   
  */
 
+<<<<<<< HEAD
+>>>>>>> 7e2e8d21cf6e8d747e5349630cdd94e55e4699aa
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
 class Image {
 private:
     int width;
@@ -17,6 +26,25 @@ private:
     unsigned char* image;
 
 public:
+<<<<<<< HEAD
+<<<<<<< HEAD
+    Image();
+    Image(int width, int height);
+    Image(const char* filename);
+    Image(const Image& img);
+    Image operator=(const Image& img);
+    ~Image();
+    int GetHeight();
+    int GetWidth();
+    int GetComponentNum();
+    unsigned char* testpixel(int x, int y);
+    Color GetPixel(int x, int y);
+    void SetPixel(int x, int y, Color& rgba);
+    void SaveAs(const char* filename);
+    void swap(Image& first, Image& second);
+=======
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
     /**
      * @brief Construct a new Image object
      *   Initializes height and width to 0 and components to 4.
@@ -122,6 +150,10 @@ public:
 
     void SaveAs(const char* filename);
 
+<<<<<<< HEAD
+>>>>>>> 7e2e8d21cf6e8d747e5349630cdd94e55e4699aa
+=======
+>>>>>>> 1c0c69de7258b9db6898dcb004439a8386cb3917
 };
 
 #endif

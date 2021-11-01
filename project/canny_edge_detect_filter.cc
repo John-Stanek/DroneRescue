@@ -18,4 +18,3 @@ void CannyEdgeDetectFilter::Apply(std::vector<Image*> original, std::vector<Imag
 	filtered_copy = filtered;
 	HysteresisFilter::Apply(filtered_copy, filtered);
 }
-
