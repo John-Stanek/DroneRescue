@@ -1,37 +1,33 @@
-#ifndef DRONE_APP_H_
-#define DRONE_APP_H_
+#ifndef WEB_APP_H_
+#define WEB_APP_H_
 
 #include <map>
 #include "WebServer.h"
+#include "camera_controller.h"
 #include <chrono>
+#include <queue>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
 /// A Web Application Sever that communicates with a web page through web sockets.
-class WebApp : public JSONSession {
+class WebApp : public JSONSession, public ICameraController {
 public:
     /// Initializes server
-    WebApp() : start(std::chrono::system_clock::now()), time(0.0) {}
+    WebApp();
     /// Destructor
-    virtual ~WebApp() {}
-    
+    virtual ~WebApp();
 
     // *******************************************
     // Methods used for simulation (edit these):
     // *******************************************
 
     /// Creates an entity based on JSON data stored as an object.
-    void CreateEntity(picojson::object& entityData);
+    void CreateEntity(picojson::object& entityData, ICameraController& cameraController);
     /// Updates the simulation.  This may be called multiple times per frame.
     void Update(double dt);
     /// Called after all updating is done.  Entity should be returned to the UI.
     void FinishUpdate(picojson::object& returnValue);
-
-
-    // *******************************************
-    // Methods for processing images (edit these):
-    // *******************************************
-
-    // To be added soon....
-
 
     // *******************************************
     // Methods used for web page communication:
@@ -46,8 +42,17 @@ public:
     void KeyUp(const std::string& key, int keyCode);
     /// Handles the key down command
     void KeyDown(const std::string& key, int keyCode);
-    // Returns whether or not a key is pressed at any time
+    /// Returns whether or not a key is pressed at any time
     bool IsKeyDown(const std::string& key);
+    /// Takes picture for a specific camera
+    void TakePicture(int cameraId);
+    /// Adds camera observers to the application
+    void AddObserver(ICameraObserver& observer);
+    /// Removes camera observers from the application
+    void RemoveObserver(ICameraObserver& observer);
+    /// Method that handles asynchronous image processing that runs on a separate thread
+    void ProcessImageQueue();
+    
 
 private:
     // Used for tracking time since last update
@@ -56,6 +61,20 @@ private:
     std::map<std::string,int> keyValue;
     // The total time the server has been running.
     double time;
+    // Camera observers
+    std::vector<ICameraObserver*> cameraObservers;
+    // Image processing queue used for processing pictures that were taken
+    std::queue<picojson::object> imageQueue;
+    // Thread that handles asynchronous processing
+    std::thread *imageProcessThread;
+    // For synchronizing with the image queue
+    std::mutex imageProcessMutex;
+    // For synchronizing with the commands and update
+    std::mutex updateMutex;
+    // Condition variable that is used to notify thread of new images
+    std::condition_variable imageProcessCond;
+    // Stores whether the application is running or not.
+    bool running;
 };
 
 
