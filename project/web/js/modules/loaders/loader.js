@@ -106,8 +106,8 @@ export function umn(scene, completed) {
       sceneModel,
       // called when resource is loaded
       function (object) {
-        object.position.copy(new THREE.Vector3(-1.2, 254.5, -1));
-        object.scale.copy(new THREE.Vector3(0.036, 0.036, 0.036));
+        object.position.copy(new THREE.Vector3(0, -13, 0))
+        object.scale.copy(new THREE.Vector3(0.05, 0.05, 0.05));
   
         const textureLoader = new THREE.TextureLoader();
         const texture = textureLoader.load(sceneTexture + "-ground.png");

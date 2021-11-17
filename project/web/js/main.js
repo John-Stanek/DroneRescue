@@ -11,7 +11,8 @@ let api = new WSApi();
 let scene = new THREE.Scene();
 
 const scaleFactor = 20;
-let origin = new THREE.Vector3(0, 264, 0);
+//let origin = new THREE.Vector3(0, 264, 0);
+let origin = new THREE.Vector3(0, 0, 0);
 let bounds = {
   "x": [-1450,1500],
   "y": [264,264],
@@ -57,9 +58,9 @@ class Scene {
 
 function coordTransform(a, scale = 20) {
   let b = new THREE.Vector3(a.x, a.y, a.z);
-  b.x = b.x / (scale);
-  b.y = 264;
-  b.z = b.z / (scale);
+  b.x = 1.4*b.x / (scale);
+  b.y = 0;
+  b.z = 1.4*b.z / (scale);
   return b;
 }
 
@@ -470,8 +471,7 @@ function update() {
         for (let e in data) {
           if (e !== "id") {
             let idx = data[e].entityId;
-            let converted = coordTransform(data[e].model.position);
-            entities[idx].model.position.copy(converted);
+            entities[idx].model.position.copy(new THREE.Vector3(data[e].pos[0], data[e].pos[1], data[e].pos[2]));
             var dir = new THREE.Vector3(data[e].dir[0], data[e].dir[1], data[e].dir[2]);
             var adjustedDirVector = dir;
             adjustedDirVector.add(entities[idx].model.position);
