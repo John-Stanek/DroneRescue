@@ -47,5 +47,5 @@ $(BUILD_DIR)/%.o: tests/%.cc
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -rf build
+	rm -rf build *.o
 

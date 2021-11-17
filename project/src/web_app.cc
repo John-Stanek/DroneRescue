@@ -1,22 +1,100 @@
 #include "web_app.h"
+#include <fstream>
+#include "base64.h"
+#include "drone.h"
 
 // ============================== TODO: DELETE! ==============================
 
-// A simple example entity to get your started in the examples below.
-// Move the functionality into your simulation facade and delete this class!
-class DeleteThisDroneClass {
+// A simple camera class that can take pictures and process images assynchronously.
+// This class should be deleted at the end of the day and moved behind the facade.
+class WriteYourOwnCameraClass : public ICameraObserver {
 public:
-    int id; double pos[3]; double dir[3]; double speed;
-    void Update(double dt) {
-       for (int i = 0; i < 3; i++) {
-           pos[i] += speed*dir[i]*dt;
-       } 
-    }
-    void SetJoystick(double x, double y, double z, double a) {
-        dir[0] = x; dir[1] = y; dir[2] = z;
+    // Structure the result however you like
+    struct CameraResult : public ICameraResult {
+        bool found;
+        double pos[3];
+    };
+
+    // Constructor
+    WriteYourOwnCameraClass(int cameraId, ICameraController* controller) : id(id), controller(controller) {
+        controller->AddObserver(*this);
     }
 
-} deleteThisDrone;
+    // Takes a picture using the specified camera id
+    void TakePicture() {
+        controller->TakePicture(id);
+    }
+
+    // Processes images asynchonously.  The returned camera result will be passed into the ImageProcessingComplete(...) method
+    ICameraResult* ProcessImages(int cameraId, double xPos, double yPos, double zPos, const std::vector<RawCameraImage>& images, picojson::object& details) const {
+        if (cameraId == id || cameraId < 0) {
+            // These will output the image to files.  Ultimately this is just for debugging:
+            std::ofstream colorFile ("color.jpg", std::ios::out | std::ios::binary);
+            colorFile.write (reinterpret_cast<const char*>(images[0].data), images[0].length);
+            std::ofstream depthFile ("depth.jpg", std::ios::out | std::ios::binary);
+            depthFile.write (reinterpret_cast<const char*>(images[1].data), images[1].length);
+
+            // Use the following to convert color and depth images to RGBA image from memory (inside your image class / perhaps with a new constructor):
+            // int width, height, components;
+            // unsigned char* buffer = stbi_load_from_memory((const unsigned char*)images[0].data, images[0].length(), &width, &height, &components, 4);
+            // components = 4;
+
+            // Generate the result of image processing.  This could include images using the Result class.
+            CameraResult* result = new CameraResult();
+            result->found = true;
+            result->pos[0] = xPos;
+            result->pos[1] = yPos;
+            result->pos[2] = zPos;
+            return result;
+        }
+        else {
+            return NULL;
+        }
+    }
+
+    // After the asynchronous image processing, this method will be synchronized with the update loop.
+    void ImageProcessingComplete(ICameraResult* result) {
+        CameraResult& res = *static_cast<CameraResult*>(result);
+        if (res.found) {
+            std::cout << "The robot was found here: " << res.pos[0] << ", " << res.pos[1] << ", " << res.pos[1] << std::endl;
+        }
+        delete result;
+    }
+
+private:
+    ICameraController* controller;
+    int id;
+};
+
+// A simple example entity to get your started in the examples below.
+// Move the functionality into your simulation facade and delete this class!
+// class DeleteThisDroneClass {
+// public:
+//     int id; double pos[3]; double dir[3]; double speed;
+
+//     void Update(double dt) {
+//        for (int i = 0; i < 3; i++) {
+//            pos[i] += speed*dir[i]*dt;
+//        }
+
+//        // Take a picture every 5 seconds with front camera
+//        time += dt;
+//        if (time-lastPictureTime > 5.0) {
+//            cameras[0]->TakePicture();
+//            lastPictureTime = time;
+//        }
+//     }
+//     void SetJoystick(double x, double y, double z, double a) {
+//         dir[0] = x; dir[1] = y; dir[2] = z;
+//     }
+
+//     std::vector<WriteYourOwnCameraClass*> cameras;
+//     float lastPictureTime = 0.0;
+//     float time = 0.0;
+
+// } deleteThisDrone;
+
+Drone deleteThisDrone;
 
 // ============================== TODO: DELETE! ==============================
 
@@ -30,7 +108,7 @@ public:
 
 
 
-void WebApp::CreateEntity(picojson::object& entityData) {
+void WebApp::CreateEntity(picojson::object& entityData, ICameraController& cameraController) {
     // Creates an entity based on JSON data stored as an object.
 
     // Print out actual json:
@@ -55,6 +133,13 @@ void WebApp::CreateEntity(picojson::object& entityData) {
         deleteThisDrone.dir[0] = dir[0].get<double>();
         deleteThisDrone.dir[1] = dir[1].get<double>();
         deleteThisDrone.dir[2] = dir[1].get<double>();
+
+        // Create cameras for the entity.
+        picojson::array cameras = entityData["cameras"].get<picojson::array>();
+        for (int i = 0; i < cameras.size(); i++) {
+            WriteYourOwnCameraClass* camera = new WriteYourOwnCameraClass(cameras[i].get<double>(), &cameraController);
+            //deleteThisDrone.cameras.push_back(camera);
+        }
     }
 }
 
@@ -113,6 +198,16 @@ void WebApp::FinishUpdate(picojson::object& returnValue) {
 // that will talk to the UI over web sockets.
 //*****************************************************************************************
 
+WebApp::WebApp() : start(std::chrono::system_clock::now()), time(0.0), running(true) {
+    imageProcessThread = new std::thread(&WebApp::ProcessImageQueue, this);
+}
+
+WebApp::~WebApp() {
+    running = false;
+    imageProcessCond.notify_all();
+    imageProcessThread->join();
+}
+
 void WebApp::receiveJSON(picojson::value& val) {
     picojson::object data = val.get<picojson::object>();
     std::string cmd = data["command"].get<std::string>();
@@ -124,8 +219,18 @@ void WebApp::receiveJSON(picojson::value& val) {
 }
 
 void WebApp::ReceiveCommand(const std::string& cmd, picojson::object& data, picojson::object& returnValue) {
+    if (cmd == "image") {
+        std::unique_lock<std::mutex> lock(imageProcessMutex);
+        data["time"].set<double>(time);
+        imageQueue.push(data);
+        imageProcessCond.notify_all();
+        return;
+    }
+
+
+    std::unique_lock<std::mutex> updateLock(updateMutex);
     if (cmd == "createEntity") {
-        CreateEntity(data);
+        CreateEntity(data, *this);
     } 
     else if (cmd == "update") {
         std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
@@ -174,3 +279,64 @@ bool WebApp::IsKeyDown(const std::string& key) {
     return false;
 }
 
+void WebApp::TakePicture(int cameraId) {
+    picojson::object obj;
+    picojson::value val;
+    obj["takePicture"] = picojson::value((double)cameraId);
+    picojson::value v(obj);
+    sendJSON(v);
+}
+
+void WebApp::ProcessImageQueue() {
+    while (running) {
+        std::unique_lock<std::mutex> lock(imageProcessMutex);
+        if (imageQueue.size() > 0) {
+            picojson::object data = imageQueue.front();
+            imageQueue.pop();
+            lock.unlock();
+            
+            std::vector<std::string> decodedImages;
+            std::vector<RawCameraImage> imageData;
+            
+            const picojson::array& images = data["images"].get<picojson::array>();
+
+            for (int i = 0; i < images.size(); i++) {
+                std::string decoded = base64_decode(images[i].get<std::string>().substr(23));
+                decodedImages.push_back(decoded);
+                RawCameraImage rawImage;
+                rawImage.data = reinterpret_cast<const unsigned char*>(decodedImages[i].c_str());
+                rawImage.length = decoded.length();
+                imageData.push_back(rawImage);
+            }
+
+            int cameraId = data["cameraId"].get<double>();
+            const picojson::array& pos = data["position"].get<picojson::array>();
+
+            for (int i = 0; i < cameraObservers.size(); i++) {
+                ICameraResult* result = cameraObservers[i]->ProcessImages(
+                    cameraId,
+                    pos[0].get<double>(),
+                    pos[1].get<double>(),
+                    pos[2].get<double>(),
+                    imageData,
+                    data
+                );
+                if (result) {
+                    std::unique_lock<std::mutex> updateLock(updateMutex);
+                    cameraObservers[i]->ImageProcessingComplete(result);
+                }
+            }
+        }
+        else {
+          imageProcessCond.wait(lock);
+        }
+    }
+}
+
+void WebApp::AddObserver(ICameraObserver& observer) {
+    cameraObservers.push_back(&observer);
+}
+
+void WebApp::RemoveObserver(ICameraObserver& observer) {
+    cameraObservers.erase(std::remove(cameraObservers.begin(), cameraObservers.end(), &observer), cameraObservers.end()); 
+}

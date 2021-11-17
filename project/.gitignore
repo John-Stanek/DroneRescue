@@ -5,5 +5,8 @@
 /docs/latex/*
 /data/
 *.png
+*.jpg
 *-app
 build
+.DS_Store
+/.DS_Store
