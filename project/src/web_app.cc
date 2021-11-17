@@ -1,7 +1,8 @@
 #include "web_app.h"
 #include <fstream>
 #include "base64.h"
-	    
+#include "drone.h"
+
 // ============================== TODO: DELETE! ==============================
 
 // A simple camera class that can take pictures and process images assynchronously.
@@ -67,30 +68,33 @@ private:
 
 // A simple example entity to get your started in the examples below.
 // Move the functionality into your simulation facade and delete this class!
-class DeleteThisDroneClass {
-public:
-    int id; double pos[3]; double dir[3]; double speed;
-    void Update(double dt) {
-       for (int i = 0; i < 3; i++) {
-           pos[i] += speed*dir[i]*dt;
-       }
+// class DeleteThisDroneClass {
+// public:
+//     int id; double pos[3]; double dir[3]; double speed;
 
-       // Take a picture every 5 seconds with front camera
-       time += dt;
-       if (time-lastPictureTime > 5.0) {
-           cameras[0]->TakePicture();
-           lastPictureTime = time;
-       }
-    }
-    void SetJoystick(double x, double y, double z, double a) {
-        dir[0] = x; dir[1] = y; dir[2] = z;
-    }
+//     void Update(double dt) {
+//        for (int i = 0; i < 3; i++) {
+//            pos[i] += speed*dir[i]*dt;
+//        }
 
-    std::vector<WriteYourOwnCameraClass*> cameras;
-    float lastPictureTime = 0.0;
-    float time = 0.0;
+//        // Take a picture every 5 seconds with front camera
+//        time += dt;
+//        if (time-lastPictureTime > 5.0) {
+//            cameras[0]->TakePicture();
+//            lastPictureTime = time;
+//        }
+//     }
+//     void SetJoystick(double x, double y, double z, double a) {
+//         dir[0] = x; dir[1] = y; dir[2] = z;
+//     }
 
-} deleteThisDrone;
+//     std::vector<WriteYourOwnCameraClass*> cameras;
+//     float lastPictureTime = 0.0;
+//     float time = 0.0;
+
+// } deleteThisDrone;
+
+Drone deleteThisDrone;
 
 // ============================== TODO: DELETE! ==============================
 
@@ -134,7 +138,7 @@ void WebApp::CreateEntity(picojson::object& entityData, ICameraController& camer
         picojson::array cameras = entityData["cameras"].get<picojson::array>();
         for (int i = 0; i < cameras.size(); i++) {
             WriteYourOwnCameraClass* camera = new WriteYourOwnCameraClass(cameras[i].get<double>(), &cameraController);
-            deleteThisDrone.cameras.push_back(camera);
+            //deleteThisDrone.cameras.push_back(camera);
         }
     }
 }
