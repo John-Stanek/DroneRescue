@@ -87,7 +87,7 @@ api.onmessage = function(msg, data) {
     $.fn.display(data);
   }
   if ("takePicture" in data) {
-    sendImage();
+    sendImage(data["takePicture"]);
   }
 }
 
@@ -100,34 +100,33 @@ let scenes = { target : umnScene };
 
 // saves the image to a base64 encoded jpg file
 var strDownloadMime = "image/octet-stream";
-function sendImage() {
-  var imgData, imgNode;
+function saveImage() {
+  sendImage(-1);
+}
+
+function sendImage(cameraId) {
+  var imgData;
   var depthData;
   try {
       let cam = camera;
       if (currentView >= 0 && firstPerson) {
         cam = actorCamera;
       }
+      if (cameraId >= 0) {
+        cam = entities[cameraId].camera;
+      }
       scene.overrideMaterial = objMaterial;
       depthRenderer.render( scene, cam );
       scene.overrideMaterial = null;
       colorRenderer.render( scene, cam );
       scene.overrideMaterial = null;
-      imageStall = true;
       var strMime = "image/jpeg";
       imgData = colorRenderer.domElement.toDataURL(strMime,.8);
       depthData = depthRenderer.domElement.toDataURL(strMime,.8);
-      //console.log(`imgData is ${imgData}`);
-      console.log({position: [cam.position.x, cam.position.y, cam.position.z], image: imgData, depth: depthData});
-      api.sendPostCommand("image", {position: [cam.position.x, cam.position.y, cam.position.z], image: imgData, depth: depthData}).then(function(data) {
-        //console.log(data);
-        imageStall = false;
-      });
-      //saveFile(imgData.replace(strMime, strDownloadMime), "screenshot.jpg");
+      api.sendPostCommand("image", {position: [cam.position.x, cam.position.y, cam.position.z], images: [imgData, depthData], cameraId: cameraId}).then(function(data) {});
   } catch (e) {
       console.log(e);
       return;
-      imageStall = false;
   }
 }
 
@@ -230,7 +229,7 @@ function start(){
   saveLink.style.textAlign = 'center';
   saveLink.innerHTML = '<a href="#" id="saveLink">Take Picture</a>';
   document.body.appendChild(saveLink);
-  document.getElementById("saveLink").addEventListener('click', sendImage);
+  document.getElementById("saveLink").addEventListener('click', saveImage);
 
   //====================================SCENE RENDERER==============================================
 
@@ -401,10 +400,12 @@ function update() {
             adjustedDirVector.add(entities[idx].model.position);
             entities[idx].model.lookAt(adjustedDirVector);
 
+            let cam =  entities[idx].camera;
+            cam.position.copy(entities[idx].model.position);
+            cam.lookAt(adjustedDirVector);
+
             if (currentView == idx) {
-              actorCamera =  entities[idx].camera;
-              actorCamera.position.copy(entities[idx].model.position);
-              actorCamera.lookAt(adjustedDirVector);
+              actorCamera =  cam;
               controls.target.copy(entities[idx].model.position);
               controls.update();
             }

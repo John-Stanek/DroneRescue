@@ -59,7 +59,8 @@ export async function generate(type) {
             "scale": [1, 1, 1],
             "direction": [1,0,0],
             "radius": 1.0,
-            "rotation": [0, 0, 0]
+            "rotation": [0, 0, 0],
+            "cameras": [idx]
     };
     switch(type) {
         case "drone":

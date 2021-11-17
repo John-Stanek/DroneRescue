@@ -16,7 +16,8 @@
             "radius": 1.0,
             "start": 2.0,
             "duration": 2.0,
-            "offset": [0, 0.6, 0]
+            "offset": [0, 0.6, 0],
+            "cameras": [0]
     	  }
     },
     {
@@ -30,7 +31,8 @@
             "scale": [1, 1, 1],
             "direction": [1,0,0],
             "radius": 1.0,
-            "rotation": [0, 0, 0]
+            "rotation": [0, 0, 0],
+            "cameras": [1]
         }
     },
     {
@@ -44,7 +46,8 @@
             "scale": [1, 1, 1],
             "direction": [1,0,0],
             "radius": 1.0,
-            "rotation": [0, 0, 0]
+            "rotation": [0, 0, 0],
+            "cameras": [2]
         }
     }
 ]
