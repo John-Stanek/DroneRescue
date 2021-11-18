@@ -13,11 +13,11 @@ public:
     double pos[3] = {0, 0, 0}; 
     double dir[3] = {0, 0, 0};
     double speed; 
-    bool isSearching = true;
+    bool isSearching = false;
 public:
     Drone();
     void Update(double dt);
-    void SetJoystick(double x, double y, double z, double a);
+    void SetJoystick(double x, double y, double z, double a, bool s);
     double GetPosition(int index);
     double GetSpeed();
     double GetDirection(int index);

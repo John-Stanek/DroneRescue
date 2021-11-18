@@ -152,7 +152,8 @@ void WebApp::Update(double dt) {
         IsKeyDown("ArrowRight") ? 1 : (IsKeyDown("ArrowLeft") ? -1 : 0),
         IsKeyDown("w") ? 1 : (IsKeyDown("s") ? -1 : 0),
         IsKeyDown("ArrowUp") ? -1 : (IsKeyDown("ArrowDown") ? 1 : 0),
-        IsKeyDown("a") ? 1 : (IsKeyDown("d") ? -1 : 0)
+        IsKeyDown("a") ? 1 : (IsKeyDown("d") ? -1 : 0),
+        IsKeyDown("b")
     );
     
     // Below is an example of how to update an entity.  
@@ -168,7 +169,7 @@ void WebApp::FinishUpdate(picojson::object& returnValue) {
     // their position and direction:
     picojson::object entity;
     entity["entityId"] = picojson::value((double)0);
-    
+
     // Save the position as an array
     picojson::array pos;
     pos.push_back(picojson::value(deleteThisDrone.pos[0]));

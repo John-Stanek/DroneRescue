@@ -5,7 +5,7 @@
 
 class Patrol : public DroneMovement{
 public:
-    void move();
+    double* move();
 };
 
 #endif

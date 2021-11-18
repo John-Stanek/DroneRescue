@@ -5,7 +5,7 @@
 
 class Beeline : public DroneMovement{
 public:
-    void move();
+    double* move(double* drone_pos, double drone_speed);
 };
 
 #endif
