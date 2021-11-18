@@ -98,7 +98,7 @@ This creates the following JSON value.
 ```
 ## Retrieving map data
 The path searching strategy pattern will require map data. We provide two json files: nodes.json 
-and edges.json. Nodes.json is a list of node ids and their corresponding positions. The second file, 
+and edges.json (stored in the project/data directory). Nodes.json is a list of node ids and their corresponding positions. The second file, 
 edges.json, is another list of ids but with an array of its adjacent nodes. These adjacent nodes are 
 represented by ids. Therefore a lookup in nodes.json will be required in to find the nodes position. 
 To parse these files we will again be using picojson. Code to iterate this data structure can be 
