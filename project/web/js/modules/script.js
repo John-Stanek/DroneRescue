@@ -55,11 +55,12 @@ export async function generate(type) {
             "name": "undefined",
             "type": "undefined",
             "path": "undefined",
-            "position": [0, 0, 0],
+            "position": [0, 0, 0],     
             "scale": [1, 1, 1],
             "direction": [1,0,0],
             "radius": 1.0,
-            "rotation": [0, 0, 0]
+            "rotation": [0, 0, 0],
+            "cameras": [idx]
     };
     switch(type) {
         case "drone":
@@ -67,8 +68,8 @@ export async function generate(type) {
             o.type = "actor";
             o.name = `drone ${idx}`;
             o.scale = [0.15, 0.15, 0.15];
+            o.position = [-90 + Math.random() * 180, 264, -50 + Math.random() * 100];
             break;
-        case "robot":
         case "other":
             o.path = "robot.glb";
             o.type = "actee";

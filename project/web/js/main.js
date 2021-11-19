@@ -9,9 +9,16 @@ import * as Script from './modules/script.js';
 let api = new WSApi();
 
 let scene = new THREE.Scene();
-let models = [];
-let mixers = [];
-let size = 10;
+
+const scaleFactor = 20;
+//let origin = new THREE.Vector3(0, 264, 0);
+let origin = new THREE.Vector3(0, 0, 0);
+let bounds = {
+  "x": [-1450,1500],
+  "y": [264,264],
+  "z": [-900,900]
+};
+
 
 let controls;
 var container = document.querySelector( '#scene-container' );
@@ -22,25 +29,16 @@ let simSpeed = 1.0;
 let target = "umn";
 let renderer, colorRenderer, depthRenderer, renderer3;
 
-// unused for right now
-const fov = 55; // fov = Field Of View
-const aspect = container.clientWidth / container.clientHeight;
-const near = 0.1;
-const far = 20000;
-
-let sceneFile;
-let gridGate = false;
 let updateReady = false;
 let mouseX, mouseY;
 let objMaterial;
 let scriptsDir = "./scenes/";
 let modelsDir = "../assets/model/"
+let renderGraph = false;
 
 let camera;
 let actorCamera;
-let imageStall = false;
 let miniMapShow = false;
-let renderTarget;
 let currentView = -1;
 let entities = [];
 let otherEntities = [];
@@ -56,6 +54,14 @@ class Scene {
   background() {
     return this.background;
   }
+}
+
+function coordTransform(a, scale = 20) {
+  let b = new THREE.Vector3(a.x, a.y, a.z);
+  b.x = 1.4*b.x / (scale);
+  b.y = 0;
+  b.z = 1.4*b.z / (scale);
+  return b;
 }
 
 $.fn.buildBatteryDisplay = () => {
@@ -81,13 +87,22 @@ $("a[data-role='generate']").click(function(){
   });
 });
 
+$("span#route-toggle").click(function(){
+  renderGraph = !renderGraph;
+  if (renderGraph) {
+    scene.add(group);
+  } else {
+    scene.remove(group);
+  }
+});
+
 api.onmessage = function(msg, data) {
   // interprets data from backend sent through observer
   if ("notification" in data) {
     $.fn.display(data);
   }
   if ("takePicture" in data) {
-    sendImage();
+    sendImage(data["takePicture"]);
   }
 }
 
@@ -100,40 +115,100 @@ let scenes = { target : umnScene };
 
 // saves the image to a base64 encoded jpg file
 var strDownloadMime = "image/octet-stream";
-function sendImage() {
-  var imgData, imgNode;
+function saveImage() {
+  sendImage(-1);
+}
+
+function sendImage(cameraId) {
+  var imgData;
   var depthData;
   try {
       let cam = camera;
       if (currentView >= 0 && firstPerson) {
         cam = actorCamera;
       }
+      if (cameraId >= 0) {
+        cam = entities[cameraId].camera;
+      }
       scene.overrideMaterial = objMaterial;
       depthRenderer.render( scene, cam );
       scene.overrideMaterial = null;
       colorRenderer.render( scene, cam );
       scene.overrideMaterial = null;
-      imageStall = true;
       var strMime = "image/jpeg";
       imgData = colorRenderer.domElement.toDataURL(strMime,.8);
       depthData = depthRenderer.domElement.toDataURL(strMime,.8);
-      //console.log(`imgData is ${imgData}`);
-      console.log({position: [cam.position.x, cam.position.y, cam.position.z], image: imgData, depth: depthData});
-      api.sendPostCommand("image", {position: [cam.position.x, cam.position.y, cam.position.z], image: imgData, depth: depthData}).then(function(data) {
-        //console.log(data);
-        imageStall = false;
-      });
-      //saveFile(imgData.replace(strMime, strDownloadMime), "screenshot.jpg");
+      api.sendPostCommand("image", {position: [cam.position.x, cam.position.y, cam.position.z], images: [imgData, depthData], cameraId: cameraId}).then(function(data) {});
   } catch (e) {
       console.log(e);
       return;
-      imageStall = false;
   }
 }
 
 //========================================SCENE GENERATION==========================================
 // This function runs the scene
+let group = new THREE.Group();
 function start(){
+
+    const gridMaterial = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+    let maxVec = new THREE.Vector3(-9999999, -9999999, -9999999);
+    let minVec = new THREE.Vector3(9999999, 9999999, 9999999);
+    console.log('building graph');
+    $.getJSON("./scenes/graph.json", function(data) {
+      for (var i = 0; i < data.length; i++) {
+        const points = [];
+        let node = data[i].node;
+        // console.log("****************************************************");
+        // console.log(node.id);
+        // console.log(node.position);
+        let converted = coordTransform(node.position);
+        // console.log("converted is: ");
+        // console.log(converted);
+        points.push( converted );
+        if (-node.position.x < minVec.x) {
+          minVec.x = node.position.x;
+        }
+        if (node.position.y < minVec.y) {
+          minVec.y = node.position.y;
+        }
+        if (-node.position.z < minVec.z) {
+          minVec.z = node.position.x;
+        }
+        if (-node.position.x > maxVec.x) {
+          maxVec.x = node.position.x;
+        }
+        if (node.position.y > maxVec.y) {
+          maxVec.y = node.position.y;
+        }
+        if (-node.position.z > maxVec.z) {
+          maxVec.z = node.position.z;
+        }
+        // console.log(Object.keys(node.edges).length);
+        for (let e in node.edges) {
+          let line = points;
+          let edge = node.edges[e].position;
+          // console.log(edge);
+          let convertedEdge = coordTransform(edge);
+          line.push(convertedEdge);
+          const geometry = new THREE.BufferGeometry().setFromPoints( line );
+          const draw = new THREE.Line( geometry, gridMaterial );
+          group.add(draw);
+          line = [];
+        }
+      }
+    }).then(function(data){
+      // console.log("======MAP DIMENSIONS ARE=======");
+      // console.log(maxVec);
+      // console.log(minVec); 
+      let midX = (maxVec.x + minVec.x) / 2;
+      let midZ = (maxVec.z + minVec.z) / 2;
+      if (renderGraph) {
+        scene.add(group);
+      }
+      // console.log("mid x is: "+midX);
+      // console.log("mid z is: "+midZ);
+      // origin.set(midX, 264, midZ);
+    });
 
   var simSpeedSlider = document.getElementById("simSpeed");
 
@@ -165,7 +240,7 @@ function start(){
 
   // initializes scene and camera
   camera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 1000 );
-  camera.position.set( -10, 10, 10 );//30, 30, 100 );
+  camera.position.set( origin.x - 10, origin.y + 10, origin.z + 10 );//30, 30, 100 );
   scene = new THREE.Scene();
   
   actorCamera = new THREE.PerspectiveCamera( 55, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -230,7 +305,7 @@ function start(){
   saveLink.style.textAlign = 'center';
   saveLink.innerHTML = '<a href="#" id="saveLink">Take Picture</a>';
   document.body.appendChild(saveLink);
-  document.getElementById("saveLink").addEventListener('click', sendImage);
+  document.getElementById("saveLink").addEventListener('click', saveImage);
 
   //====================================SCENE RENDERER==============================================
 
@@ -265,7 +340,7 @@ function start(){
   // define controls
   controls = new OrbitControls( camera, container );
   controls.maxPolarAngle = Math.PI * 0.695;
-  controls.target.set( 0, 0, 0 );
+  controls.target.copy( origin );
   controls.update();
 
   cam1 = camera;
@@ -401,10 +476,12 @@ function update() {
             adjustedDirVector.add(entities[idx].model.position);
             entities[idx].model.lookAt(adjustedDirVector);
 
+            let cam =  entities[idx].camera;
+            cam.position.copy(entities[idx].model.position);
+            cam.lookAt(adjustedDirVector);
+
             if (currentView == idx) {
-              actorCamera =  entities[idx].camera;
-              actorCamera.position.copy(entities[idx].model.position);
-              actorCamera.lookAt(adjustedDirVector);
+              actorCamera =  cam;
               controls.target.copy(entities[idx].model.position);
               controls.update();
             }

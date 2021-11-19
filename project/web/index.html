@@ -22,11 +22,10 @@
 		<script id="fragmentShader" type="x-shader/x-fragment">
 			in vec4 localPos;
 			void main() {
-				vec3 pos = (localPos.xyz/2.0 + 50.0)/100.0;
 				vec3 dir = localPos.xyz-cameraPosition;
 				float dist = 1.0-(length(dir)/50.0);
-				pos = dist*(dir/length(dir)/2.0 + 0.5);
-				gl_FragColor = vec4(pos.x, pos.y, pos.z, 1.0); 
+				dir = dir/length(dir)/2.0 + 0.5;
+				gl_FragColor = vec4(dist, dir.x, dir.y, dir.z); 
 			  }
 		</script>
 
@@ -79,7 +78,8 @@
 					  <option value="-1">Select entity...</option>
 				  </select>
 				  <br>
-				  <span style="padding-right: 10px;">First Person View</span><input id="firstPerson" type="checkbox">
+				  <span style="padding-right: 10px;">First Person View</span><input id="firstPerson" type="checkbox"><br>
+				  <span id="route-toggle" class="pr-10">Show Routes</span> 
 				</div>
 			  <nav id="navbar" class="nav-header">
 				<span class="left"><b class="brand" style="color:white;">CSCI3081W Project</b></span>
