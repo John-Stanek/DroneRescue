@@ -1,5 +1,5 @@
 #include "patrol.h"
 
-void Patrol::move() {
-
+double* Patrol::move() {
+    
 }
