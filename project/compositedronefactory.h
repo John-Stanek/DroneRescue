@@ -20,7 +20,7 @@ public:
      * @param original - A vector of images to be filtered.
      * @param filtered - A vector of images after filter has been applied.
      */
-    virtual void Create();
+    void CreateEntity();
     
 private:	
 	std::vector<DroneFactory*> factories;

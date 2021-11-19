@@ -1,4 +1,5 @@
 #include "factory.h"
 
-void Factory::Create(string type) {
+void Factory::CreateEntity(picojson::object entityData) {
+
 }
