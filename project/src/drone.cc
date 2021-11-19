@@ -29,10 +29,17 @@ int Drone::GetId() {
 void Drone::Update(double dt) {
     if (!isSearching) {
         this->movement = new Beeline();
-        this->movement->move();
-    }
+        double* new_position = this->movement->move(pos, speed);
+        for(int i = 0; i < 3; i++){
+            pos[i] = new_position[i];
+        }
+        delete this->movement;
+        isSearching = true;
+    } 
     else {
-        this->movement = new Patrol();
+        for(int i = 0; i < 3; i++){
+            pos[i] += speed*dir[i]*dt;
+        }
     }
     // for (int i = 0; i < 3; i++) {
     //     pos[i] += speed*dir[i]*dt;
