@@ -3,6 +3,8 @@
 #include "base64.h"
 #include "drone.h"
 
+#include "util/base64.h"
+    
 // ============================== TODO: DELETE! ==============================
 
 // A simple camera class that can take pictures and process images assynchronously.
