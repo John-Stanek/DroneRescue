@@ -5,9 +5,9 @@ ROOT_DIR := $(shell git rev-parse --show-toplevel)
 -include $(DEP_DIR)/env
 
 BUILD_DIR = build
-INCLUDES = -I.. -I$(DEP_DIR)/include -Isrc -I. -I$(DEP_DIR)/include -Iinclude -I.
+INCLUDES = -I.. -I$(DEP_DIR)/include -Isrc -I. -I$(DEP_DIR)/include -Iinclude -I. $(OPENCV_INCLUDES)
 LIBDIRS = -L$(DEP_DIR)/lib 
-LIBS = -lCppWebServer -lwebsockets -lssl -lcrypto -lz -lpthread
+LIBS = -lCppWebServer -lwebsockets -lssl -lcrypto -lz -lpthread  $(OPENCV_LIBS)
 
 SOURCES = $(shell find src -name '*.cc')
 OBJFILES = $(addprefix $(BUILD_DIR)/, $(SOURCES:.cc=.o))
