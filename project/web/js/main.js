@@ -11,7 +11,8 @@ let api = new WSApi();
 let scene = new THREE.Scene();
 
 const scaleFactor = 20;
-let origin = new THREE.Vector3(0, 264, 0);
+//let origin = new THREE.Vector3(0, 264, 0);
+let origin = new THREE.Vector3(0, 0, 0);
 let bounds = {
   "x": [-1450, 1500],
   "y": [264, 264],
@@ -57,9 +58,9 @@ class Scene {
 
 function coordTransform(a, scale = 20) {
   let b = new THREE.Vector3(a.x, a.y, a.z);
-  b.x = b.x / (scale);
-  b.y = b.y;
-  b.z = b.z / (scale);
+  b.x = 1.4*b.x / (scale);
+  b.y = 0;
+  b.z = 1.4*b.z / (scale);
   return b;
 }
 
@@ -101,7 +102,7 @@ api.onmessage = function (msg, data) {
     $.fn.display(data);
   }
   if ("takePicture" in data) {
-    sendImage();
+    sendImage(data["takePicture"]);
   }
 }
 
@@ -114,34 +115,33 @@ let scenes = { target: umnScene };
 
 // saves the image to a base64 encoded jpg file
 var strDownloadMime = "image/octet-stream";
-function sendImage() {
-  var imgData, imgNode;
+function saveImage() {
+  sendImage(-1);
+}
+
+function sendImage(cameraId) {
+  var imgData;
   var depthData;
   try {
-    let cam = camera;
-    if (currentView >= 0 && firstPerson) {
-      cam = actorCamera;
-    }
-    scene.overrideMaterial = objMaterial;
-    depthRenderer.render(scene, cam);
-    scene.overrideMaterial = null;
-    colorRenderer.render(scene, cam);
-    scene.overrideMaterial = null;
-    imageStall = true;
-    var strMime = "image/jpeg";
-    imgData = colorRenderer.domElement.toDataURL(strMime, .8);
-    depthData = depthRenderer.domElement.toDataURL(strMime, .8);
-    //console.log(`imgData is ${imgData}`);
-    console.log({ position: [cam.position.x, cam.position.y, cam.position.z], image: imgData, depth: depthData });
-    api.sendPostCommand("image", { position: [cam.position.x, cam.position.y, cam.position.z], image: imgData, depth: depthData }).then(function (data) {
-      //console.log(data);
-      imageStall = false;
-    });
-    //saveFile(imgData.replace(strMime, strDownloadMime), "screenshot.jpg");
+      let cam = camera;
+      if (currentView >= 0 && firstPerson) {
+        cam = actorCamera;
+      }
+      if (cameraId >= 0) {
+        cam = entities[cameraId].camera;
+      }
+      scene.overrideMaterial = objMaterial;
+      depthRenderer.render( scene, cam );
+      scene.overrideMaterial = null;
+      colorRenderer.render( scene, cam );
+      scene.overrideMaterial = null;
+      var strMime = "image/jpeg";
+      imgData = colorRenderer.domElement.toDataURL(strMime,.8);
+      depthData = depthRenderer.domElement.toDataURL(strMime,.8);
+      api.sendPostCommand("image", {position: [cam.position.x, cam.position.y, cam.position.z], images: [imgData, depthData], cameraId: cameraId}).then(function(data) {});
   } catch (e) {
-    console.log(e);
-    return;
-    imageStall = false;
+      console.log(e);
+      return;
   }
 }
 
@@ -305,7 +305,7 @@ function start() {
   saveLink.style.textAlign = 'center';
   saveLink.innerHTML = '<a href="#" id="saveLink">Take Picture</a>';
   document.body.appendChild(saveLink);
-  document.getElementById("saveLink").addEventListener('click', sendImage);
+  document.getElementById("saveLink").addEventListener('click', saveImage);
 
   //====================================SCENE RENDERER==============================================
 
@@ -470,20 +470,18 @@ function update() {
         for (let e in data) {
           if (e !== "id") {
             let idx = data[e].entityId;
-            console.log(data[e]);
-            let p = new THREE.Vector3(data[e].pos[0], data[e].pos[1], data[e].pos[2]);
-            let converted = coordTransform(p);
-            console.log(converted);
-            entities[idx].model.position.copy(converted);
+            entities[idx].model.position.copy(new THREE.Vector3(data[e].pos[0], data[e].pos[1], data[e].pos[2]));
             var dir = new THREE.Vector3(data[e].dir[0], data[e].dir[1], data[e].dir[2]);
             var adjustedDirVector = dir;
             adjustedDirVector.add(entities[idx].model.position);
             entities[idx].model.lookAt(adjustedDirVector);
 
+            let cam =  entities[idx].camera;
+            cam.position.copy(entities[idx].model.position);
+            cam.lookAt(adjustedDirVector);
+
             if (currentView == idx) {
-              actorCamera = entities[idx].camera;
-              actorCamera.position.copy(entities[idx].model.position);
-              actorCamera.lookAt(adjustedDirVector);
+              actorCamera =  cam;
               controls.target.copy(entities[idx].model.position);
               controls.update();
             }
