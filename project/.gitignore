@@ -4,3 +4,7 @@
 /docs/html/*
 /docs/latex/*
 /data/
+*.png
+*.jpg
+*-app
+build
