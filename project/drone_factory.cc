@@ -2,16 +2,14 @@
 #include "factory.h"
 
 void Factory::CreateEntity(picojson::object entityData){
-	
+
 	//parse json object aka entityData
 
     // Print out actual json:
     picojson::value val(entityData);
     std::cout << val.serialize() << std::endl;
 
-    // Use your simulatin facade to create a new entity.
-    // Below is an example on how to get data values from picojson.
-    // The code should be in the factory, not here!
+
     if (entityData["name"].get<std::string>() == "drone") {
 
 	    newDrone.id = entityData["entityId"].get<double>();
@@ -28,7 +26,7 @@ void Factory::CreateEntity(picojson::object entityData){
 	    newDrone.dir[0] = dir[0].get<double>();
 	    newDrone.dir[1] = dir[1].get<double>();
 	    newDrone.dir[2] = dir[1].get<double>();
-	    
+
 	    return newDrone;
 	}
 	return NULL;

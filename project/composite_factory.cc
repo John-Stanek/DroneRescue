@@ -26,8 +26,6 @@ Factory::CreateEntity(picojson::object entityData){
     // Below is an example on how to get data values from picojson.
     // The code should be in the factory, not here!
 
-
-
 	for(Factory dfactory : factories){
 		Entity* entity = dfactory->CreateEntity(entityData);
 		if(entity){
