@@ -2,6 +2,8 @@ FROM ubuntu:18.04 as env
 
 RUN groupdel dialout
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y \
     build-essential \
     gdb \
@@ -14,6 +16,8 @@ RUN apt-get update && apt-get install -y \
     libc6-dbg \
     valgrind \
     git \
+    libopencv-dev \
+    libomp-dev \
     cmake
 
 ARG USER_ID
@@ -42,6 +46,9 @@ RUN make install -j
 WORKDIR ${SRC_DIR}/gtest/build
 RUN cmake -DCMAKE_INSTALL_PREFIX=${DEP_DIR} ..
 RUN make install -j
+
+RUN echo OPENCV_INCLUDES=`pkg-config --cflags opencv` >> ${DEP_DIR}/env
+RUN echo OPENCV_LIBS=`pkg-config --libs opencv` >> ${DEP_DIR}/env
 
 RUN find ${install_dir} -type d -exec chmod 775 {} \;
 RUN find ${install_dir} -type f -exec chmod 664 {} \;

@@ -24,9 +24,9 @@
 			void main() {
 				vec3 dir = localPos.xyz-cameraPosition;
 				float dist = 1.0-(length(dir)/50.0);
-				dir = dir/length(dir)/2.0 + 0.5;
-				gl_FragColor = vec4(dist, dir.x, dir.y, dir.z); 
-			  }
+				dir = (dist*normalize(dir)/2.0) + 0.5;
+				gl_FragColor = vec4(dir.x, dir.y, dir.z, 1); 
+			}
 		</script>
 
 		<div id="loading-background" class="hide center loading-background">
