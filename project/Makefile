@@ -43,5 +43,5 @@ $(TESTEXEFILE): $(TESTOBJFILES)
 	$(CXX) $(CXXFLAGS) $(LIBDIRS) $(TESTOBJFILES) -lgtest_main -lgtest -lgmock $(LIBS) -o $@
 
 clean:
-	rm -rf build
+	rm -rf build *.o
 
