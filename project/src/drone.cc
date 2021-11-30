@@ -9,11 +9,6 @@ Drone::Drone() {
     pos[0] = 0;
     pos[1] = 0;
     pos[2] = 0;
-<<<<<<< HEAD
-    for (int i=0; i<3; i++) {
-        dir[i] = 0; 
-    }
-=======
 
     dir[0] = 0;
     dir[1] = 0;
@@ -54,7 +49,6 @@ Drone::Drone(double x, double y, double z){
     name = NULL;
     id = 0;
     speed =0;
->>>>>>> 6791b97c93ecc571e3952d3bf1c49f62d8132c47
 }
 
 double Drone::GetPosition(int index) {

@@ -1,10 +1,5 @@
 #include "web_app.h"
 #include <fstream>
-<<<<<<< HEAD
-#include "drone.h"
-#include "factory.h"
-=======
->>>>>>> 6791b97c93ecc571e3952d3bf1c49f62d8132c47
 #include "util/base64.h"
     
 // ============================== TODO: DELETE! ==============================
