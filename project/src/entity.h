@@ -110,21 +110,6 @@ class Charger: public Entity{
 	Charger(double x, double y, double z);
 };
 
-class Drone: public Entity{
-	private: 
-	    double speed;
-	public: 
-	Drone();
-	
-	Drone(char *name);
-	
-	Drone(double x, double y, double z);
-	
-	void SetSpeed(double speed);
-	
-	double GetSpeed();
-};
-
 class Robot: public Entity{
 	public:
 	Robot();
