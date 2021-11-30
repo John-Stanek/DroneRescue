@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y \
     git \
     libopencv-dev \
     libomp-dev \
-    cmake
+    cmake \
+    wget
 
 ARG USER_ID
 ARG GROUP_ID
@@ -35,6 +36,17 @@ RUN addgroup --gid $GROUP_ID user
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
 
 RUN mkdir -p ${SRC_DIR}
+RUN mkdir -p ${DEP_DIR}
+WORKDIR ${SRC_DIR}
+RUN mkdir imageio
+WORKDIR imageio
+RUN wget https://github.com/fiveman1/imageio/raw/master/imageio.tar.gz
+RUN tar xzvf imageio.tar.gz
+RUN cp -R include ${DEP_DIR}
+RUN mkdir ${DEP_DIR}/lib
+RUN mv lib/libimageio-docker.so lib/libimageio.so
+RUN cp lib/libimageio.so ${DEP_DIR}/lib
+
 WORKDIR ${SRC_DIR}
 RUN git clone https://github.com/dtorban/CppWebServer.git CppWebServer
 RUN mkdir -p ${SRC_DIR}/CppWebServer/build
