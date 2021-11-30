@@ -6,6 +6,12 @@
 Drone::Drone() {
     id = 0;
     speed = 0;
+    pos[0] = 0;
+    pos[1] = 0;
+    pos[2] = 0;
+    for (int i=0; i<3; i++) {
+        dir[i] = 0; 
+    }
 }
 
 double Drone::GetPosition(int index) {
@@ -27,14 +33,13 @@ int Drone::GetId() {
 void Drone::Update(double dt) {
     double* new_position;
 
-    if (!isSearching) {
+    if (isSearching) {
         this->movement = new Patrol();
         new_position = this->movement->move(pos, dir, speed);
 
         for (int i=0; i < 3; i++) {
             pos[i] = new_position[i];
         }
-
         delete this->movement;
     }
     // else if {
@@ -44,7 +49,7 @@ void Drone::Update(double dt) {
     else {
         for (int i = 0; i < 3; i++) {
             pos[i] += speed*dir[i]*dt;
-        }  
+        }
     }
 
     // // Take a picture every 5 seconds with front camera
@@ -55,6 +60,6 @@ void Drone::Update(double dt) {
     // }
 }
 void Drone::SetJoystick(double x, double y, double z, double a, bool s) {
-    isSearching = !s;
+    isSearching = s;
     dir[0] = x; dir[1] = y; dir[2] = z;
 }

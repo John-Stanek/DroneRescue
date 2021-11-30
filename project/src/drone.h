@@ -10,8 +10,8 @@
 class Drone {
 public:
     double id; 
-    double pos[3] = {0, 264, 0}; 
-    double dir[3] = {0, 0, 0};
+    double pos[3];
+    double dir[3];
     double speed; 
     bool isSearching = true;
 public:
