@@ -5,6 +5,7 @@
 #include <vector>
 #include "entity.h"
 #include "picojson.h"
+#include "drone.h"
 
 
 class Factory {

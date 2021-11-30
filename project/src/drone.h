@@ -5,9 +5,10 @@
 #include <vector>
 
 #include "drone_movement.h"
+#include "entity.h"
 
 
-class Drone {
+class Drone : public Entity{
 public:
     double id; 
     double pos[3] = {0, 264, 0}; 
@@ -16,6 +17,10 @@ public:
     bool isSearching = true;
 public:
     Drone();
+    Drone(char *name);
+    Drone(double x, double y, double z);
+    void SetSpeed(double speed);
+    
     void Update(double dt);
     void SetJoystick(double x, double y, double z, double a, bool s);
     double GetPosition(int index);

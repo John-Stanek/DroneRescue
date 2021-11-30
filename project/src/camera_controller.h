@@ -2,6 +2,7 @@
 #define ICAMERA_CONTROLLER_H_
 
 #include <vector>
+#include "picojson.h"
 
 /// The result returned from the image processing
 class ICameraResult {
