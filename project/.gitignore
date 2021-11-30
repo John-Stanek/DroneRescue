@@ -1,0 +1,12 @@
+*.o
+*_app
+*.exe
+/docs/html/*
+/docs/latex/*
+/data/
+*.png
+*.jpg
+*-app
+build
+.DS_Store
+/.DS_Store
