@@ -63,9 +63,9 @@ floats and integers will have to be casted after extracted. Lastly, in iterating
 the c++ iterator library is used, as well as a map to optimize key searching in larger datasets. 
 Extracting the above information can be done with the following code.
 ```
-int id = static_cast<int>(o.find["entityId"]->second.get<double>());
-std::string name = o.find["type"]->second.get<std::string>();
-picojson::array arr = o.find["position"]->second.get<picojson::array>();
+int id = static_cast<int>(o.find("entityId")->second.get<double>());
+std::string name = o.find("type")->second.get<std::string>();
+picojson::array arr = o.find("position")->second.get<picojson::array>();
 std::vector<float> position = {0, 0, 0};
 for (int i = 0; i < arr.size(); i++) {
     position.at(i) = static_cast<float>(arr[i].get<double>());

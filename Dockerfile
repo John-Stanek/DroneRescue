@@ -2,6 +2,8 @@ FROM ubuntu:18.04 as env
 
 RUN groupdel dialout
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && apt-get install -y \
     build-essential \
     gdb \
@@ -14,7 +16,10 @@ RUN apt-get update && apt-get install -y \
     libc6-dbg \
     valgrind \
     git \
-    cmake
+    libopencv-dev \
+    libomp-dev \
+    cmake \
+    wget
 
 ARG USER_ID
 ARG GROUP_ID
@@ -31,6 +36,17 @@ RUN addgroup --gid $GROUP_ID user
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
 
 RUN mkdir -p ${SRC_DIR}
+RUN mkdir -p ${DEP_DIR}
+WORKDIR ${SRC_DIR}
+RUN mkdir imageio
+WORKDIR imageio
+RUN wget https://github.com/fiveman1/imageio/raw/master/imageio.tar.gz
+RUN tar xzvf imageio.tar.gz
+RUN cp -R include ${DEP_DIR}
+RUN mkdir ${DEP_DIR}/lib
+RUN mv lib/libimageio-docker.so lib/libimageio.so
+RUN cp lib/libimageio.so ${DEP_DIR}/lib
+
 WORKDIR ${SRC_DIR}
 RUN git clone https://github.com/dtorban/CppWebServer.git CppWebServer
 RUN mkdir -p ${SRC_DIR}/CppWebServer/build
@@ -42,6 +58,9 @@ RUN make install -j
 WORKDIR ${SRC_DIR}/gtest/build
 RUN cmake -DCMAKE_INSTALL_PREFIX=${DEP_DIR} ..
 RUN make install -j
+
+RUN echo OPENCV_INCLUDES=`pkg-config --cflags opencv` >> ${DEP_DIR}/env
+RUN echo OPENCV_LIBS=`pkg-config --libs opencv` >> ${DEP_DIR}/env
 
 RUN find ${install_dir} -type d -exec chmod 775 {} \;
 RUN find ${install_dir} -type f -exec chmod 664 {} \;
