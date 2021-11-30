@@ -64,8 +64,6 @@ RUN echo OPENCV_LIBS=`pkg-config --libs opencv` >> ${DEP_DIR}/env
 
 RUN find ${install_dir} -type d -exec chmod 775 {} \;
 RUN find ${install_dir} -type f -exec chmod 664 {} \;
-RUN ["apt-get", "update"]
-RUN ["apt-get", "install", "-y", "vim"]
 
 RUN mkdir -p /home/user
 WORKDIR /home/user/repo
