@@ -9,9 +9,52 @@ Drone::Drone() {
     pos[0] = 0;
     pos[1] = 0;
     pos[2] = 0;
+<<<<<<< HEAD
     for (int i=0; i<3; i++) {
         dir[i] = 0; 
     }
+=======
+
+    dir[0] = 0;
+    dir[1] = 0;
+    dir[2] = 0;
+    x=0;
+    y=0;
+    z=0;
+    name = NULL;
+}
+
+Drone::Drone(char *n){
+    pos[0] = 0;
+    pos[1] = 0;
+    pos[2] = 0;
+
+    dir[0] = 0;
+    dir[1] = 0;
+    dir[2] = 0;
+    x=0;
+    y=0;
+    z=0;
+    name = n;
+    id = 0;
+    speed = 0;
+}
+
+Drone::Drone(double x, double y, double z){
+    pos[0] = x;
+    pos[1] = y;
+    pos[2] = z;
+
+    dir[0] = 0;
+    dir[1] = 0;
+    dir[2] = 0;
+    x=x;
+    y=y;
+    z=z;
+    name = NULL;
+    id = 0;
+    speed =0;
+>>>>>>> 6791b97c93ecc571e3952d3bf1c49f62d8132c47
 }
 
 double Drone::GetPosition(int index) {
@@ -26,6 +69,9 @@ double Drone::GetSpeed() {
     return speed;
 }
 
+void Drone::SetSpeed(double s){
+        speed = s;
+}
 int Drone::GetId() {
     return id;
 }

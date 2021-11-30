@@ -1,13 +1,13 @@
 CXX=g++
+CXXFLAGS = -std=c++11 -g
 ROOT_DIR := $(shell git rev-parse --show-toplevel)
 -include $(ROOT_DIR)/config/settings
 -include $(DEP_DIR)/env
-CXXFLAGS = -std=c++11 -g -Wl,-rpath,$(DEP_DIR)/lib
 
 BUILD_DIR = build
-INCLUDES = -I.. -I$(DEP_DIR)/include -Isrc -I. -I$(DEP_DIR)/include -Iinclude -I. $(OPENCV_INCLUDES)
+INCLUDES = -I.. -I$(DEP_DIR)/include -Isrc -I. -I$(DEP_DIR)/include -Iinclude -I.
 LIBDIRS = -L$(DEP_DIR)/lib 
-LIBS = -lCppWebServer -lwebsockets -lssl -lcrypto -lz -lpthread  $(OPENCV_LIBS) -limageio
+LIBS = -lCppWebServer -lwebsockets -lssl -lcrypto -lz -lpthread
 
 SOURCES = $(shell find src -name '*.cc')
 OBJFILES = $(addprefix $(BUILD_DIR)/, $(SOURCES:.cc=.o))

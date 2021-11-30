@@ -13,6 +13,9 @@
 
 class DroneFactory : public Factory {
 public:
+
+	DroneFactory();
+	~DroneFactory();
     /**
      * @brief A pure virtual function to be overriden by child classes to apply a 
      *   specific filter to an image.
@@ -20,7 +23,11 @@ public:
      * @param original - A vector of images to be filtered.
      * @param filtered - A vector of images after filter has been applied.
      */
+<<<<<<< HEAD:project/src/drone_factory.h
     virtual void CreateEntity();
+=======
+    Entity* CreateEntity(picojson::object &entityData);
+>>>>>>> 6791b97c93ecc571e3952d3bf1c49f62d8132c47:project/src/drone_factory.h
     
 };
 
