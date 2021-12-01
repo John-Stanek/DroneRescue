@@ -92,11 +92,20 @@ public:
      * @param red - a float value for alpha to be set to
      */
      
+     
      double *GetDir();
      
      void SetDir(double dir[3]);
      
+     double *GetPos();
+     
+     void SetPos(double dir[3]);
+     
      void SetID(double id);
+     
+     double GetID();
+     
+     void Update(double dt){};
 
 	
 };

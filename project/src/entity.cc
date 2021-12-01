@@ -89,9 +89,23 @@
         dir[1] = d[1];
         dir[2] = d[2];
     }
+    
+    double *Entity::GetPos(){
+        return pos;
+    }
+     
+    void Entity::SetPos(double d[3]){
+        pos[0] = d[0];
+        pos[1] = d[1];
+        pos[2] = d[2];
+    }
      
     void Entity::SetID(double i){
         id = i;
+    }
+    
+    double Entity::GetID(){
+        return id;
     }
 
 

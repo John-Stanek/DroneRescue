@@ -10,6 +10,8 @@
 #include <mutex>
 #include <condition_variable>
 
+#include "simulation.h"
+
 /// A Web Application Sever that communicates with a web page through web sockets.
 class WebApp : public JSONSession, public ICameraController {
 public:
@@ -55,6 +57,9 @@ public:
     
 
 private:
+	
+	Simulation simulation;
+	
     // Used for tracking time since last update
     std::chrono::time_point<std::chrono::system_clock> start;
     // Stores current state of key presses
