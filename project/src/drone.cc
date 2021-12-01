@@ -4,8 +4,6 @@
 #include "patrol.h"
 
 Drone::Drone() {
-    // pos = {0, 0, 0};
-    // dir = {0, 0, 0};
     id = 0;
     speed = 0;
 }
@@ -27,22 +25,26 @@ int Drone::GetId() {
 }
 
 void Drone::Update(double dt) {
+    double* new_position;
+
     if (!isSearching) {
-        this->movement = new Beeline();
-        double* new_position = this->movement->move(pos, speed);
-        for(int i=0; i<3; i++) {
+        this->movement = new Patrol();
+        new_position = this->movement->move(pos, dir, speed);
+
+        for (int i=0; i < 3; i++) {
             pos[i] = new_position[i];
         }
+
         delete this->movement;
-        isSearching = true;
     }
-    // else {
+    // else if {
     //     this->movement = new Patrol();
+    //     new_position = this->movement->move(pos, dir, speed);
     // }
-    else{
+    else {
         for (int i = 0; i < 3; i++) {
             pos[i] += speed*dir[i]*dt;
-        }    
+        }  
     }
 
     // // Take a picture every 5 seconds with front camera

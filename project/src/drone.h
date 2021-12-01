@@ -9,11 +9,11 @@
 
 class Drone {
 public:
-    int id; 
-    double pos[3] = {0, 0, 0}; 
+    double id; 
+    double pos[3] = {0, 264, 0}; 
     double dir[3] = {0, 0, 0};
     double speed; 
-    bool isSearching = false;
+    bool isSearching = true;
 public:
     Drone();
     void Update(double dt);

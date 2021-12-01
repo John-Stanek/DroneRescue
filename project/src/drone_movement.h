@@ -6,7 +6,7 @@
 
 class DroneMovement {
 public:
-    virtual double* move(double* drone_pos, double drone_speed) = 0;
+    virtual double* move(double* drone_pos, double* drone_dir, double drone_speed) = 0;
 };
 
 #endif

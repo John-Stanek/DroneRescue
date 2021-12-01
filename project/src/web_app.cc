@@ -2,6 +2,8 @@
 #include <fstream>
 #include "base64.h"
 #include "drone.h"
+#include "util/base64.h"
+
 
 // ============================== TODO: DELETE! ==============================
 
@@ -153,7 +155,7 @@ void WebApp::Update(double dt) {
         IsKeyDown("w") ? 1 : (IsKeyDown("s") ? -1 : 0),
         IsKeyDown("ArrowUp") ? -1 : (IsKeyDown("ArrowDown") ? 1 : 0),
         IsKeyDown("a") ? 1 : (IsKeyDown("d") ? -1 : 0),
-        IsKeyDown("b")
+        IsKeyDown("p")
     );
     
     // Below is an example of how to update an entity.  

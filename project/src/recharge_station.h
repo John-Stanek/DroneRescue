@@ -1,0 +1,2 @@
+#ifndef RECHARGE_FACTORY_H_
+#define RECHARGE_FACTORY_H_
