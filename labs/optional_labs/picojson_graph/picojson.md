@@ -155,7 +155,7 @@ information from nodes.json, create a graph class so that you can conduct path-s
 (Hint: edges.json is very similar to nodes.json, but instead of the parsed value being a 
 picojson::object with x, y, z values, the value is a picojson::array) An example: 
 ```
-("4111674105": ["723893259", "1762637754]);
+{"4111674105": ["723893259", "1762637754]};
 ```
 Your task is to build this graph structure and compute various search algorithms such as A* and DFS. 
 To guide you toward a direction that does not involve an algorithm that takes minutes to compute, 
@@ -164,3 +164,11 @@ positions will increase look up time ten fold. From here, parsing the edges file
 std::vector of neighbor ids to the node id will allow you to look up their positions quickly. This should 
 give you what you need to compute the graph traversal algorithms. If you are confused by graph theory, 
 please feel free to reach out to one of the TAs or surf the internet on what a graph adjacency list is.
+
+## Scene Dimensions
+
+The bounds of the scene are as follows
+
+X: [-1450, 1500]
+Y: [0, 0]
+Z: [-900, 900]
