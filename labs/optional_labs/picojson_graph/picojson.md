@@ -85,7 +85,7 @@ info["data"] = picojson::value(1.0);
 picojson::object o;
 o["notification"] = picojson::value(info);
 picojson::value v(o);
-this->Send(v);
+this->sendJSON(v);
 ```
 This creates the following JSON value.
 ```
@@ -169,6 +169,6 @@ please feel free to reach out to one of the TAs or surf the internet on what a g
 
 The bounds of the scene are as follows
 
-X: [-1450, 1500]
+X: [-1450, 1450]
 Y: [0, 0]
 Z: [-900, 900]
