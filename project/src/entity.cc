@@ -94,6 +94,13 @@
         id = i;
     }
 
+    bool Entity::CheckForBattery(){
+        if(hasBattery){
+            return true;
+        }
+        return false;
+    }
+
 
 	Charger::Charger(){
         pos[0] = 0;

@@ -11,14 +11,14 @@ public:
 
 
   	
-  	//picojson::value dObj;
+  	//Create json objects
   	const char* Dronejson ="{\"name\":\"drone\", \"entityId\":0, \"speed\":1,\"direction\":[0,0,0],\"position\":[0,0,0]}";
 
   	const char* Robotjson ="{\"name\":\"robot\", \"entityId\":1,\"position\":[0,0,0]}";
 
   	const char* Chargerjson ="{\"name\":\"charger\", \"entityId\":2,\"position\":[0,0,0]}";
 
-  	//const char* HosptialJson ="{\"name\":\"hospital\", \"entityId\":3,\"position\":[0,0,0]}";
+  	const char* Hospitaljson ="{\"name\":\"hospital\", \"entityId\":3,\"position\":[0,0,0]}";
 
 
   	//picojson::value dObj= picojson::value(dStr);
@@ -51,9 +51,18 @@ public:
 	    printf("charger json parsed\n");
 	}
 
+	//parse hospital json
+	json_end = picojson::parse(hValue, Hospitaljson, Hospitaljson + strlen(Hospitaljson), &err);
+	if (! err.empty()) {
+	  std::cerr << err << std::endl;
+	}
+ 	else {
+	    printf("hospital json parsed\n");
+	}
+
   }
 protected:
-	picojson::value dValue,rValue,cValue;
+	picojson::value dValue,rValue,cValue, hValue;
 	CompositeFactory factory;
 
 };
@@ -86,13 +95,19 @@ TEST_F(FactoryTest, CreateRobot) {
   EXPECT_EQ(robot->GetZ(),0);
 }
 
-/*
+
 TEST_F(FactoryTest, CreateHospital) {  
-  Hospital* hospital = CreateEntity("hospital"); 
-  EXPECT_EQ(hospital.pos[0],0) << "Wrong x coordinate creating hospital";
-  EXPECT_EQ(hospital.pos[2],0) << "Wrong z coordinate creating hospital";
+  if(!hValue.is<picojson::object>()){
+		ASSERT_EQ(false,true); // force fail test
+	}
+  Hospital* hospital = static_cast<Hospital*>(factory.CreateEntity(hValue.get<picojson::object>())); 
+  if(hospital == NULL){
+  	ASSERT_EQ(true,false); // force fail test
+  }
+  EXPECT_EQ(hospital->GetX(),0);
+  EXPECT_EQ(hospital->GetY(),0);
+  EXPECT_EQ(hospital->GetZ(),0);
 }
-*/
 
 TEST_F(FactoryTest, CreateCharger) {  
   if(!cValue.is<picojson::object>()){
