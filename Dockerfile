@@ -39,7 +39,7 @@ RUN mkdir -p ${SRC_DIR}
 RUN mkdir -p ${DEP_DIR}
 WORKDIR ${SRC_DIR}
 RUN mkdir imageio
-WORKDIR imageio
+WORKDIR ${SRC_DIR}/imageio
 RUN wget https://github.com/fiveman1/imageio/raw/master/imageio.tar.gz
 RUN tar xzvf imageio.tar.gz
 RUN cp -R include ${DEP_DIR}
