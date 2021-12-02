@@ -22,9 +22,16 @@ class BatteryDecoratorTest : public ::testing::Test {
           printf("drone json parsed\n");
       }
     }
+
+/*
+    void TearDown(){
+      delete factory;
+
+    }*/
+
     protected:
       picojson::value dValue,rValue,cValue, hValue;
-      CompositeFactory factory;
+      CompositeFactory factory = CompositeFactory();
 };
 
 TEST_F(BatteryDecoratorTest, AddBattery) {
@@ -37,7 +44,8 @@ TEST_F(BatteryDecoratorTest, AddBattery) {
   }
   EXPECT_EQ(drone->hasBattery,false);
 
-  Entity* electricEntity= new BatteryEntity(drone); 
+  Entity* electricEntity= new BatteryEntity(drone);
+
   //Drone* electricDrone = static_cast<Drone*>(electricEntity);
   // if(electricDrone == NULL){
   //   ASSERT_EQ(false,true); // force fail test
@@ -45,5 +53,8 @@ TEST_F(BatteryDecoratorTest, AddBattery) {
   //EXPECT_EQ(electricDrone->hasBattery,true);
   EXPECT_EQ(drone->hasBattery,true);
   //delete electricDrone;
-  //delete electricEntity;
+  delete electricEntity;
+  delete drone;
+  
+  
 }

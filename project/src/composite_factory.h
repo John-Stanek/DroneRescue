@@ -34,12 +34,12 @@ public:
     
     void AddFactory(Factory* factory);
     
-    /*
+   
     Factory* droneFactory;
     Factory* robotFactory;
     Factory* rechargeFactory;
     Factory* hospitalFactory;
-    */
+    
     
     
 };

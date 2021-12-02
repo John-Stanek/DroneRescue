@@ -8,10 +8,10 @@ static std::vector<Factory*> factories;
 CompositeFactory::CompositeFactory(){
 
 	//std::vector<Factory*> factories;
-	Factory* droneFactory = new DroneFactory();
-	Factory* robotFactory = new RobotFactory();
-	Factory* rechargeFactory = new ChargerFactory();
-	Factory* hospitalFactory = new HospitalFactory();
+	droneFactory = new DroneFactory();
+	robotFactory = new RobotFactory();
+	rechargeFactory = new ChargerFactory();
+	hospitalFactory = new HospitalFactory();
 
 	factories = std::vector<Factory*>();
 
@@ -23,10 +23,10 @@ CompositeFactory::CompositeFactory(){
 
 CompositeFactory::~CompositeFactory(){
 	//cant do this unless they are declared in .h, but that causes other problems
-	/*delete droneFactory;
+	delete droneFactory;
 	delete robotFactory;
 	delete rechargeFactory;
-	delete hospitalFactory;*/
+	delete hospitalFactory;
 }
 
 
