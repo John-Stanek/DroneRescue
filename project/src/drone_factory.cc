@@ -39,7 +39,6 @@ Entity* DroneFactory::CreateEntity(picojson::object &entityData){
 	    temp[1] = dir[1].get<double>();
 	    temp[2] = dir[2].get<double>();
 	    newDrone->SetDir(temp);
-
 	    return newDrone;
 	}
 	return NULL;

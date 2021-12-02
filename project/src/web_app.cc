@@ -138,6 +138,8 @@ void WebApp::CreateEntity(picojson::object& entityData, ICameraController& camer
         //}
     //}
     
+    printf("CreateEntity\n");
+    
     simulation.CreateEntity(entityData, cameraController);
 }
 
@@ -156,6 +158,9 @@ void WebApp::Update(double dt) {
     //// Below is an example of how to update an entity.  
     //// This code should be in the simulation facade, not here!
     //deleteThisDrone.Update(dt);
+    
+    printf("Update\n");
+    
     simulation.Update(dt);
 }
 
@@ -184,7 +189,12 @@ void WebApp::FinishUpdate(picojson::object& returnValue) {
 
     //// Send the compile picojson data to the UI in the returnValue variable
     //returnValue["entity"+std::to_string(deleteThisDrone.id)] = picojson::value(entity);
+    
+    printf("start FinishUpdate\n");
+    
     simulation.FinishUpdate(returnValue);
+    
+    printf("end FinishUpdate\n");
 }
 
 

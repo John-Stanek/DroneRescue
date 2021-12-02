@@ -14,8 +14,10 @@ protected:
     double x,y,z;
     char *name;
     double id;
+    
 
 public:
+	bool hasBattery = false;
     /**
      * @brief Construct a new Color object
      * @return
@@ -107,7 +109,7 @@ public:
      
      void Update(double dt){};
 
-	
+     bool CheckForBattery();
 };
 
 class Charger: public Entity{

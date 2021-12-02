@@ -1,6 +1,5 @@
 #include "charger_factory.h"
 #include "factory.h"
-#include <fstream>
 
 ChargerFactory::ChargerFactory(){}
 ChargerFactory::~ChargerFactory(){}

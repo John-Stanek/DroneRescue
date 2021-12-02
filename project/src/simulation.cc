@@ -26,6 +26,8 @@ void Simulation::Update(double dt) {
 }
 
 void Simulation::FinishUpdate(picojson::object& returnValue) {
+	printf("starting FinishUpdate");
+	
 	// Called after all updating is done.
 
     // Below is an example of how to send the position and direction to the UI.  
@@ -52,6 +54,7 @@ void Simulation::FinishUpdate(picojson::object& returnValue) {
 		// Send the compile picojson data to the UI in the returnValue variable
 		returnValue["entity"+std::to_string(entity->GetID())] = picojson::value(entity_json);
 	}
+	printf("ending FinishUpdate");
 }
 
 void Simulation::CreateEntity(picojson::object& entityData, ICameraController& cameraController) {

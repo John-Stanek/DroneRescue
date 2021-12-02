@@ -8,21 +8,25 @@ static std::vector<Factory*> factories;
 CompositeFactory::CompositeFactory(){
 
 	//std::vector<Factory*> factories;
-	Factory *droneFactory = new DroneFactory();
-	Factory *robotFactory = new RobotFactory();
-	Factory *rechargeFactory = new ChargerFactory();
-	//Factory hospitalFactory = HospitalFactory();
+	Factory* droneFactory = new DroneFactory();
+	Factory* robotFactory = new RobotFactory();
+	Factory* rechargeFactory = new ChargerFactory();
+	Factory* hospitalFactory = new HospitalFactory();
 
 	factories = std::vector<Factory*>();
 
 	AddFactory(droneFactory);
 	AddFactory(robotFactory);
 	AddFactory(rechargeFactory);
-	//AddFactory(hospitalFactory);
+	AddFactory(hospitalFactory);
 }
 
 CompositeFactory::~CompositeFactory(){
-
+	//cant do this unless they are declared in .h, but that causes other problems
+	/*delete droneFactory;
+	delete robotFactory;
+	delete rechargeFactory;
+	delete hospitalFactory;*/
 }
 
 
@@ -30,9 +34,9 @@ Entity* CompositeFactory::CreateEntity(picojson::object &entityData){
 	//parse json object aka entityData
 
     // Print out actual json:
-    picojson::value val(entityData);
+    //picojson::value val(entityData);
     //std::cout << picojson::value(entityData) << std::endl;
-    std::cout << val.serialize() << std::endl;
+    //std::cout << val.serialize() << std::endl;
 
     //check every factory for successful return
 	for(Factory* dfactory : factories){
