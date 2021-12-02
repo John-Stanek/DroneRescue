@@ -59,11 +59,16 @@ public:
  	else {
 	    printf("hospital json parsed\n");
 	}
+}/*
 
-  }
+void TearDown(){
+    delete factory;
+
+    }*/
+
 protected:
 	picojson::value dValue,rValue,cValue, hValue;
-	CompositeFactory factory;
+	CompositeFactory factory = CompositeFactory();
 
 };
 
@@ -79,6 +84,7 @@ TEST_F(FactoryTest, CreateDrone) {
   EXPECT_EQ(drone->GetX(),0);
   EXPECT_EQ(drone->GetY(),0);
   EXPECT_EQ(drone->GetZ(),0);
+  delete drone;
 }
 
 
@@ -93,6 +99,7 @@ TEST_F(FactoryTest, CreateRobot) {
   EXPECT_EQ(robot->GetX(),0);
   EXPECT_EQ(robot->GetY(),0);
   EXPECT_EQ(robot->GetZ(),0);
+  delete robot;
 }
 
 
@@ -107,6 +114,7 @@ TEST_F(FactoryTest, CreateHospital) {
   EXPECT_EQ(hospital->GetX(),0);
   EXPECT_EQ(hospital->GetY(),0);
   EXPECT_EQ(hospital->GetZ(),0);
+  delete hospital;
 }
 
 TEST_F(FactoryTest, CreateCharger) {  
@@ -120,4 +128,5 @@ TEST_F(FactoryTest, CreateCharger) {
   EXPECT_EQ(charger->GetX(),0);
   EXPECT_EQ(charger->GetY(),0);
   EXPECT_EQ(charger->GetZ(),0);
+  delete charger;
 }
