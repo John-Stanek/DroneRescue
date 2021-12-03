@@ -7,6 +7,7 @@
 #include "drone_factory.h"
 #include "robot_factory.h"
 #include "charger_factory.h"
+#include "hospital_factory.h"
 #include "entity.h"
 
 /**
@@ -33,7 +34,13 @@ public:
     
     void AddFactory(Factory* factory);
     
-
+   
+    Factory* droneFactory;
+    Factory* robotFactory;
+    Factory* rechargeFactory;
+    Factory* hospitalFactory;
+    
+    
     
 };
 
