@@ -12,7 +12,8 @@ Entity* DroneFactory::CreateEntity(picojson::object &entityData){
     // picojson::value val(entityData);
     // std::cout << val.serialize() << std::endl;
     
-	if ((entityData["name"].get<std::string>().compare (0, 5, "drone")) == 0) {
+	if ((entityData["name"].get<std::string>().compare (0, 5, "drone") == 0) ||
+	    (entityData["name"].get<std::string>().compare (0, 12, "rescue drone") == 0)) {
 
     	Drone* newDrone = new Drone();
     	
