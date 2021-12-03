@@ -6,23 +6,27 @@
 
 #include "drone_movement.h"
 #include "entity.h"
-
+#include "camera.h"
 
 class Drone : public Entity{
 public:
-    double id; 
+    int id; 
     double pos[3];
     double dir[3];
     double speed; 
-    bool isSearching = true;
-public:
+    bool patrol = false;
+    bool beeline = false;
+    float lastPictureTime;
+    float time;
+    Camera* camera;
+
     Drone();
-    Drone(char *name);
-    Drone(double x, double y, double z);
+    ~Drone();
+    Drone(double x, double y, double z, char* name);
     void SetSpeed(double speed);
     
     void Update(double dt);
-    void SetJoystick(double x, double y, double z, double a, bool s);
+    void SetJoystick(double x, double y, double z, double a, bool p, bool b);
     double GetPosition(int index);
     double GetSpeed();
     double GetDirection(int index);

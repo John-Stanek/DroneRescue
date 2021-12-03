@@ -62,8 +62,8 @@ RUN make install -j
 RUN echo OPENCV_INCLUDES=`pkg-config --cflags opencv` >> ${DEP_DIR}/env
 RUN echo OPENCV_LIBS=`pkg-config --libs opencv` >> ${DEP_DIR}/env
 
-RUN find ${install_dir} -type d -exec chmod 775 {} \;
-RUN find ${install_dir} -type f -exec chmod 664 {} \;
+RUN find ${DEP_DIR} -type d -exec chmod 775 {} \;
+RUN find ${DEP_DIR} -type f -exec chmod 664 {} \;
 
 RUN mkdir -p /home/user
 WORKDIR /home/user/repo
