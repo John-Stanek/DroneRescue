@@ -8,7 +8,7 @@ Learn how to implement a basic observer pattern and deal with some of the compli
 
 ## Background
 
-The observer pattern is a software design pattern in which an object, named the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods. This pattern is one of the most widely used patterns design patterns. It is often necessary for asynchronous systems. If you are familiar with event listeners or push notifications, these are implemented with the observer pattern. The observer pattern is also used for graphical user interfaces.
+The observer pattern is a software design pattern in which an object, named the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods. This pattern is one of the most widely used design patterns. It is often necessary for asynchronous systems. If you are familiar with event listeners or push notifications, these are implemented with the observer pattern. The observer pattern is also used for graphical user interfaces.
 
 ## Example
 
