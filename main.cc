@@ -38,18 +38,10 @@ int main(int argc, const char* argv[]) {
     // Create available filters (unique_ptr handles dynamic memory)
     std::map<std::string, unique_ptr<Filter>> filters;
     filters["greyscale"] = unique_ptr<Filter>(new GreyScaleFilter());
-<<<<<<< HEAD:project/main.cc
-    filters["gaussian"] = unique_ptr<Filter>(new GaussianBlurFilter(2.0,5.0));
-    filters["sobel"] = unique_ptr<Filter>(new SobelFilter());
-    filters["non-max-suppression"] = unique_ptr<Filter>(new NonMaxSuppression());
-    filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(0.09, 0.4));
-    filters["hysteresis"] = unique_ptr<Filter>(new HysteresisFilter());
-=======
     filters["gaussian"] = unique_ptr<Filter>(new GaussianBlurFilter(2,5));
     filters["sobel"] = unique_ptr<Filter>(new SobelFilter());
     filters["non-max-suppression"] = unique_ptr<Filter>(new NonMaxSuppression());
     filters["double-threshold"] = unique_ptr<Filter>(new DoubleThresholdFilter(0.05 , 0.09));
->>>>>>> ced3c5b629bedebf743af178b7846c4b79310925:main.cc
     filters["canny-edge-detect"] = unique_ptr<Filter>(new CannyEdgeDetectFilter());
 
     // Create input and output vectors
