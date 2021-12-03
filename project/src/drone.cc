@@ -86,7 +86,7 @@ void Drone::Update(double dt) {
     // Take a picture every 5 seconds with front camera
     time += dt;
     if (time-lastPictureTime > 5.0) {
-        //camera->TakePicture();
+        camera->TakePicture();
         lastPictureTime = time;
     }
 }
