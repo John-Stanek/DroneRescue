@@ -11,19 +11,16 @@
 
 class Drone : public Entity{
 public:
-<<<<<<< HEAD
     double id; 
     double pos[3] = {0, 264, 0}; 
     double dir[3] = {0, 0, 0};
     double speed;
     double time;
     double lastPictureTime;
-=======
     int id; 
     double pos[3];
     double dir[3];
     double speed; 
->>>>>>> 9c7b48151f2cfcba0cfed5e1b02e76eeeb98aac2
     bool final = false;
     bool patrol = false;
     bool beeline = false;
