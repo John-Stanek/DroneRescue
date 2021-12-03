@@ -15,7 +15,7 @@ Entity* HospitalFactory::CreateEntity(picojson::object &entityData){
     if ((entityData["name"].get<std::string>().compare (0, 8, "hospital")) == 0) {
 
     	Hospital* newHospital = new Hospital();
-    	
+    	newHospital->SetName(entityData["name"].get<std::string>());
     	//newHospital->SetName((char*)entityData["name"].get<std::string>().c_str());
 	    newHospital->SetID(entityData["entityId"].get<double>());
 

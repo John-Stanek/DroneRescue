@@ -115,6 +115,10 @@
 		name = n;
 	}
 
+    std::string Entity::GetName(){
+        return name;
+    }
+
     bool Entity::CheckForBattery(){
         if(hasBattery){
             return true;

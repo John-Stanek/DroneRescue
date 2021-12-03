@@ -109,6 +109,8 @@ public:
      
      void SetName(std::string n);
      
+     std::string GetName();
+     
      void Update(double dt){};
 
      bool CheckForBattery();

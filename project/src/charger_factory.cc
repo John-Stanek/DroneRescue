@@ -18,6 +18,7 @@ Entity* ChargerFactory::CreateEntity(picojson::object &entityData){
     	
     	//newCharger->SetName((char*)entityData["name"].get<std::string>().c_str());
 	    newCharger->SetID(entityData["entityId"].get<double>());
+	    newCharger->SetName(entityData["name"].get<std::string>());
 
 	    if(!entityData["position"].is<picojson::array>()){
 	    	printf("Error converting to array\n");

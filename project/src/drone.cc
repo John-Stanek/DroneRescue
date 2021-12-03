@@ -44,6 +44,7 @@ int Drone::GetId() {
 }
 
 void Drone::Update(double dt) {
+    /*
     this->SetJoystick(
         IsKeyDown("ArrowRight") ? 1 : (IsKeyDown("ArrowLeft") ? -1 : 0),
         IsKeyDown("w") ? 1 : (IsKeyDown("s") ? -1 : 0),
@@ -52,6 +53,7 @@ void Drone::Update(double dt) {
         IsKeyDown("p") ? 1 : 0,
         IsKeyDown("b") ? 1 : 0 
     );
+    */
 
     double* new_position;
     double rspos[3] = {1000, 1000, 0}; 

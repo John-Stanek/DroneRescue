@@ -19,6 +19,7 @@ Entity* RobotFactory::CreateEntity(picojson::object &entityData){
     	
     	//newRobot->SetName((char*)entityData["name"].get<std::string>().c_str());
 	    newRobot->SetID(entityData["entityId"].get<double>());
+	    newRobot->SetName(entityData["name"].get<std::string>());
 
 	    if(!entityData["position"].is<picojson::array>()){
 	    	printf("Error converting to array\n");
