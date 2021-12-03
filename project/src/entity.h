@@ -7,7 +7,7 @@
  *   Has no parent or child classes.
  */
 
-class Entity{
+class Entity {
 protected:
     double pos[3];
     double dir[3];

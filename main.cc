@@ -19,9 +19,21 @@ int main(int argc, const char* argv[]) {
     // Get input file, filter type, and output file from command line
     // argc = # of arguments
     // argv = an array of arguments
+
+    // const char* inputFile = argv[1];
+    // const char* inputFile2 = argv[2];
+    // std::string filterType(argv[3]);
+    // const char* outputFile(argv[4]);
+
     const char* inputFile = argv[1];
     std::string filterType(argv[2]);
     const char* outputFile(argv[3]);
+
+    // const char* inputFile = argv[1];
+    // std::string filterType(argv[2]);
+    // const char* outputFile(argv[3]);
+    // const char* outputFile2(argv[4]);
+
     
     // Create available filters (unique_ptr handles dynamic memory)
     std::map<std::string, unique_ptr<Filter>> filters;
@@ -34,11 +46,13 @@ int main(int argc, const char* argv[]) {
 
     // Create input and output vectors
     Image input(inputFile);
+    //Image input2(inputFile2);
     Image output;
     Image output2;
     std::vector<Image*> inputs;
     std::vector<Image*> outputs;
     inputs.push_back(&input);
+    //inputs.push_back(&input2);
     outputs.push_back(&output);
     outputs.push_back(&output2);
 
@@ -48,4 +62,5 @@ int main(int argc, const char* argv[]) {
     // Save output image
     //output2.SaveAs("data/statue_direction");
     output.SaveAs(outputFile);
+    //output2.SaveAs(outputFile2);
 }
