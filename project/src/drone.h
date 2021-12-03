@@ -14,7 +14,9 @@ public:
     double id; 
     double pos[3] = {0, 264, 0}; 
     double dir[3] = {0, 0, 0};
-    double speed; 
+    double speed;
+    double time;
+    double lastPictureTime;
     bool final = false;
     bool patrol = false;
     bool beeline = false;
