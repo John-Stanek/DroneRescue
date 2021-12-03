@@ -465,29 +465,26 @@ function update() {
 
     api.sendCommand("update", { delta: delta, simSpeed: simSpeed }).then(function (updateData) {
       let data = updateData;
+	    for (let e in data) {
+	      if (e !== "id") {
+	        let idx = data[e].entityId;
+	        entities[idx].model.position.copy(new THREE.Vector3(data[e].pos[0], data[e].pos[1], data[e].pos[2]));
+	        var dir = new THREE.Vector3(data[e].dir[0], data[e].dir[1], data[e].dir[2]);
+	        var adjustedDirVector = dir;
+	        adjustedDirVector.add(entities[idx].model.position);
+	        entities[idx].model.lookAt(adjustedDirVector);
 
-      if (data.entity0 != undefined) {
-        for (let e in data) {
-          if (e !== "id") {
-            let idx = data[e].entityId;
-            entities[idx].model.position.copy(new THREE.Vector3(data[e].pos[0], data[e].pos[1], data[e].pos[2]));
-            var dir = new THREE.Vector3(data[e].dir[0], data[e].dir[1], data[e].dir[2]);
-            var adjustedDirVector = dir;
-            adjustedDirVector.add(entities[idx].model.position);
-            entities[idx].model.lookAt(adjustedDirVector);
+	        let cam =  entities[idx].camera;
+	        cam.position.copy(entities[idx].model.position);
+	        cam.lookAt(adjustedDirVector);
 
-            let cam =  entities[idx].camera;
-            cam.position.copy(entities[idx].model.position);
-            cam.lookAt(adjustedDirVector);
+	        if (currentView == idx) {
+	          actorCamera =  cam;
+	          controls.target.copy(entities[idx].model.position);
+	          controls.update();
+	        }
 
-            if (currentView == idx) {
-              actorCamera =  cam;
-              controls.target.copy(entities[idx].model.position);
-              controls.update();
-            }
-
-          }
-        }
+	      }
       }
       updateReady = true;
       render();

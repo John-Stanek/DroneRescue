@@ -3,8 +3,6 @@
 
 static std::vector<Factory*> factories;
 
-//TODO: MEMORY LEAKS NEED TO BE FIXED
-
 CompositeFactory::CompositeFactory(){
 
 	//std::vector<Factory*> factories;

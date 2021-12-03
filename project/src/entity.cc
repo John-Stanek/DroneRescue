@@ -12,13 +12,13 @@
         x=0;
         y=0;
         z=0;
-        name = NULL;
+        name = "";
         id = -1;
 
     }
     
     
-    Entity::Entity(char *n){
+    Entity::Entity(std::string n){
         pos[0] = 0;
         pos[1] = 0;
         pos[2] = 0;
@@ -45,7 +45,7 @@
         x=x;
         y=y;
         z=z;
-        name = NULL;
+        name = "";
         id = -1;
     }
 
@@ -67,16 +67,19 @@
 
     void Entity::SetX(double x){
         x = x;
+        pos[0] = x;
     }
 
 
     void Entity::SetY(double y){
         y = y;
+        pos[1]=y;
     }
 
 
     void Entity::SetZ(double z){
         z = z;
+        pos[2] =z;
     }
 
      
@@ -89,10 +92,28 @@
         dir[1] = d[1];
         dir[2] = d[2];
     }
+    
+    double *Entity::GetPos(){
+        return pos;
+    }
+     
+    void Entity::SetPos(double d[3]){
+        pos[0] = d[0];
+        pos[1] = d[1];
+        pos[2] = d[2];
+    }
      
     void Entity::SetID(double i){
         id = i;
     }
+    
+    double Entity::GetID(){
+        return id;
+    }
+    
+    void Entity::SetName(std::string n) {
+		name = n;
+	}
 
     bool Entity::CheckForBattery(){
         if(hasBattery){
@@ -113,12 +134,12 @@
         x=0;
         y=0;
         z=0;
-        name = NULL;
+        name = "";
         id = -1;
 
     }
 	
-	Charger::Charger(char *n){
+	Charger::Charger(std::string n){
         pos[0] = 0;
         pos[1] = 0;
         pos[2] = 0;
@@ -145,7 +166,7 @@
         x=x;
         y=y;
         z=z;
-        name = NULL;
+        name = "";
         id = -1;
 
     }
@@ -163,7 +184,7 @@
  //        x=0;
  //        y=0;
  //        z=0;
- //        name = NULL;
+ //        name = "";
  //        id = -1;
  //    }
 	
@@ -193,7 +214,7 @@
  //        x=x;
  //        y=y;
  //        z=z;
- //        name = NULL;
+ //        name = "";
  //        id = -1;
  //    }
 	
@@ -213,11 +234,11 @@
         x=0;
         y=0;
         z=0;
-        name = NULL;
+        name = "";
         id = -1;
     }
     
-    Robot::Robot(char *n){
+    Robot::Robot(std::string n){
         pos[0] = 0;
         pos[1] = 0;
         pos[2] = 0;
@@ -243,7 +264,7 @@
         x=x;
         y=y;
         z=z;
-        name = NULL;
+        name = "";
         id = -1;
     }
 
@@ -259,11 +280,11 @@
         x=0;
         y=0;
         z=0;
-        name = NULL;
+        name = "";
         id = -1;
     }
     
-    Hospital::Hospital(char *n){
+    Hospital::Hospital(std::string n){
         pos[0] = 0;
         pos[1] = 0;
         pos[2] = 0;
@@ -289,6 +310,6 @@
         x=x;
         y=y;
         z=z;
-        name = NULL;
+        name = "";
         id = -1;
     }

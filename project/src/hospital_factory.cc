@@ -12,10 +12,11 @@ Entity* HospitalFactory::CreateEntity(picojson::object &entityData){
     // picojson::value val(entityData);
     // std::cout << val.serialize() << std::endl;
 
-    if (entityData["name"].get<std::string>() == "hospital") {
+    if ((entityData["name"].get<std::string>().compare (0, 8, "hospital")) == 0) {
 
     	Hospital* newHospital = new Hospital();
     	
+    	//newHospital->SetName((char*)entityData["name"].get<std::string>().c_str());
 	    newHospital->SetID(entityData["entityId"].get<double>());
 
 	    if(!entityData["position"].is<picojson::array>()){

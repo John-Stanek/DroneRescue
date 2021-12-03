@@ -12,7 +12,7 @@ protected:
     double pos[3];
     double dir[3];
     double x,y,z;
-    char *name;
+    std::string name;
     double id;
     
 
@@ -27,7 +27,7 @@ public:
     Entity();
     
     
-    Entity(char *name);
+    Entity(std::string name);
 
     /**
      * @brief Construct a new Color object
@@ -94,12 +94,23 @@ public:
      * @param red - a float value for alpha to be set to
      */
      
+     
      double *GetDir();
      
      void SetDir(double dir[3]);
      
+     double *GetPos();
+     
+     void SetPos(double dir[3]);
+     
      void SetID(double id);
      
+     double GetID();
+     
+     void SetName(std::string n);
+     
+     void Update(double dt){};
+
      bool CheckForBattery();
 };
 
@@ -107,7 +118,7 @@ class Charger: public Entity{
 	public: 
 	Charger();
 	
-	Charger(char *name);
+	Charger(std::string name);
 	
 	Charger(double x, double y, double z);
 };
@@ -116,7 +127,7 @@ class Robot: public Entity{
 	public:
 	Robot();
 	
-	Robot(char *name);
+	Robot(std::string name);
 	
 	Robot(double x, double y, double z);
 };
@@ -125,7 +136,7 @@ class Hospital: public Entity{
 	public: 
 	Hospital();
 	
-	Hospital(char *name);
+	Hospital(std::string name);
 	
 	Hospital(double x, double y, double z);
 };

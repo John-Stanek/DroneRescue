@@ -14,9 +14,10 @@ Entity* RobotFactory::CreateEntity(picojson::object &entityData){
     // std::cout << val.serialize() << std::endl;
 
 
-    if (entityData["name"].get<std::string>() == "robot") {
+    if ((entityData["name"].get<std::string>().compare (0, 5, "robot")) == 0) {
     	Robot* newRobot = new Robot();
     	
+    	//newRobot->SetName((char*)entityData["name"].get<std::string>().c_str());
 	    newRobot->SetID(entityData["entityId"].get<double>());
 
 	    if(!entityData["position"].is<picojson::array>()){
