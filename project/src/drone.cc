@@ -7,6 +7,49 @@
 Drone::Drone() {
     id = 0;
     speed = 0;
+    pos[0] = 0;
+    pos[1] = 0;
+    pos[2] = 0;
+
+    dir[0] = 0;
+    dir[1] = 0;
+    dir[2] = 0;
+    x=0;
+    y=0;
+    z=0;
+    name = "drone";
+}
+
+Drone::Drone(std::string n){
+    pos[0] = 0;
+    pos[1] = 0;
+    pos[2] = 0;
+
+    dir[0] = 0;
+    dir[1] = 0;
+    dir[2] = 0;
+    x=0;
+    y=0;
+    z=0;
+    name = n;
+    id = 0;
+    speed = 0;
+}
+
+Drone::Drone(double x, double y, double z){
+    pos[0] = x;
+    pos[1] = y;
+    pos[2] = z;
+
+    dir[0] = 0;
+    dir[1] = 0;
+    dir[2] = 0;
+    x=x;
+    y=y;
+    z=z;
+    name = "";
+    id = 0;
+    speed =0;
 }
 
 double Drone::GetPosition(int index) {
@@ -21,6 +64,9 @@ double Drone::GetSpeed() {
     return speed;
 }
 
+void Drone::SetSpeed(double s){
+        speed = s;
+}
 int Drone::GetId() {
     return id;
 }
@@ -52,7 +98,7 @@ void Drone::Update(double dt) {
     }
     else {
         for (int i = 0; i < 3; i++) {
-            pos[i] += speeddir[i]dt;
+            pos[i] += speed*dir[i]*dt;
         }
     }
 
@@ -96,6 +142,6 @@ void Drone::Update(double dt) {
     // // }
 }
 void Drone::SetJoystick(double x, double y, double z, double a, bool s) {
-    isSearching = !s;
+    //isSearching = !s;
     dir[0] = x; dir[1] = y; dir[2] = z;
 }

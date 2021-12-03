@@ -1,10 +1,8 @@
 #include "web_app.h"
 #include <fstream>
-//#include "base64.h"
 #include "drone.h"
 #include "util/base64.h"
-
-
+    
 // ============================== TODO: DELETE! ==============================
 
 // A simple camera class that can take pictures and process images assynchronously.
@@ -70,33 +68,30 @@ private:
 
 // A simple example entity to get your started in the examples below.
 // Move the functionality into your simulation facade and delete this class!
-// class DeleteThisDroneClass {
-// public:
-//     int id; double pos[3]; double dir[3]; double speed;
+class DeleteThisDroneClass {
+public:
+    int id; double pos[3]; double dir[3]; double speed;
+    void Update(double dt) {
+       for (int i = 0; i < 3; i++) {
+           pos[i] += speed*dir[i]*dt;
+       }
 
-//     void Update(double dt) {
-//        for (int i = 0; i < 3; i++) {
-//            pos[i] += speed*dir[i]*dt;
-//        }
+       // Take a picture every 5 seconds with front camera
+       time += dt;
+       if (time-lastPictureTime > 5.0) {
+           cameras[0]->TakePicture();
+           lastPictureTime = time;
+       }
+    }
+    void SetJoystick(double x, double y, double z, double a) {
+        dir[0] = x; dir[1] = y; dir[2] = z;
+    }
 
-//        // Take a picture every 5 seconds with front camera
-//        time += dt;
-//        if (time-lastPictureTime > 5.0) {
-//            cameras[0]->TakePicture();
-//            lastPictureTime = time;
-//        }
-//     }
-//     void SetJoystick(double x, double y, double z, double a) {
-//         dir[0] = x; dir[1] = y; dir[2] = z;
-//     }
+    std::vector<WriteYourOwnCameraClass*> cameras;
+    float lastPictureTime = 0.0;
+    float time = 0.0;
 
-//     std::vector<WriteYourOwnCameraClass*> cameras;
-//     float lastPictureTime = 0.0;
-//     float time = 0.0;
-
-// } deleteThisDrone;
-
-Drone deleteThisDrone;
+} deleteThisDrone;
 
 // ============================== TODO: DELETE! ==============================
 
@@ -111,83 +106,91 @@ Drone deleteThisDrone;
 
 
 void WebApp::CreateEntity(picojson::object& entityData, ICameraController& cameraController) {
-    // Creates an entity based on JSON data stored as an object.
+    //// Creates an entity based on JSON data stored as an object.
 
-    // Print out actual json:
-    picojson::value val(entityData);
-    std::cout << val.serialize() << std::endl;
+    //// Print out actual json:
+    //picojson::value val(entityData);
+    //std::cout << val.serialize() << std::endl;
 
-    // Use your simulatin facade to create a new entity.
-    // Below is an example on how to get data values from picojson.
-    // The code should be in the factory, not here!
-    if (entityData["name"].get<std::string>() == "drone") {
-        deleteThisDrone.id = entityData["entityId"].get<double>();
-        deleteThisDrone.speed = entityData["speed"].get<double>();
+    //// Use your simulatin facade to create a new entity.
+    //// Below is an example on how to get data values from picojson.
+    //// The code should be in the factory, not here!
+    //if (entityData["name"].get<std::string>() == "drone") {
+        //deleteThisDrone.id = entityData["entityId"].get<double>();
+        //deleteThisDrone.speed = entityData["speed"].get<double>();
 
-        // Get the position as an array
-        picojson::array position = entityData["position"].get<picojson::array>();
-        deleteThisDrone.pos[0] = position[0].get<double>();
-        deleteThisDrone.pos[1] = position[1].get<double>();
-        deleteThisDrone.pos[2] = position[1].get<double>();
+        //// Get the position as an array
+        //picojson::array position = entityData["position"].get<picojson::array>();
+        //deleteThisDrone.pos[0] = position[0].get<double>();
+        //deleteThisDrone.pos[1] = position[1].get<double>();
+        //deleteThisDrone.pos[2] = position[1].get<double>();
 
-        // Get the direction as an array
-        picojson::array dir = entityData["direction"].get<picojson::array>();
-        deleteThisDrone.dir[0] = dir[0].get<double>();
-        deleteThisDrone.dir[1] = dir[1].get<double>();
-        deleteThisDrone.dir[2] = dir[1].get<double>();
+        //// Get the direction as an array
+        //picojson::array dir = entityData["direction"].get<picojson::array>();
+        //deleteThisDrone.dir[0] = dir[0].get<double>();
+        //deleteThisDrone.dir[1] = dir[1].get<double>();
+        //deleteThisDrone.dir[2] = dir[1].get<double>();
 
-        // Create cameras for the entity.
-        picojson::array cameras = entityData["cameras"].get<picojson::array>();
-        for (int i = 0; i < cameras.size(); i++) {
-            WriteYourOwnCameraClass* camera = new WriteYourOwnCameraClass(cameras[i].get<double>(), &cameraController);
+        //// Create cameras for the entity.
+        //picojson::array cameras = entityData["cameras"].get<picojson::array>();
+        //for (int i = 0; i < cameras.size(); i++) {
+            //WriteYourOwnCameraClass* camera = new WriteYourOwnCameraClass(cameras[i].get<double>(), &cameraController);
             //deleteThisDrone.cameras.push_back(camera);
-        }
-    }
+        //}
+    //}
+    
+    
+    simulation.CreateEntity(entityData, cameraController);
 }
 
 
 void WebApp::Update(double dt) {
-    // Updates the simulation.  This may be called multiple times per frame.
+    //// Updates the simulation.  This may be called multiple times per frame.
 
-    // Below is an example of how to use keyboard commands:
-    deleteThisDrone.SetJoystick(
-        IsKeyDown("ArrowRight") ? 1 : (IsKeyDown("ArrowLeft") ? -1 : 0),
-        IsKeyDown("w") ? 1 : (IsKeyDown("s") ? -1 : 0),
-        IsKeyDown("ArrowUp") ? -1 : (IsKeyDown("ArrowDown") ? 1 : 0),
-        IsKeyDown("a") ? 1 : (IsKeyDown("d") ? -1 : 0),
-        IsKeyDown("p")
-    );
+    //// Below is an example of how to use keyboard commands:
+    //deleteThisDrone.SetJoystick(
+        //IsKeyDown("ArrowRight") ? 1 : (IsKeyDown("ArrowLeft") ? -1 : 0),
+        //IsKeyDown("w") ? 1 : (IsKeyDown("s") ? -1 : 0),
+        //IsKeyDown("ArrowUp") ? -1 : (IsKeyDown("ArrowDown") ? 1 : 0),
+        //IsKeyDown("a") ? 1 : (IsKeyDown("d") ? -1 : 0)
+    //);
     
-    // Below is an example of how to update an entity.  
-    // This code should be in the simulation facade, not here!
-    deleteThisDrone.Update(dt);
+    //// Below is an example of how to update an entity.  
+    //// This code should be in the simulation facade, not here!
+    //deleteThisDrone.Update(dt);
+    
+    
+    simulation.Update(dt);
 }
 
 void WebApp::FinishUpdate(picojson::object& returnValue) {
-    // Called after all updating is done.
+    //// Called after all updating is done.
 
-    // Below is an example of how to send the position and direction to the UI.  
-    // In general you will want to loop through entities that have changed to update
-    // their position and direction:
-    picojson::object entity;
-    entity["entityId"] = picojson::value((double)0);
+    //// Below is an example of how to send the position and direction to the UI.  
+    //// In general you will want to loop through entities that have changed to update
+    //// their position and direction:
+    //picojson::object entity;
+    //entity["entityId"] = picojson::value((double)0);
+    
+    //// Save the position as an array
+    //picojson::array pos;
+    //pos.push_back(picojson::value(deleteThisDrone.pos[0]));
+    //pos.push_back(picojson::value(deleteThisDrone.pos[1]));
+    //pos.push_back(picojson::value(deleteThisDrone.pos[2]));
+    //entity["pos"] = picojson::value(pos);
 
-    // Save the position as an array
-    picojson::array pos;
-    pos.push_back(picojson::value(deleteThisDrone.pos[0]));
-    pos.push_back(picojson::value(deleteThisDrone.pos[1]));
-    pos.push_back(picojson::value(deleteThisDrone.pos[2]));
-    entity["pos"] = picojson::value(pos);
+    //// Save the direction as an array
+    //picojson::array dir;
+    //dir.push_back(picojson::value(deleteThisDrone.dir[0]));
+    //dir.push_back(picojson::value(deleteThisDrone.dir[1]));
+    //dir.push_back(picojson::value(deleteThisDrone.dir[2]));
+    //entity["dir"] = picojson::value(dir);
 
-    // Save the direction as an array
-    picojson::array dir;
-    dir.push_back(picojson::value(deleteThisDrone.dir[0]));
-    dir.push_back(picojson::value(deleteThisDrone.dir[1]));
-    dir.push_back(picojson::value(deleteThisDrone.dir[2]));
-    entity["dir"] = picojson::value(dir);
-
-    // Send the compile picojson data to the UI in the returnValue variable
-    returnValue["entity"+std::to_string(deleteThisDrone.id)] = picojson::value(entity);
+    //// Send the compile picojson data to the UI in the returnValue variable
+    //returnValue["entity"+std::to_string(deleteThisDrone.id)] = picojson::value(entity);
+    
+    simulation.FinishUpdate(returnValue);
+    
 }
 
 
