@@ -49,5 +49,22 @@
             "rotation": [0, 0, 0],
             "cameras": [2]
         }
+    },
+    {
+        "command": "createEntity",
+        "params": {
+            "entityId": 3,
+            "name": "rescue drone",
+            "type": "actor",
+            "path": "drone_lp.glb",
+            "position": [-40.0, 2.5, 2],
+            "scale": [1, 1, 1],
+            "direction": [1,0,0],
+            "radius": 1.0,
+            "rotation": [0, 0, 0],
+            "start": 0.0,
+            "duration": 0.0,
+            "cameras": [3]
+        }
     }
 ]
