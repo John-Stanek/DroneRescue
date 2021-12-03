@@ -12,10 +12,11 @@ Entity* ChargerFactory::CreateEntity(picojson::object &entityData){
     // picojson::value val(entityData);
     // std::cout << val.serialize() << std::endl;
 
-    if (entityData["name"].get<std::string>() == "charger") {
+    if ((entityData["name"].get<std::string>().compare (0, 16, "recharge station")) == 0) {
 
     	Charger* newCharger = new Charger();
     	
+    	//newCharger->SetName((char*)entityData["name"].get<std::string>().c_str());
 	    newCharger->SetID(entityData["entityId"].get<double>());
 
 	    if(!entityData["position"].is<picojson::array>()){

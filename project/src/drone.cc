@@ -16,10 +16,10 @@ Drone::Drone() {
     x=0;
     y=0;
     z=0;
-    name = NULL;
+    name = "drone";
 }
 
-Drone::Drone(char *n){
+Drone::Drone(std::string n){
     pos[0] = 0;
     pos[1] = 0;
     pos[2] = 0;
@@ -46,7 +46,7 @@ Drone::Drone(double x, double y, double z){
     x=x;
     y=y;
     z=z;
-    name = NULL;
+    name = "";
     id = 0;
     speed =0;
 }

@@ -17,7 +17,7 @@ public:
     bool isSearching = true;
 public:
     Drone();
-    Drone(char *name);
+    Drone(std::string name);
     Drone(double x, double y, double z);
     void SetSpeed(double speed);
     

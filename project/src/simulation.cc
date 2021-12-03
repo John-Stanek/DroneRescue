@@ -1,6 +1,7 @@
 #include "simulation.h"
 
 Simulation::Simulation() {
+	entities = std::vector<Entity*>();
 }
 
 
@@ -26,7 +27,6 @@ void Simulation::Update(double dt) {
 }
 
 void Simulation::FinishUpdate(picojson::object& returnValue) {
-	printf("starting FinishUpdate");
 	
 	// Called after all updating is done.
 
@@ -50,13 +50,12 @@ void Simulation::FinishUpdate(picojson::object& returnValue) {
 		dir.push_back(picojson::value(entity->GetDir()[1]));
 		dir.push_back(picojson::value(entity->GetDir()[2]));
 		entity_json["dir"] = picojson::value(dir);
-		
 		// Send the compile picojson data to the UI in the returnValue variable
-		returnValue["entity"+std::to_string(entity->GetID())] = picojson::value(entity_json);
+		returnValue["entity"+std::to_string(int(entity->GetID()))] = picojson::value(entity_json);
 	}
-	printf("ending FinishUpdate");
 }
 
 void Simulation::CreateEntity(picojson::object& entityData, ICameraController& cameraController) {
+	std::cout << (picojson::value)entityData << std::endl;
 	entities.push_back(composite_factory.CreateEntity(entityData));
 }
