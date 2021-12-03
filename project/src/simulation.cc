@@ -8,7 +8,7 @@ Simulation::Simulation() {
 Simulation::~Simulation() {
 }
 
-void Simulation::Update(double dt) {
+void Simulation::Update(double dt, double arrows[4], bool moves[2]) {
 	//// Below is an example of how to use keyboard commands:
     //deleteThisDrone.SetJoystick(
         //IsKeyDown("ArrowRight") ? 1 : (IsKeyDown("ArrowLeft") ? -1 : 0),
@@ -22,7 +22,7 @@ void Simulation::Update(double dt) {
     //deleteThisDrone.Update(dt);
     
     for (Entity* entity : entities) {
-		entity->Update(dt);
+		entity->Update(dt, arrows, moves);
 	}
 }
 
