@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "drone_movement.h"
+#include "battery.h"
 #include "entity.h"
 
 
@@ -14,7 +15,10 @@ public:
     double pos[3] = {0, 264, 0}; 
     double dir[3] = {0, 0, 0};
     double speed; 
-    bool isSearching = true;
+    bool final = false;
+    bool patrol = false;
+    bool beeline = false;
+    Battery battery;
 public:
     Drone();
     Drone(std::string name);
