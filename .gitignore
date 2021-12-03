@@ -5,8 +5,5 @@ data
 /docs/html/*
 /docs/latex/*
 .vscode*
-<<<<<<< HEAD
 .vscode/*
-=======
-.vscode/*
->>>>>>> 7a425b132deab971efd2bda596eb49fec08a185e
+
