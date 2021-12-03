@@ -19,6 +19,9 @@ public:
     bool patrol = false;
     bool beeline = false;
     Battery battery;
+    double time = 0;
+    double lastPictureTime = 0;
+    
 public:
     Drone();
     Drone(std::string name);

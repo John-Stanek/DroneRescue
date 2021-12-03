@@ -103,11 +103,11 @@ void Drone::Update(double dt) {
     }
 
     // Take a picture every 5 seconds with front camera
-    time += dt;
-    if (time-lastPictureTime > 5.0) {
-        camera->TakePicture();
-        lastPictureTime = time;
-    }
+    // time += dt;
+    // if (time-lastPictureTime > 5.0) {
+    //     camera->TakePicture();
+    //     lastPictureTime = time;
+    // }
     // double* new_position;
     // this->battery.ReduceBatteryLife(dt);
     // if (!isSearching) {
