@@ -4,6 +4,7 @@
 static std::vector<Factory*> factories;
 
 CompositeFactory::CompositeFactory(){
+//Create vector of factories upon its own creation
 
 	//std::vector<Factory*> factories;
 	droneFactory = new DroneFactory();
@@ -20,7 +21,6 @@ CompositeFactory::CompositeFactory(){
 }
 
 CompositeFactory::~CompositeFactory(){
-	//cant do this unless they are declared in .h, but that causes other problems
 	delete droneFactory;
 	delete robotFactory;
 	delete rechargeFactory;

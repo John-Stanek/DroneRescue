@@ -16,7 +16,7 @@ public:
 
   	const char* Robotjson ="{\"name\":\"robot\", \"entityId\":1,\"position\":[0,0,0]}";
 
-  	const char* Chargerjson ="{\"name\":\"charger\", \"entityId\":2,\"position\":[0,0,0]}";
+  	const char* Chargerjson ="{\"name\":\"recharge station\", \"entityId\":2,\"position\":[0,0,0]}";
 
   	const char* Hospitaljson ="{\"name\":\"hospital\", \"entityId\":3,\"position\":[0,0,0]}";
 
