@@ -16,6 +16,5 @@ double* Beeline::move(double* drone_pos, double* drone_dir, double drone_speed) 
         timestep[i] = beelineVel[i] * dt;
         drone_pos[i] += timestep[i];
     }
-
     return drone_pos;
 }
