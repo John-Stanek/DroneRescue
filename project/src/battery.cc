@@ -20,11 +20,11 @@ float Battery::GetMax(){
 float Battery::GetBatteryLife(){
     return batteryLife;
 }
-void Battery::ReduceBatteryLife(float rem){
-    batteryLife -= rem;
+void Battery::ReduceBatteryLife(float dt){
+    batteryLife -= dt;
 }
-void Battery::RechargeBatteryLife(){
-    batteryLife = maxCharge;
+void Battery::RechargeBatteryLife(float dt){
+    batteryLife += dt;
 }
 bool Battery::IsEmpty(){
     return empty;
