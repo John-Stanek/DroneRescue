@@ -41,13 +41,12 @@ protected:
                 // do stuff
                 // Color pixel = input.GetPixel(x, y) etc...
                 Color pixel = input.GetPixel(x, y);
-                if (pixel.Red() <= 265 && pixel.Red() >= 210) {
-                    if (pixel.Green() <= 200 && pixel.Green() >= 110) {
-                        if (pixel.Blue() <= 60 && pixel.Blue() >= 10) {
-                            output.SetPixel(x, y, Color(1.0, 1.0, 1.0, 1.0));                                                    
-                        }
-                    }
-                } else {
+                if ((pixel.Red() <= 265 && pixel.Red() >= 210) 
+                    && (pixel.Green() <= 200 && pixel.Green() >= 110) 
+                    && (pixel.Blue() <= 60 && pixel.Blue() >= 10)) {
+                    output.SetPixel(x, y, Color(1.0, 1.0, 1.0, 1.0));                                                                                
+                } 
+                else {
                     output.SetPixel(x, y, Color(0.0, 0.0, 0.0, 1.0));
                 }
             }

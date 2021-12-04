@@ -41,8 +41,8 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
         imageio::Image test;
         imageio::Image input;
         imageio::Image output;
-        //input.Load("./1.png");
-        input.LoadFromString(images[0].data, images[0].length);
+        input.Load("./1.png");
+        //input.LoadFromString(images[0].data, images[0].length);
 
         // How to use composite filter
         imageio::CompositeFilter composite;
