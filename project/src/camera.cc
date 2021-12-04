@@ -39,10 +39,37 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
 
         // How to use composite filter
         imageio::CompositeFilter composite;
-        composite.AddFilter(new BlobDetection());
-        composite.AddFilter(new imageio::CannyEdgeDetect(0.1, 0.3));
         imageio::Image output;
+        composite.AddFilter(new BlobDetection());
         composite.Apply( { statue.get() }, { &output } );
+
+        // Count blob pixels.
+        int blobCount = 0;
+        for (int x=0; y < output.GetWidth(); x++) {
+            for (int y=0; y < output.GetHeight(); y++) {
+                Color pixel = output.GetPixel(x, y);
+                if (pixel.Red() == 0 && pixel.Green() == 0; && pixel.Blue() == 0) {
+                    blobCount++;        
+                }
+            }
+        }
+        
+        composite.AddFilter(new imageio::CannyEdgeDetect(0.1, 0.3));
+        composite.Apply( { statue.get() }, { &output } );
+
+        // Count edge pixels.
+        int edgeCount = 0;
+        for (int x=0; y < output.GetWidth(); x++) {
+            for (int y=0; y < output.GetHeight(); y++) {
+                Color pixel = output.GetPixel(x, y);
+                if () {
+                    edgeCount++;        
+                }
+            }
+        }
+        
+        //Get ratio of blob to edge pixels.
+
         output.SaveAs("./robot.png");
         std::cout << "Image filtered" << std::endl;
 
