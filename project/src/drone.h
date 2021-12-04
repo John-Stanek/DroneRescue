@@ -87,8 +87,8 @@ public:
      * 
      * @param index - x, y, or z coordinate 
      * @return double 
-     * /
-
+     */
+    
     double GetPosition(int index);
 
     /**
