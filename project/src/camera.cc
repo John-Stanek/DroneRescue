@@ -30,6 +30,16 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
         std::ofstream depthFile ("depth.png", std::ios::out | std::ios::binary);
         depthFile.write (reinterpret_cast<const char*>(images[1].data), images[1].length);
 
+        CameraResult* result = new CameraResult();
+        result->found = true;
+        result->pos[0] = xPos;
+        result->pos[1] = yPos;
+        result->pos[2] = zPos;
+
+        // int width, height, components;
+        // unsigned char* buffer = stbi_load_from_memory((const unsigned char*)images[0].data, images[0].length(), &width, &height, &components, 4);
+        // components = 4;
+
         std::unique_ptr<imageio::IImage> statue;
         
         //TODO: Get color.png image to load into variable.
@@ -45,10 +55,10 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
 
         // Count blob pixels.
         int blobCount = 0;
-        for (int x=0; y < output.GetWidth(); x++) {
+        for (int x=0; x < output.GetWidth(); x++) {
             for (int y=0; y < output.GetHeight(); y++) {
                 Color pixel = output.GetPixel(x, y);
-                if (pixel.Red() == 0 && pixel.Green() == 0; && pixel.Blue() == 0) {
+                if (pixel.Red() == 0 && pixel.Green() == 0 && pixel.Blue() == 0) {
                     blobCount++;        
                 }
             }
@@ -59,18 +69,21 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
 
         // Count edge pixels.
         int edgeCount = 0;
-        for (int x=0; y < output.GetWidth(); x++) {
+        for (int x=0; x < output.GetWidth(); x++) {
             for (int y=0; y < output.GetHeight(); y++) {
                 Color pixel = output.GetPixel(x, y);
-                if () {
+                if (pixel.Red() == 255 && pixel.Green() == 255 && pixel.Blue() == 255) {
                     edgeCount++;        
                 }
             }
         }
-        
         //Get ratio of blob to edge pixels.
-
-        output.SaveAs("./robot.png");
+        int ratio = blobCount / edgeCount;
+        if (ratio > 10) {
+            result->found = true;
+        }
+        std::cout << result->found << std::endl;
+        output.SaveAs("./robot4.png");
         std::cout << "Image filtered" << std::endl;
 
         //TODO: count blob pixels and edge pixels and get ratio
@@ -79,16 +92,8 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
         //TODO: do depth calulation and get robot's position.
 
         // Use the following to convert color and depth images to RGBA image from memory (inside your image class / perhaps with a new constructor):
-        // int width, height, components;
-        // unsigned char* buffer = stbi_load_from_memory((const unsigned char*)images[0].data, images[0].length(), &width, &height, &components, 4);
-        // components = 4;
 
         // Generate the result of image processing.  This could include images using the Result class.
-        CameraResult* result = new CameraResult();
-        result->found = false;
-        result->pos[0] = xPos;
-        result->pos[1] = yPos;
-        result->pos[2] = zPos;
         return result;
     }
     else {

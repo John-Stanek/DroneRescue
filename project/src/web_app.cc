@@ -110,41 +110,38 @@ Drone deleteThisDrone;
 
 
 void WebApp::CreateEntity(picojson::object& entityData, ICameraController& cameraController) {
-    //// Creates an entity based on JSON data stored as an object.
+    // Creates an entity based on JSON data stored as an object.
 
-    //// Print out actual json:
-    //picojson::value val(entityData);
-    //std::cout << val.serialize() << std::endl;
+    // Print out actual json:
+    picojson::value val(entityData);
+    std::cout << val.serialize() << std::endl;
 
-    //// Use your simulatin facade to create a new entity.
-    //// Below is an example on how to get data values from picojson.
-    //// The code should be in the factory, not here!
-    //if (entityData["name"].get<std::string>() == "drone") {
-        //deleteThisDrone.id = entityData["entityId"].get<double>();
-        //deleteThisDrone.speed = entityData["speed"].get<double>();
+    // Use your simulatin facade to create a new entity.
+    // Below is an example on how to get data values from picojson.
+    // The code should be in the factory, not here!
+    if (entityData["name"].get<std::string>() == "drone") {
+        deleteThisDrone.id = entityData["entityId"].get<double>();
+        deleteThisDrone.speed = entityData["speed"].get<double>();
 
-        //// Get the position as an array
-        //picojson::array position = entityData["position"].get<picojson::array>();
-        //deleteThisDrone.pos[0] = position[0].get<double>();
-        //deleteThisDrone.pos[1] = position[1].get<double>();
-        //deleteThisDrone.pos[2] = position[1].get<double>();
+        // Get the position as an array
+        picojson::array position = entityData["position"].get<picojson::array>();
+        deleteThisDrone.pos[0] = position[0].get<double>();
+        deleteThisDrone.pos[1] = position[1].get<double>();
+        deleteThisDrone.pos[2] = position[1].get<double>();
 
-        //// Get the direction as an array
-        //picojson::array dir = entityData["direction"].get<picojson::array>();
-        //deleteThisDrone.dir[0] = dir[0].get<double>();
-        //deleteThisDrone.dir[1] = dir[1].get<double>();
-        //deleteThisDrone.dir[2] = dir[1].get<double>();
+        // Get the direction as an array
+        picojson::array dir = entityData["direction"].get<picojson::array>();
+        deleteThisDrone.dir[0] = dir[0].get<double>();
+        deleteThisDrone.dir[1] = dir[1].get<double>();
+        deleteThisDrone.dir[2] = dir[1].get<double>();
 
-        //// Create cameras for the entity.
-        //picojson::array cameras = entityData["cameras"].get<picojson::array>();
-        //for (int i = 0; i < cameras.size(); i++) {
-            //WriteYourOwnCameraClass* camera = new WriteYourOwnCameraClass(cameras[i].get<double>(), &cameraController);
-            //deleteThisDrone.cameras.push_back(camera);
-        //}
-    //}
+        // Create cameras for the entity.
+        picojson::array cameras = entityData["cameras"].get<picojson::array>();
+        deleteThisDrone.camera = new Camera(cameras[0].get<double>(), &cameraController);
+    }
     
     
-    simulation.CreateEntity(entityData, cameraController);
+    //simulation.CreateEntity(entityData, cameraController);
 }
 
 
@@ -161,13 +158,22 @@ void WebApp::Update(double dt) {
         IsKeyDown("p") ? true : false,
         IsKeyDown("b") ? true : false,
     };
+
+    deleteThisDrone.SetJoystick(
+        IsKeyDown("ArrowRight") ? 1.0 : (IsKeyDown("ArrowLeft") ? -1.0 : 0.0),
+        IsKeyDown("w") ? 1.0 : (IsKeyDown("s") ? -1 : 0),
+        IsKeyDown("ArrowUp") ? -1.0 : (IsKeyDown("ArrowDown") ? 1.0 : 0.0),
+        IsKeyDown("a") ? 1.0 : (IsKeyDown("d") ? -1.0 : 0.0),
+        IsKeyDown("p") ? true : false,
+        IsKeyDown("b") ? true : false
+    );
     //// Below is an example of how to use keyboard commands:    
     //// Below is an example of how to update an entity.  
     //// This code should be in the simulation facade, not here!
-    //deleteThisDrone.Update(dt);
+    deleteThisDrone.Update(dt, arrows, moves);
     
     
-    simulation.Update(dt, arrows, moves);
+    //simulation.Update(dt, arrows, moves);
 }
 
 void WebApp::FinishUpdate(picojson::object& returnValue) {

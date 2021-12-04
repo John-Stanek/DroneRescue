@@ -5,12 +5,23 @@
 
 using namespace imageio;
 
+/**
+ * @brief Class for applying Blob detection to an image.
+ * 
+ */
+
 // Creating your own Filter class is simple. Just override ApplyInternal().
 class BlobDetection : public Filter {
 public:
     // 1 input, 1 output
     BlobDetection() : Filter(1, 1) {}
-        
+
+/**
+ * @brief Overloads Filter ApplyInternal method and applies blob detection filter
+ * @param parameter-inputs: a vector of input images to be filtered with blob detection
+ * @param parameter-outputs a vector of output images that are the result of blob detection being applied to inputs
+ */
+
 protected:
     void ApplyInternal(const vector<IImage *> &inputs, const vector<IImage *> &outputs) {
         // Do not modify any of the inputs
