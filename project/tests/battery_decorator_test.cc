@@ -50,6 +50,4 @@ TEST_F(BatteryDecoratorTest, AddBattery) {
 
   delete electricEntity;
   delete drone;
-  
-  
 }

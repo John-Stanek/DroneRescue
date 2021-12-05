@@ -48,9 +48,9 @@ Let's take a moment to define our notation.
 <ul>
     <li>V<sub>o</sub> is our source point</li>
     <li>V is the point we are moving to</li>
-    <li>V<sub>m</sub> is our midpoint equal to distance(source, destination) / 2</li>
+    <li>V<sub>m</sub> is our midpoint equal to difference(source, destination) / 2</li>
     <li>T is the number of steps we are estimating</li>
-    <li>V<sub>t</sub> is our step interval equal to distance(source, destination) / T</li>
+    <li>V<sub>t</sub> is our step interval equal to difference(source, destination) / T</li>
 </ul>
 
 The vertex in this context is the point at which the sign of the parabola's slope flips.

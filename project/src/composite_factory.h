@@ -34,7 +34,7 @@ public:
      * @param entityData - A reference to a picojson::object that contains data to be used for how an entity is created.
      * @return A newly created entity object
      */
-    Entity* CreateEntity(picojson::object &entityData);
+    Entity* CreateEntity(picojson::object &entityData, ICameraController& cameraController);
     
     /**
      * @brief A function to add factories to a factory list

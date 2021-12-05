@@ -5,7 +5,7 @@
 RobotFactory::RobotFactory(){}
 RobotFactory::~RobotFactory(){}
 
-Entity* RobotFactory::CreateEntity(picojson::object &entityData){
+Entity* RobotFactory::CreateEntity(picojson::object &entityData, ICameraController& cameraController){
 
 	//parse json object aka entityData
 

@@ -190,7 +190,7 @@ public:
      * 
      */
      
-     virtual void Update(double dt){};
+     virtual void Update(double dt, double arrows[4], bool moves[4]) = 0;
      
      /**
      * @brief Checks to see if the object has a battery
@@ -235,6 +235,8 @@ class Charger: public Entity{
      */
 	
 	Charger(double x, double y, double z);
+
+    void Update(double dt, double arrows[4], bool moves[4]) {};
 };
 
 /**
@@ -269,6 +271,8 @@ class Robot: public Entity{
      */
 	
 	Robot(double x, double y, double z);
+
+    void Update(double dt, double arrows[4], bool moves[4]) {};
 };
 
 /**
@@ -303,5 +307,7 @@ class Hospital: public Entity{
      */
 	
 	Hospital(double x, double y, double z);
+
+    void Update(double dt, double arrows[4], bool moves[4]) {};
 };
 #endif

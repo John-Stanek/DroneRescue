@@ -28,7 +28,7 @@ public:
      * @param entityData - A reference to a picojson::object that contains data to be used for how an entity is created.
      * @return A newly created robot object
      */
-    Entity* CreateEntity(picojson::object &entityData);
+    Entity* CreateEntity(picojson::object &entityData, ICameraController& cameraController);
     
 };
 

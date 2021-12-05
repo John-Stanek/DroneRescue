@@ -4,7 +4,7 @@
 
 DroneFactory::DroneFactory(){}
 DroneFactory::~DroneFactory(){}
-Entity* DroneFactory::CreateEntity(picojson::object &entityData){
+Entity* DroneFactory::CreateEntity(picojson::object &entityData, ICameraController& cameraController){
 
 	//parse json object aka entityData
 
@@ -15,9 +15,10 @@ Entity* DroneFactory::CreateEntity(picojson::object &entityData){
 	if ((entityData["name"].get<std::string>().compare (0, 5, "drone") == 0) ||
 	    (entityData["name"].get<std::string>().compare (0, 12, "rescue drone") == 0)) {
 
-    	Drone* newDrone = new Drone();
+    	Drone* newDrone = new Drone(cameraController);
     	newDrone->SetName(entityData["name"].get<std::string>());
-    	//printf("%s is current name\n", newDrone->GetName().c_str());
+    	
+
 		//newDrone->SetName((char*)entityData["name"].get<std::string>().c_str());
 	    newDrone->SetID(entityData["entityId"].get<double>());
 	    if(entityData["speed"].is<double>()){

@@ -27,9 +27,9 @@ public:
      * 
      * @param entityData - A reference to a picojson::object that contains data to be used for how an entity is created.
      * @return A newly created entity object
-     */
-     
-    virtual Entity* CreateEntity(picojson::object &entityData){return NULL;};
+     */  
+    virtual Entity* CreateEntity(picojson::object &entityData, ICameraController& cameraController){return NULL;};
+
     
     
 };
