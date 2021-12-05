@@ -150,21 +150,24 @@ void WebApp::CreateEntity(picojson::object& entityData, ICameraController& camer
 
 void WebApp::Update(double dt) {
     //// Updates the simulation.  This may be called multiple times per frame.
+    double arrows[4] = {
+        IsKeyDown("ArrowRight") ? 1.0 : (IsKeyDown("ArrowLeft") ? -1.0 : 0.0),
+        IsKeyDown("w") ? 1.0 : (IsKeyDown("s") ? -1 : 0),
+        IsKeyDown("ArrowUp") ? -1.0 : (IsKeyDown("ArrowDown") ? 1.0 : 0.0),
+        IsKeyDown("a") ? 1.0 : (IsKeyDown("d") ? -1.0 : 0.0),
+    };
 
-    //// Below is an example of how to use keyboard commands:
-    //deleteThisDrone.SetJoystick(
-        //IsKeyDown("ArrowRight") ? 1 : (IsKeyDown("ArrowLeft") ? -1 : 0),
-        //IsKeyDown("w") ? 1 : (IsKeyDown("s") ? -1 : 0),
-        //IsKeyDown("ArrowUp") ? -1 : (IsKeyDown("ArrowDown") ? 1 : 0),
-        //IsKeyDown("a") ? 1 : (IsKeyDown("d") ? -1 : 0)
-    //);
-    
+    bool moves[2] = {
+        IsKeyDown("p") ? true : false,
+        IsKeyDown("b") ? true : false,
+    };
+    //// Below is an example of how to use keyboard commands:    
     //// Below is an example of how to update an entity.  
     //// This code should be in the simulation facade, not here!
     //deleteThisDrone.Update(dt);
     
     
-    simulation.Update(dt);
+    simulation.Update(dt, arrows, moves);
 }
 
 void WebApp::FinishUpdate(picojson::object& returnValue) {

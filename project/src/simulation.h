@@ -11,7 +11,7 @@ class Simulation {
 	public:
 		Simulation();
 		~Simulation();
-		void Update(double dt);
+		void Update(double dt, double arrows[4], bool moves[2]);
 		void FinishUpdate(picojson::object& returnValue);
 		void CreateEntity(picojson::object& entityData, ICameraController& cameraController);
 	private:

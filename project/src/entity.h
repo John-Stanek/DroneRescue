@@ -109,7 +109,7 @@ public:
      
      void SetName(std::string n);
      
-     void Update(double dt){};
+     virtual void Update(double dt, double arrows[4], bool moves[4]) = 0;
 
      bool CheckForBattery();
 };
@@ -121,6 +121,8 @@ class Charger: public Entity{
 	Charger(std::string name);
 	
 	Charger(double x, double y, double z);
+
+    void Update(double dt, double arrows[4], bool moves[4]) {};
 };
 
 class Robot: public Entity{
@@ -130,6 +132,8 @@ class Robot: public Entity{
 	Robot(std::string name);
 	
 	Robot(double x, double y, double z);
+
+    void Update(double dt, double arrows[4], bool moves[4]) {};
 };
 
 class Hospital: public Entity{
@@ -139,5 +143,7 @@ class Hospital: public Entity{
 	Hospital(std::string name);
 	
 	Hospital(double x, double y, double z);
+
+    void Update(double dt, double arrows[4], bool moves[4]) {};
 };
 #endif
