@@ -1,7 +1,7 @@
 #include "beeline.h"
 
 double* Beeline::move(double* drone_pos, double* drone_dir, double drone_speed) {
-    if (drone_pos[2] >= 5) {
+    if ((int) drone_pos[2] == 5) {
         return drone_pos;
     }
 

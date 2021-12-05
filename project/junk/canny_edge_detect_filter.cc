@@ -23,6 +23,7 @@ void CannyEdgeDetectFilter::Apply(std::vector<Image*> original, std::vector<Imag
 	gaussian.GaussianBlurFilter::Apply(filtered_copy, filtered);
 	
 	filtered_copy = filtered;
+	filtered.push_back(filtered[0]);
 	sobel.SobelFilter::Apply(filtered_copy, filtered);
 	
 	filtered_copy = filtered;
@@ -39,3 +40,4 @@ void CannyEdgeDetectFilter::Apply(std::vector<Image*> original, std::vector<Imag
 	
 	
 }
+
