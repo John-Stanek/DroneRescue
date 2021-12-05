@@ -20,7 +20,6 @@ public:
 
   	const char* Hospitaljson ="{\"name\":\"hospital\", \"entityId\":3,\"position\":[0,0,0]}";
 
-
   	//picojson::value dObj= picojson::value(dStr);
   	
 	//parse drone json

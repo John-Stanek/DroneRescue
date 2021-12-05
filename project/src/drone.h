@@ -34,6 +34,13 @@ public:
      */
 
     Drone(ICameraController& cameraController);
+    
+    /**
+     * @brief Construct a new Drone object
+     * 
+     */
+
+    Drone();
 
     /**
      * @brief Destroy the Drone object

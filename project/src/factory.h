@@ -29,6 +29,8 @@ public:
      * @return A newly created entity object
      */  
     virtual Entity* CreateEntity(picojson::object &entityData, ICameraController& cameraController){return NULL;};
+    
+    virtual Entity* CreateEntity(picojson::object &entityData){return NULL;};
 
     
     

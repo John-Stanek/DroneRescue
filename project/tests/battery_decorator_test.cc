@@ -44,7 +44,9 @@ TEST_F(BatteryDecoratorTest, AddBattery) {
 
   EXPECT_EQ(drone->GetPosition(0),electricEntity->GetPosition(0));
 
-  electricEntity->Update();
+  double arrows[4] = {1.0, 0.0, 0.0, 0.0};
+  bool moves[2] = {false, false};
+  electricEntity->Update(0.01, arrows, moves);
 
   EXPECT_EQ(drone->GetPosition(0),electricEntity->GetPosition(0));
 

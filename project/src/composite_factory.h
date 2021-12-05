@@ -9,6 +9,7 @@
 #include "charger_factory.h"
 #include "hospital_factory.h"
 #include "entity.h"
+//#include "camera.h"
 
 /**
  * @brief This is the CompositeFactory class which handles entity creation for all entity types by using the composite factory pattern. Other Files only need to know about this class and it will do all of the work to create any type of entity.
@@ -35,6 +36,15 @@ public:
      * @return A newly created entity object
      */
     Entity* CreateEntity(picojson::object &entityData, ICameraController& cameraController);
+    
+    
+    /**
+     * @brief A function to be create a new entity of any type
+     * 
+     * @param entityData - A reference to a picojson::object that contains data to be used for how an entity is created.
+     * @return A newly created entity object
+     */
+    Entity* CreateEntity(picojson::object &entityData);
     
     /**
      * @brief A function to add factories to a factory list

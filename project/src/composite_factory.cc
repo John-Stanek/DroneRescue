@@ -47,6 +47,25 @@ Entity* CompositeFactory::CreateEntity(picojson::object &entityData, ICameraCont
 	return NULL;
 }
 
+Entity* CompositeFactory::CreateEntity(picojson::object &entityData){
+	//parse json object aka entityData
+
+    // Print out actual json:
+    //picojson::value val(entityData);
+    //std::cout << picojson::value(entityData) << std::endl;
+    //std::cout << val.serialize() << std::endl;
+
+    //check every factory for successful return
+	for(Factory* dfactory : factories){
+		Entity* entity = dfactory->CreateEntity(entityData);
+		if(entity){
+			return entity;
+		}
+		
+	}
+	return NULL;
+}
+
 void CompositeFactory::AddFactory(Factory* factory){
 	factories.push_back(factory);
 }

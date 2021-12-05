@@ -30,9 +30,11 @@ public:
     /**
     * @brief Update the existing entity object
     */
-    void Update(){
-        ent->Update(0.01);
+    void Update(double dt, double arrows[4], bool moves[2]){
+        ent->Update(dt, arrows, moves);
     }
+    
+    
     /**
     * @brief Get the position of the entity object
     * @param index - The index of the pos array that is requested

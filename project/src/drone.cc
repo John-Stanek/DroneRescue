@@ -19,6 +19,19 @@ Drone::Drone(ICameraController& cameraController) {
     camera = new Camera(id, &cameraController);
 }
 
+Drone::Drone() {
+    id = 0;
+
+    speed = 0;
+
+    // dir[0] = 0;
+    // dir[1] = 0;
+    // dir[2] = 0;
+    x=0;
+    y=0;
+    z=0;
+    name = "drone";
+}
 Drone::~Drone() {
     delete camera;
     delete movement;

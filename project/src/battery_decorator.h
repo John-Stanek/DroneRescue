@@ -35,13 +35,13 @@ class BatteryEntity : public EntityDecorator {
 		/**
 	     * @brief Update the BatteryEntity object by calling the entity's update function if it fulfills battery requirements
 	     */
-		void Update(){
+		void Update(double dt, double arrows[4], bool moves[2]){
 			if(battery->GetBatteryLife() <=0){
 				ent->final = true;
 			}
 			
 			if(battery->GetBatteryLife() > 0){
-				EntityDecorator::Update();
+				EntityDecorator::Update(dt, arrows, moves);
 			}
 			
 		}
