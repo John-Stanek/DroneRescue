@@ -4,45 +4,44 @@
 #include <iostream>
 #include <vector>
 #include "entity.h"
+#include "drone.h"
 
 
+/**
+ * @brief The EntityDecorator Class represents a class to be used to create decorator patterns for entity objects
+ * 
+ */
 class EntityDecorator : public Entity{
 protected:
-/*
-    double pos[3];
-    double dir[3];
-    double x,y,z;
-    char *name;
-    double id;
-    */
+    /**
+     * @brief An entity object to be given new attributes
+     */
     Entity *ent;
 public:
-/*
-    Entity();
-    
-    Entity(char *name);
 
-    Entity(double x, double y, double z);
-
-    double GetX();
-
-    double GetY();
-
-    double GetZ();
-
-    void SetX(double x);
-
-    void SetY(double y);
-
-    void SetZ(double z);
-
-    double *GetDir();
-     
-    void SetDir(double dir[3]);
-     
-    void SetID(double id);
-*/
+    /**
+         * @brief Construct a new EntityDecorator object using an existing entity object
+         * @param ent - An Entity pointer of an existing object
+         * @return
+         *   Returns a new instance of a the EntityDecorator class.
+         */
 	EntityDecorator(Entity *ent) : ent(ent) {}
+
+    /**
+    * @brief Update the existing entity object
+    */
+    void Update(){
+        ent->Update(0.01);
+    }
+    /**
+    * @brief Get the position of the entity object
+    * @param index - The index of the pos array that is requested
+    * @return
+    *   A position value of a given index as type double
+    */
+    double GetPosition(int index){
+        return ent->GetPosition(index);
+    }
 	
 };
 

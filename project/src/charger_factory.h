@@ -6,22 +6,26 @@
 #include "factory.h"
 
 /**
- * @brief This is the abstract Filter class which handles all types of image processing filters.
- *  All filters inherit from this class.
+ * @brief This is the ChargerFactory class which handles entity creation for recharge station type entities
  * 
  */
 
 class ChargerFactory : public Factory {
 public:
-
+	/**
+	* @brief a constructor to intitalize everything in the charger factory when it is created
+	*/
 	ChargerFactory();
+	
+	/**
+	* @brief a destructor to remove everything from the charger factory when it goes out of scope
+	*/
 	~ChargerFactory();
     /**
-     * @brief A pure virtual function to be overriden by child classes to apply a 
-     *   specific filter to an image.
+     * @brief A function to be create a new entity of type charger
      * 
-     * @param original - A vector of images to be filtered.
-     * @param filtered - A vector of images after filter has been applied.
+     * @param entityData - A reference to a picojson::object that contains data to be used for how an entity is created.
+     * @return A newly created charger object
      */
     Entity* CreateEntity(picojson::object &entityData);
     

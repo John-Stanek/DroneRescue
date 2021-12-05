@@ -12,8 +12,6 @@
 class Drone : public Entity{
 public:
     int id; 
-    double pos[3];
-    double dir[3];
     double speed; 
     bool final = false;
     bool patrol = false;
@@ -21,7 +19,7 @@ public:
     double time = 0.0;
     double lastPictureTime = 0.0; 
     Camera* camera;
-    Battery battery;
+    //Battery battery;
 
     Drone();
     ~Drone();

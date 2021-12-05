@@ -23,12 +23,6 @@ class BatteryDecoratorTest : public ::testing::Test {
       }
     }
 
-/*
-    void TearDown(){
-      delete factory;
-
-    }*/
-
     protected:
       picojson::value dValue,rValue,cValue, hValue;
       CompositeFactory factory = CompositeFactory();
@@ -44,15 +38,16 @@ TEST_F(BatteryDecoratorTest, AddBattery) {
   }
   EXPECT_EQ(drone->hasBattery,false);
 
-  Entity* electricEntity= new BatteryEntity(drone);
+  BatteryEntity* electricEntity= new BatteryEntity(drone); //call decorator
 
-  //Drone* electricDrone = static_cast<Drone*>(electricEntity);
-  // if(electricDrone == NULL){
-  //   ASSERT_EQ(false,true); // force fail test
-  // }
-  //EXPECT_EQ(electricDrone->hasBattery,true);
-  EXPECT_EQ(drone->hasBattery,true);
-  //delete electricDrone;
+  EXPECT_EQ(electricEntity->battery->GetBatteryLife() > 0,true);
+
+  EXPECT_EQ(drone->GetPosition(0),electricEntity->GetPosition(0));
+
+  electricEntity->Update();
+
+  EXPECT_EQ(drone->GetPosition(0),electricEntity->GetPosition(0));
+
   delete electricEntity;
   delete drone;
   
