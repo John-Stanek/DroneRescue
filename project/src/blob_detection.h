@@ -5,12 +5,23 @@
 
 using namespace imageio;
 
+/**
+ * @brief Class for applying Blob detection to an image.
+ * 
+ */
+
 // Creating your own Filter class is simple. Just override ApplyInternal().
 class BlobDetection : public Filter {
 public:
     // 1 input, 1 output
     BlobDetection() : Filter(1, 1) {}
-        
+
+/**
+ * @brief Overloads Filter ApplyInternal method and applies blob detection filter
+ * @param parameter-inputs: a vector of input images to be filtered with blob detection
+ * @param parameter-outputs a vector of output images that are the result of blob detection being applied to inputs
+ */
+
 protected:
     void ApplyInternal(const vector<IImage *> &inputs, const vector<IImage *> &outputs) {
         // Do not modify any of the inputs
@@ -30,18 +41,13 @@ protected:
                 // do stuff
                 // Color pixel = input.GetPixel(x, y) etc...
                 Color pixel = input.GetPixel(x, y);
-                if (pixel.Red() <= 265 && pixel.Red() >= 220) {
-                    if (pixel.Green() <= 200 && pixel.Green() >= 100) {
-                        if (pixel.Blue() <= 62 && pixel.Blue() >= 10) {
-                            pixel.R = pixel.GetLuminance();
-                            pixel.B = pixel.GetLuminance();
-                            pixel.G = pixel.GetLuminance();
-                            pixel.A = 1.0;
-                            output.SetPixel(x, y, pixel);                                                    
-                        }
-                    }
-                } else {
-                    output.SetPixel(x, y, Color(0.0, 0.0, 0.0, pixel.Alpha()));
+                if ((pixel.Red() <= 265 && pixel.Red() >= 210) 
+                    && (pixel.Green() <= 200 && pixel.Green() >= 110) 
+                    && (pixel.Blue() <= 60 && pixel.Blue() >= 10)) {
+                    output.SetPixel(x, y, Color(1.0, 1.0, 1.0, 1.0));                                                                                
+                } 
+                else {
+                    output.SetPixel(x, y, Color(0.0, 0.0, 0.0, 1.0));
                 }
             }
         }
