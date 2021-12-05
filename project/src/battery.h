@@ -22,12 +22,6 @@ class Battery {
          */
         void SetBatteryLife(float batLife);
         /**
-         * @brief Get the Max object
-         * 
-         * @return float 
-         */
-        float GetMax();
-        /**
          * @brief Get the Battery Life object
          * 
          * @return float 
@@ -45,27 +39,9 @@ class Battery {
          * @param dt 
          */
         void RechargeBatteryLife(float dt);
-        /**
-         * @brief Checks if the battery is empty
-         * 
-         * @return true 
-         * @return false 
-         */
-        bool IsEmpty();
-        /**
-         * @brief Set the Empty object
-         * 
-         * @param emp 
-         */
-        void SetEmpty(bool emp);
-        /**
-         * @brief Checks if the battery life is empty
-         * 
-         */
-        void CheckEmpty();
 
     private:
 
-        float batteryLife; float maxCharge; bool empty;
+        float batteryLife; 
 };
 #endif

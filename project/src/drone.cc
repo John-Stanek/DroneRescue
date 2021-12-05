@@ -72,6 +72,8 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
         }
         else{
             RechargeStation(this);
+            std::cout<< "this is battery life after recharge" << this->battery.GetBatteryLife() << std::endl;
+
         }
     }
     if(this->battery.GetBatteryLife() > 1000 && !final){
