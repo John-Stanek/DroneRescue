@@ -51,11 +51,12 @@ void Simulation::FinishUpdate(picojson::object& returnValue) {
 		dir.push_back(picojson::value(entity->GetDir()[2]));
 		entity_json["dir"] = picojson::value(dir);
 		// Send the compile picojson data to the UI in the returnValue variable
+		//std::cout << (picojson::value)returnValue << std::endl;
 		returnValue["entity"+std::to_string(int(entity->GetID()))] = picojson::value(entity_json);
 	}
 }
 
 void Simulation::CreateEntity(picojson::object& entityData, ICameraController& cameraController) {
 	std::cout << (picojson::value)entityData << std::endl;
-	entities.push_back(composite_factory.CreateEntity(entityData));
+	entities.push_back(composite_factory.CreateEntity(entityData, cameraController));
 }

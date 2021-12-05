@@ -31,23 +31,24 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
         depthFile.write (reinterpret_cast<const char*>(images[1].data), images[1].length);
 
         CameraResult* result = new CameraResult();
-        result->found = true;
+        result->found = false;
         result->pos[0] = xPos;
         result->pos[1] = yPos;
         result->pos[2] = zPos;
 
         std::unique_ptr<imageio::IImage> statue;
         
-        imageio::Image test;
         imageio::Image input;
         imageio::Image output;
-        input.Load("./1.png");
-        //input.LoadFromString(images[0].data, images[0].length);
+        //input.Load("./1.png");
+        input.LoadFromString(images[0].data, images[0].length);
 
         // How to use composite filter
-        imageio::CompositeFilter composite;
-        composite.AddFilter(new BlobDetection());
-        composite.Apply( { &input }, { &output } );
+        // imageio::CompositeFilter composite;
+        // composite.AddFilter(new BlobDetection());
+        // composite.Apply( { &input }, { &output } );
+        imageio::Filter* blob = new BlobDetection();
+        blob->Apply({ &input }, { &output });
 
         // Count blob pixels.
         int blobCount = 0;
@@ -61,8 +62,10 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
         }
         
         output.SaveAs("./blob.png");
-        composite.AddFilter(new imageio::CannyEdgeDetect(0.1, 0.3));
-        composite.Apply( { &input }, { &output } );
+        imageio::Filter* canny = new CannyEdgeDetect(0.1, 0.3);
+        canny->Apply({&input}, {&output});
+        // composite.AddFilter(new imageio::CannyEdgeDetect(0.1, 0.3));
+        // composite.Apply( { &input }, { &output } );
         output.SaveAs("./edge.png");
 
         // Count edge pixels.
@@ -75,12 +78,26 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
                 }
             }
         }
+        std::cout << blobCount << " " << edgeCount << std::endl;
         //Get ratio of blob to edge pixels.
         int ratio = blobCount / edgeCount;
+        
+        // Depth calculation
+        double dirVec[3];
+
         if (ratio > 10) {
             result->found = true;
+        
+            imageio::Image depth;
+            depth.LoadFromString(images[1].data, images[1].length);
+            for (int x=0; x < depth.GetWidth(); x++) {
+                for (int y=0; y < depth.GetHeight(); y++) {
+                    Color pixel = depth.GetPixel(x, y);
+
+                }
+            }
         }
-        std::cout << result->found << std::endl;
+        
         std::cout << "Image filtered" << std::endl;
 
         return result;

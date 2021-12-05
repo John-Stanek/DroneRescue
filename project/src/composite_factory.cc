@@ -28,7 +28,7 @@ CompositeFactory::~CompositeFactory(){
 }
 
 
-Entity* CompositeFactory::CreateEntity(picojson::object &entityData){
+Entity* CompositeFactory::CreateEntity(picojson::object &entityData, ICameraController& cameraController){
 	//parse json object aka entityData
 
     // Print out actual json:
@@ -38,7 +38,7 @@ Entity* CompositeFactory::CreateEntity(picojson::object &entityData){
 
     //check every factory for successful return
 	for(Factory* dfactory : factories){
-		Entity* entity = dfactory->CreateEntity(entityData);
+		Entity* entity = dfactory->CreateEntity(entityData, cameraController);
 		if(entity){
 			return entity;
 		}

@@ -17,8 +17,8 @@
 class Drone : public Entity{
 public:
     int id; 
-    double pos[3];
-    double dir[3];
+    //double pos[3];
+    //double dir[3];
     double speed; 
     bool final = false;
     bool patrol = false;
@@ -26,6 +26,7 @@ public:
     double time = 0.0;
     double lastPictureTime = 0.0; 
     Camera* camera;
+    DroneMovement* movement;
     Battery battery;
 
     /**
@@ -33,7 +34,7 @@ public:
      * 
      */
 
-    Drone();
+    Drone(ICameraController& cameraController);
 
     /**
      * @brief Destroy the Drone object
@@ -79,8 +80,8 @@ public:
      * @param moves - same as Update()
      */
 
-    //void SetJoystick(double arrows[4], bool moves[2]);
-    void SetJoystick(double x, double y, double z, double a, bool p, bool b);
+    void SetJoystick(double arrows[4], bool moves[2]);
+    //void SetJoystick(double x, double y, double z, double a, bool p, bool b);
 
     /**
      * @brief Get the position of the drone
@@ -115,8 +116,6 @@ public:
      */
 
     int GetId();
-
-    DroneMovement* movement;
 };
 
 #endif

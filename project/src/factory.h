@@ -13,7 +13,7 @@ public:
 
     virtual ~Factory(){};
     
-    virtual Entity* CreateEntity(picojson::object &entityData){return NULL;};
+    virtual Entity* CreateEntity(picojson::object &entityData, ICameraController& cameraController){return NULL;};
     
     
 };
