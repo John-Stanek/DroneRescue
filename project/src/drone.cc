@@ -88,7 +88,6 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
             pos[i] = new_position[i];
         }
         delete this->movement;
-        // Checks if the drone position is the same as the recharge station position
     }
     else {
         for (int i = 0; i < 3; i++) {
