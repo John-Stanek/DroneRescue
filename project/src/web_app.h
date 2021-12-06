@@ -58,7 +58,7 @@ public:
 
 private:
 	
-	Simulation simulation;
+	Simulation* simulation;
 	
     // Used for tracking time since last update
     std::chrono::time_point<std::chrono::system_clock> start;

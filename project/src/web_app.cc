@@ -7,7 +7,7 @@
 #include "imageio/image_processor.h"
     
 void WebApp::CreateEntity(picojson::object& entityData, ICameraController& cameraController) {    
-    simulation.CreateEntity(entityData, cameraController);
+    simulation->CreateEntity(entityData, cameraController);
 }
 
 
@@ -25,12 +25,12 @@ void WebApp::Update(double dt) {
         IsKeyDown("b") ? true : false,
     };
 
-    simulation.Update(dt, arrows, moves);
+    simulation->Update(dt, arrows, moves);
 }
 
 void WebApp::FinishUpdate(picojson::object& returnValue) {
     
-    simulation.FinishUpdate(returnValue);
+    simulation->FinishUpdate(returnValue);
     
 }
 
@@ -47,12 +47,14 @@ void WebApp::FinishUpdate(picojson::object& returnValue) {
 
 WebApp::WebApp() : start(std::chrono::system_clock::now()), time(0.0), running(true) {
     imageProcessThread = new std::thread(&WebApp::ProcessImageQueue, this);
+    simulation = new Simulation();
 }
 
 WebApp::~WebApp() {
     running = false;
     imageProcessCond.notify_all();
     imageProcessThread->join();
+    delete simulation;
 }
 
 void WebApp::receiveJSON(picojson::value& val) {

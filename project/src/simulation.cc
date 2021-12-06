@@ -2,10 +2,15 @@
 
 Simulation::Simulation() {
 	entities = std::vector<Entity*>();
+	composite_factory = new CompositeFactory();
 }
 
 
 Simulation::~Simulation() {
+	delete composite_factory;
+	for (Entity* entity : entities) {
+		delete entity;
+	}
 }
 
 void Simulation::Update(double dt, double arrows[4], bool moves[2]) {
@@ -45,5 +50,10 @@ void Simulation::FinishUpdate(picojson::object& returnValue) {
 
 void Simulation::CreateEntity(picojson::object& entityData, ICameraController& cameraController) {
 	std::cout << (picojson::value)entityData << std::endl;
-	entities.push_back(composite_factory.CreateEntity(entityData, cameraController));
+	entities.push_back(composite_factory->CreateEntity(entityData, cameraController));
+}
+
+void Simulation::CreateEntity(picojson::object& entityData) {
+	std::cout << (picojson::value)entityData << std::endl;
+	entities.push_back(composite_factory->CreateEntity(entityData));
 }
