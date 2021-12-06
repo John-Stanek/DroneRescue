@@ -108,14 +108,18 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
             }
             delete this->movement;
         }
-        delete this->movement;
+        //delete this->movement;
+    else {
+        for (int i = 0; i < 3; i++) {
+            pos[i] += speed*dir[i]*dt;
+        }
+    }
     }
     else {
         for (int i = 0; i < 3; i++) {
             pos[i] += speed*dir[i]*dt;
         }
     }
-
     // Check if the battery life is greater that 20% and final is false
 
 

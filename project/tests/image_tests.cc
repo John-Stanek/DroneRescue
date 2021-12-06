@@ -4,7 +4,7 @@
 
 // using namespace imageio;
 
-// class ImageTest : public ::testing:Test {
+// class ImageTest : public ::testing::Test {
 // public:
 //     void SetUp() {
         
