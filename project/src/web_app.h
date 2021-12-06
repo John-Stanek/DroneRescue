@@ -12,47 +12,131 @@
 
 #include "simulation.h"
 
+/**
+ * @brief Web App class. Logic for communication with a webpage.
+ * 
+ */
+
 /// A Web Application Sever that communicates with a web page through web sockets.
 class WebApp : public JSONSession, public ICameraController {
 public:
-    /// Initializes server
+    /**
+     * @brief Construct a new Web App object. Initializes server
+     * 
+     */
+
     WebApp();
-    /// Destructor
+    
+    /**
+     * @brief Destroy the Web App object
+     * 
+     */
+
     virtual ~WebApp();
 
     // *******************************************
-    // Methods used for simulation (edit these):
+    // Methods used for simulation 
     // *******************************************
 
-    /// Creates an entity based on JSON data stored as an object.
+    /**
+     * @brief Create a Entity based on JSON data stored as an object.
+     * 
+     * @param entityData 
+     * @param cameraController 
+     */
+
     void CreateEntity(picojson::object& entityData, ICameraController& cameraController);
-    /// Updates the simulation.  This may be called multiple times per frame.
+    
+    /**
+     * @brief Updates the simulation.  This may be called multiple times per frame.
+     * 
+     * @param dt - Change in time.
+     */
+    
     void Update(double dt);
-    /// Called after all updating is done.  Entity should be returned to the UI.
+
+    /**
+     * @brief Called after all updating is done.  Entity should be returned to the UI.
+     * 
+     * @param returnValue - pico json data being return to the front end.
+     */
+    
     void FinishUpdate(picojson::object& returnValue);
 
-    // *******************************************
-    // Methods used for web page communication:
-    // (You shouldn't need to touch these)
-    // *******************************************
+    /**
+     * @brief Receives JSON from the web server
+     * 
+     * @param val 
+     */
 
-    /// Receives JSON from the web server
     void receiveJSON(picojson::value& val);
-    /// Handles specific commands from the web server
+
+    /**
+     * @brief Handles specific commands from the web server
+     * 
+     * @param cmd 
+     * @param data 
+     * @param returnValue 
+     */
+    
     void ReceiveCommand(const std::string& cmd, picojson::object& data, picojson::object& returnValue);
-    /// Handles the key up command
+    /**
+     * @brief Handles the key up command
+     * 
+     * @param key 
+     * @param keyCode 
+     */
+    
     void KeyUp(const std::string& key, int keyCode);
-    /// Handles the key down command
+    
+    /**
+     * @brief Handles the key down command
+     * 
+     * @param key 
+     * @param keyCode 
+     */
+
+
     void KeyDown(const std::string& key, int keyCode);
-    /// Returns whether or not a key is pressed at any time
+
+    /**
+     * @brief Returns whether or not a key is pressed at any time
+     * 
+     * @param key 
+     * @return true 
+     * @return false 
+     */
+
     bool IsKeyDown(const std::string& key);
-    /// Takes picture for a specific camera
+
+    /**
+     * @brief Takes picture for a specific camera
+     * 
+     * @param cameraId 
+     */
+    
     void TakePicture(int cameraId);
-    /// Adds camera observers to the application
+
+    /**
+     * @brief Adds camera observers to the application
+     * 
+     * @param observer 
+     */
+    
     void AddObserver(ICameraObserver& observer);
-    /// Removes camera observers from the application
+    /**
+     * @brief Removes camera observers from the application
+     * 
+     * @param observer 
+     */
+
     void RemoveObserver(ICameraObserver& observer);
-    /// Method that handles asynchronous image processing that runs on a separate thread
+
+    /**
+     * @brief Method that handles asynchronous image processing that runs on a separate thread
+     * 
+     */
+
     void ProcessImageQueue();
     
 
