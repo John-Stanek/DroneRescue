@@ -79,7 +79,7 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
         // Checks if the drone position is the same as the recharge station position
         if((int)pos[0] == (int)rspos[0] && (int)pos[1] == (int)rspos[1] && (int)pos[2] == (int)rspos[2]){
             // Once drone is at the recharge station position it will recharge the drones battery
-            this->battery.Recharge();}
+            this->battery.Recharge(4000);}
     }
     if(camera->result.found) {
         this->movement = new Beeline();
