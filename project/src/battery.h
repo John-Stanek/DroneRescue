@@ -39,7 +39,8 @@ class Battery : public RechargeStation {
          * 
          * @param dt 
          */
-        void Recharge(int dt);
+        void Recharge(int full);
+
 
     private:
 
