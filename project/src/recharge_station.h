@@ -5,6 +5,8 @@
 class RechargeStation {
 
     public:
+    
+    RechargeStation(){};
     /**
      * @brief Recharges the drone
      * 

@@ -6,15 +6,33 @@
 
 Drone::Drone(ICameraController& cameraController) {
     id = 0;
+
     speed = 0;
     x=0; y=0; z=0;
     name = "drone";
     camera = new Camera(id, &cameraController);
+    hasCamera = true;
 }
 
+Drone::Drone() {
+    id = 0;
+
+    speed = 0;
+
+    // dir[0] = 0;
+    // dir[1] = 0;
+    // dir[2] = 0;
+    x=0;
+    y=0;
+    z=0;
+    name = "drone";
+    hasCamera = false;
+}
 Drone::~Drone() {
-    delete camera;
-    delete movement;
+    if(hasCamera){
+        delete camera;
+    }
+
 }
 
 double Drone::GetPosition(int index) {
@@ -35,6 +53,7 @@ void Drone::SetSpeed(double s){
 int Drone::GetId() {
     return id;
 }
+
 
 void Drone::SetJoystick(double arrows[4], bool moves[2]) {
     patrol = moves[0];
@@ -67,25 +86,27 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
         // Checks if the drone position is the same as the recharge station position
         if((int)pos[0] == (int)rspos[0] && (int)pos[1] == (int)rspos[1] && (int)pos[2] == (int)rspos[2]){
             // Once drone is at the recharge station position it will recharge the drones battery
-            this->battery.Recharge();}
+
+            this->battery.Recharge(5000);}
 
     }
-    if(camera->result.found) {
-        this->movement = new Beeline();
-        new_position = this->movement->move(pos, dir, speed);
-        for (int i=0; i < 3; i++) {
-            pos[i] = new_position[i];
+    if(hasCamera){
+        if(camera->result.found) {
+            this->movement = new Beeline();
+            new_position = this->movement->move(pos, dir, speed);
+            for (int i=0; i < 3; i++) {
+                pos[i] = new_position[i];
+            }
         }
-        delete this->movement;
-        camera->result.found = false;
-    }
-    else if (patrol || beeline) {
-        if (patrol) { this->movement = new Patrol(); }
-        else if (beeline) { this->movement = new Beeline(); }
-        new_position = this->movement->move(pos, dir, speed);
+        else if (patrol || beeline) { //&& !final) 
+            if (patrol) { this->movement = new Patrol(); }
+            else if (beeline) { this->movement = new Beeline(); }
+            new_position = this->movement->move(pos, dir, speed);
 
-        for (int i=0; i < 3; i++) {
-            pos[i] = new_position[i];
+            for (int i=0; i < 3; i++) {
+                pos[i] = new_position[i];
+            }
+            delete this->movement;
         }
         delete this->movement;
     }
@@ -94,7 +115,9 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
             pos[i] += speed*dir[i]*dt;
         }
     }
+
     // Check if the battery life is greater that 20% and final is false
+
 
     // Take a picture every 5 seconds with front camera
     time += dt;
