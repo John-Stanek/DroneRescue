@@ -2,6 +2,8 @@
 
 #include "simulation.h"
 
+//5 component tests
+
 class SimulationTest : public ::testing::Test {
 	public:
 		picojson::value dValue,rValue,cValue, hValue;

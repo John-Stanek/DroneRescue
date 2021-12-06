@@ -14,6 +14,8 @@ Simulation::~Simulation() {
 }
 
 void Simulation::Update(double dt, double arrows[4], bool moves[2]) {
+	//arrows stores keyboard input for manual movement
+	//moves stores the movement option to be used
     for (Entity* entity : entities) {
 		entity->Update(dt, arrows, moves);
 	}
@@ -22,10 +24,7 @@ void Simulation::Update(double dt, double arrows[4], bool moves[2]) {
 void Simulation::FinishUpdate(picojson::object& returnValue) {
 	
 	// Called after all updating is done.
-
-    // Below is an example of how to send the position and direction to the UI.  
-    // In general you will want to loop through entities that have changed to update
-    // their position and direction:
+	// Loops through all entities to update their position and direction
     for (Entity* entity : entities) {
 		picojson::object entity_json;
 		entity_json["entityId"] = picojson::value(entity->GetID());
