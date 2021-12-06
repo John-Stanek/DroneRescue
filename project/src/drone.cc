@@ -47,7 +47,29 @@ void Drone::SetJoystick(double arrows[4], bool moves[2]) {
 void Drone::Update(double dt, double arrows[4], bool moves[2]) {
     this->SetJoystick(arrows, moves);
     double* new_position;
-    double rspos[3] = {1000, 1000, 0}; 
+    // Hard coding the postion of the recharge station
+    double rspos[3] = {0, 0, 0};
+    // Reduces the battery life of the drone everytime update is called
+    this->battery.ReduceBatteryLife(dt);
+    // Check if the battery life is zero and sets a bool final to true and will stop moving the drone
+    if(this->battery.GetBatteryLife() <= 0){
+        final = true;
+    }
+    // Check if the battery is less that 20% and final is false
+    if(this->battery.GetBatteryLife() < 1000 && !final){
+        // Beelines to where the recharge station is
+        this->movement = new Beeline();
+        new_position = this->movement->move(pos, rspos, speed);
+        for (int i=0; i < 3; i++) {
+            pos[i] = new_position[i];
+        }
+        delete this->movement;
+        // Checks if the drone position is the same as the recharge station position
+        if((int)pos[0] == (int)rspos[0] && (int)pos[1] == (int)rspos[1] && (int)pos[2] == (int)rspos[2]){
+            // Once drone is at the recharge station position it will recharge the drones battery
+            //battery.Recharge(this);
+        }
+    }
     if(camera->result.found) {
         this->movement = new Beeline();
         new_position = this->movement->move(pos, dir, speed);
@@ -66,12 +88,14 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
             pos[i] = new_position[i];
         }
         delete this->movement;
+        // Checks if the drone position is the same as the recharge station position
     }
     else {
         for (int i = 0; i < 3; i++) {
             pos[i] += speed*dir[i]*dt;
         }
     }
+    // Check if the battery life is greater that 20% and final is false
 
     // Take a picture every 5 seconds with front camera
     time += dt;

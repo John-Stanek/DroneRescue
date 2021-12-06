@@ -1,6 +1,7 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_ 
 #include "camera_controller.h"
+#include "image_processor.h"
 #include <fstream>
 
 /**
@@ -9,6 +10,11 @@
  */
 
 class Camera : public ICameraObserver {
+private:
+    ICameraController* controller;
+    ImageProcessorFacade* image_processor;
+    int id;
+
 public:
     struct CameraResult : public ICameraResult {
         bool found;
@@ -24,6 +30,7 @@ public:
 
     Camera(int cameraId, ICameraController* controller) : id(id), controller(controller) {
         controller->AddObserver(*this);
+        image_processor = new ImageProcessorFacade();
     }
 
     /**
@@ -54,10 +61,6 @@ public:
 
     ICameraResult* ProcessImages(int cameraId, double xPos, double yPos, double zPos, const std::vector<RawCameraImage>& images, picojson::object& details) const;
     void ImageProcessingComplete(ICameraResult* result);
-
-private:
-    ICameraController* controller;
-    int id;
 };
 
 #endif

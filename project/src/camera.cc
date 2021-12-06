@@ -81,6 +81,8 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
         //Get ratio of blob to edge pixels.
         double ratio = blobCount / edgeCount;
     
+        double Distance;
+        double Direction[3];
         // Depth calculation
         // Couldn't get this to work so not going to send positon to update function.
         if (ratio > 0.3) {
@@ -93,11 +95,12 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
                     Color pixel = depth.GetPixel(x, y);
                     double r=0,g=0,b=0;
 
-                    r = ((pixel[0]/255.0)-0.5)*2.0;
-                    g = ((pixel[1]/255.0)-0.5)*2.0;
-                    b = ((pixel[2]/255.0)-0.5)*2.0;
-        
+                    r = ((pixel.Red()/255.0)-0.5)*2.0;
+                    g = ((pixel.Green()/255.0)-0.5)*2.0;
+                    b = ((pixel.Blue()/255.0)-0.5)*2.0;
+
                     double ColorVec[3]={r,g,b};
+                    double DirVec[3] = {r,g,b};
                     double AbsDirVec = sqrt(pow(ColorVec[0],2)+pow(ColorVec[1],2)+pow(ColorVec[2],2));
                         //Direction
                     for (int i=0; i<3;i++){

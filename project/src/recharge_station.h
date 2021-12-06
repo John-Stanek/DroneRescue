@@ -5,6 +5,12 @@
 class RechargeStation {
 
     public:
-        RechargeStation(Drone *drone);
+    /**
+     * @brief Recharges the drone
+     * 
+     * @param drone 
+     */
+        void Recharge(Drone *drone);
+    
 };
 #endif
