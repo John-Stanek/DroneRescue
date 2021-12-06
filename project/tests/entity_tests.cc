@@ -2,7 +2,7 @@
 #include "entity.h"
 #include "composite_factory.h"
 
-//2 unit tests, 3 regression tests
+//2 unit tests, 4 regression tests
 class EntityTest : public ::testing::Test {
 public:
     void SetUp() {

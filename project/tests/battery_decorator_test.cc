@@ -4,7 +4,7 @@
 #include <fstream>
 #include "battery_decorator.h"
 
-//1 regression test
+//1 integration test
 class BatteryDecoratorTest : public ::testing::Test {
   public:
     void SetUp( ) { 

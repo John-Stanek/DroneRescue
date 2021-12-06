@@ -4,7 +4,7 @@
 #include <fstream>
 
 
-//5 integration tests
+//4 integration tests, 1 regression test
 class FactoryTest : public ::testing::Test {
 public:
   void SetUp( ) { 
