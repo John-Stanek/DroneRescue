@@ -89,7 +89,6 @@ public:
      */
 
     void SetJoystick(double arrows[4], bool moves[2]);
-    //void SetJoystick(double x, double y, double z, double a, bool p, bool b);
 
     /**
      * @brief Get the position of the drone

@@ -1,4 +1,5 @@
 #include "battery.h"
+#include "drone.h"
 
 // Creates a battery with a battery life of 5000
 Battery::Battery(){
@@ -21,6 +22,6 @@ void Battery::ReduceBatteryLife(float dt){
     batteryLife -= dt;
 }
 // Recharges the battery life by an input
-void Battery::RechargeBatteryLife(float dt){
+void Battery::Recharge(int dt){
     batteryLife += dt;
 }

@@ -2,19 +2,13 @@
 #include "drone_movement.h"
 #include "beeline.h"
 #include "patrol.h"
-#include "recharge_station.h"
+
 
 Drone::Drone(ICameraController& cameraController) {
     id = 0;
 
     speed = 0;
-
-    // dir[0] = 0;
-    // dir[1] = 0;
-    // dir[2] = 0;
-    x=0;
-    y=0;
-    z=0;
+    x=0; y=0; z=0;
     name = "drone";
     camera = new Camera(id, &cameraController);
     hasCamera = true;
@@ -92,9 +86,9 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
         // Checks if the drone position is the same as the recharge station position
         if((int)pos[0] == (int)rspos[0] && (int)pos[1] == (int)rspos[1] && (int)pos[2] == (int)rspos[2]){
             // Once drone is at the recharge station position it will recharge the drones battery
-            //Recharge(this);
-            battery.SetBatteryLife(5000);
-        }
+
+            this->battery.Recharge();}
+
     }
     if(hasCamera){
         if(camera->result.found) {
@@ -115,21 +109,15 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
             delete this->movement;
         }
         delete this->movement;
-
     }
-    // Check if the battery life is greater that 20% and final is false
-    if(this->battery.GetBatteryLife() > 1000 && !final){
-        // Patrols the map while battery life is greater than 20%
-        this->movement = new Patrol();
-        new_position = this->movement->move(pos, dir, speed);
-        for (int i=0; i < 3; i++) {
-            pos[i] = new_position[i];
+    else {
+        for (int i = 0; i < 3; i++) {
+            pos[i] += speed*dir[i]*dt;
         }
-        delete this->movement;
     }
-    
-    //pos[0] = 10;
-    //std::cout << GetPosition(0) << std::endl;
+
+    // Check if the battery life is greater that 20% and final is false
+
 
     // Take a picture every 5 seconds with front camera
     time += dt;

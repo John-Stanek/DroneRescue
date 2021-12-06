@@ -1,6 +1,6 @@
 #ifndef RECHARGE_STATION_H_
 #define RECHARGE_STATION_H_
-#include "drone.h"
+
 
 class RechargeStation {
 
@@ -12,7 +12,7 @@ class RechargeStation {
      * 
      * @param drone 
      */
-        void Recharge(Drone *drone);
+        virtual void Recharge();
     
 };
 #endif
