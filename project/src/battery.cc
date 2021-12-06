@@ -22,6 +22,6 @@ void Battery::ReduceBatteryLife(float dt){
     batteryLife -= dt;
 }
 // Recharges the battery life by an input
-void Battery::Recharge(){
-    batteryLife = 5000;
+void Battery::Recharge(int dt){
+    batteryLife += dt;
 }
