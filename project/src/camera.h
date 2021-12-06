@@ -58,10 +58,6 @@ public:
 
     ICameraResult* ProcessImages(int cameraId, double xPos, double yPos, double zPos, const std::vector<RawCameraImage>& images, picojson::object& details) const;
     void ImageProcessingComplete(ICameraResult* result);
-
-private:
-    ICameraController* controller;
-    int id;
 };
 
 #endif
