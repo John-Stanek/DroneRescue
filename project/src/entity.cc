@@ -51,17 +51,17 @@
 
 
     double Entity::GetX(){
-        return x;
+        return pos[0];
     }
 
 
     double Entity::GetY(){
-        return y;
+        return pos[1];
     }
 
 
     double Entity::GetZ(){
-        return z;
+        return pos[2];
     }
 
 
@@ -114,6 +114,10 @@
     void Entity::SetName(std::string n) {
 		name = n;
 	}
+
+    std::string Entity::GetName(){
+        return name;
+    }
 
     bool Entity::CheckForBattery(){
         if(hasBattery){

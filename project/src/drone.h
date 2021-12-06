@@ -21,6 +21,7 @@ public:
     bool final = false;
     bool patrol = false;
     bool beeline = false;
+    bool hasCamera = true;
     bool isCharging = false;
     double time = 0.0;
     double lastPictureTime = 0.0; 
@@ -28,12 +29,20 @@ public:
     DroneMovement* movement;
     Battery battery;
 
+
     /**
      * @brief Construct a new Drone object
      * 
      */
 
     Drone(ICameraController& cameraController);
+    
+    /**
+     * @brief Construct a new Drone object
+     * 
+     */
+
+    Drone();
 
     /**
      * @brief Destroy the Drone object

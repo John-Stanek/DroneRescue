@@ -41,6 +41,7 @@ class Battery : public RechargeStation {
          */
         void Recharge(int full);
 
+
     private:
 
         float batteryLife; 
