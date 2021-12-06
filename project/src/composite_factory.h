@@ -30,7 +30,7 @@ public:
      * @param original - A vector of images to be filtered.
      * @param filtered - A vector of images after filter has been applied.
      */
-    Entity* CreateEntity(picojson::object &entityData);
+    Entity* CreateEntity(picojson::object &entityData, ICameraController& cameraController);
     
     void AddFactory(Factory* factory);
     

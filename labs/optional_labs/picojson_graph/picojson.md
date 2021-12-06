@@ -12,7 +12,7 @@ function calls. The library is built off of WebGL and has been tuned to leverage
 for optimal performance. Javascript is the most commonly used language in the world however it does 
 have its limitations. It is a scripting language designed off a paradigm known as ecmascript. It is 
 lightweight, dynamically typed, and supports higher order functions. Javscript supports its own 
-style of data communication known as JSON (JavasSript Object Notation). JSON is a hash rather than 
+style of data communication known as JSON (JavaScript Object Notation). JSON is a hash rather than 
 an array and is similar to python dictionaries, which use hash tables to match the keys to arrays. 
 JSON is transmitted over networks as a string.
 

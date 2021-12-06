@@ -2,7 +2,7 @@
 
 
 Battery::Battery(){
-    batteryLife = 5000;
+    batteryLife = 1010;
 }
 Battery::Battery(float batLife){
     batteryLife = batLife;
