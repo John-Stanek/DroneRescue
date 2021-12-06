@@ -117,3 +117,18 @@ TEST_F(EntityTest, EntitySetDir) {
 
     delete robot;
 }
+
+TEST_F(EntityTest, EntityGetXYZ) {
+	if(!rValue.is<picojson::object>()){
+		ASSERT_EQ(true,false); // force fail test
+	}
+	  Robot* robot = static_cast<Robot*>(factory.CreateEntity(rValue.get<picojson::object>())); 
+	  if(robot == NULL){
+	  	ASSERT_EQ(false,true); // force fail test
+	  }
+	
+	EXPECT_EQ(0,robot->GetX());
+	EXPECT_EQ(0,robot->GetY());
+	EXPECT_EQ(0,robot->GetZ());
+    delete robot;
+}
