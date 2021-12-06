@@ -14,6 +14,7 @@ class Simulation {
 		void Update(double dt, double arrows[4], bool moves[2]);
 		void FinishUpdate(picojson::object& returnValue);
 		void CreateEntity(picojson::object& entityData, ICameraController& cameraController);
+		Entity* GetEntity(int index){return entities[index];}
 	private:
 		std::vector<Entity*> entities;
 		CompositeFactory composite_factory;
