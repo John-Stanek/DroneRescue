@@ -6,7 +6,11 @@ double* Beeline::move(double* drone_pos, double* drone_dir, double drone_speed) 
     }
 
     double dt = 0.01;
-    double beelineDir[3] = {5, 5, 5};
+    double beelineDir[3] = {0, 0, 0};
+    beelineDir[0] = drone_dir[0];
+    beelineDir[1] = drone_dir[1];
+    beelineDir[2] = drone_dir[2];
+
     double beelineVel[3] = {0, 0, 0};
     double timestep[3] = {0, 0, 0};
 
