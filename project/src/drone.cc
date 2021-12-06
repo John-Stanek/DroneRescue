@@ -72,7 +72,16 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
     //     delete this->movement;
     //     RechargeStation(this);
     // }
-    if (patrol || beeline) { //&& !final) 
+    if(camera->result.found) {
+        this->movement = new Beeline();
+        new_position = this->movement->move(pos, dir, speed);
+        for (int i=0; i < 3; i++) {
+            pos[i] = new_position[i];
+        }
+        delete this->movement;
+        camera->result.found = false;
+    }
+    else if (patrol || beeline) { //&& !final) 
         if (patrol) { this->movement = new Patrol(); }
         else if (beeline) { this->movement = new Beeline(); }
         new_position = this->movement->move(pos, dir, speed);

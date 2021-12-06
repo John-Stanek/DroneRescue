@@ -9,16 +9,12 @@
  */
 
 class Camera : public ICameraObserver {
-private:
-    ICameraController* controller;
-    int id;
-
 public:
     struct CameraResult : public ICameraResult {
         bool found;
         double pos[3];
     };
-
+    CameraResult result;
     /**
      * @brief Construct a new Camera object
      * 
@@ -58,6 +54,10 @@ public:
 
     ICameraResult* ProcessImages(int cameraId, double xPos, double yPos, double zPos, const std::vector<RawCameraImage>& images, picojson::object& details) const;
     void ImageProcessingComplete(ICameraResult* result);
+
+private:
+    ICameraController* controller;
+    int id;
 };
 
 #endif

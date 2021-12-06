@@ -55,7 +55,7 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
         for (int x=0; x < input.GetWidth(); x++) {
             for (int y=0; y < input.GetHeight(); y++) {
                 Color pixel = input.GetPixel(x, y);
-                if (pixel.Red() == 0 && pixel.Green() == 0 && pixel.Blue() == 0) {
+                if (pixel.Red() == 255 && pixel.Green() == 255 && pixel.Blue() == 255) {
                     blobCount++;        
                 }
             }
@@ -78,14 +78,14 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
                 }
             }
         }
-        std::cout << blobCount << " " << edgeCount << std::endl;
         //Get ratio of blob to edge pixels.
-        int ratio = blobCount / edgeCount;
-        
+        double ratio = blobCount / edgeCount;
+        std::cout << blobCount << " " << edgeCount << std::endl;
+        std::cout << ratio << std::endl;
         // Depth calculation
         double dirVec[3];
 
-        if (ratio > 10) {
+        if (ratio > 0.3) {
             result->found = true;
         
             imageio::Image depth;
@@ -96,6 +96,8 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
 
                 }
             }
+        } else {
+            result->found = false;
         }
         
         std::cout << "Image filtered" << std::endl;
@@ -110,6 +112,7 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
 // After the asynchronous image processing, this method will be synchronized with the update loop.
 void Camera::ImageProcessingComplete(ICameraResult* result) {
     CameraResult& res = *static_cast<CameraResult*>(result);
+    this->result = res;
     if (res.found) {
         std::cout << "The robot was found here: " << res.pos[0] << ", " << res.pos[1] << ", " << res.pos[2] << std::endl;
     }
