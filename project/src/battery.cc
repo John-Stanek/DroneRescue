@@ -1,39 +1,27 @@
 #include "battery.h"
+#include "drone.h"
 
-
+// Creates a battery with a battery life of 5000
 Battery::Battery(){
     batteryLife = 5000;
-    maxCharge = 5000;
-    empty = false;
 }
+// Creates a battery with a specific amount of battery
 Battery::Battery(float batLife){
     batteryLife = batLife;
-    maxCharge = 5000;
-    empty = false;
 }
+// Sets the battery life 
 void Battery::SetBatteryLife(float batLife){
     batteryLife = batLife;
 }
-float Battery::GetMax(){
-    return maxCharge;
-}
+// Gets what the battery life is
 float Battery::GetBatteryLife(){
     return batteryLife;
 }
+// Reduces the battery life by an input
 void Battery::ReduceBatteryLife(float dt){
     batteryLife -= dt;
 }
-void Battery::RechargeBatteryLife(float dt){
+// Recharges the battery life by an input
+void Battery::Recharge(int dt){
     batteryLife += dt;
-}
-bool Battery::IsEmpty(){
-    return empty;
-}
-void Battery::SetEmpty(bool emp){
-    empty = emp;
-}
-void Battery::CheckEmpty(){
-    if(batteryLife <= 0){
-        empty = true;
-    }
 }

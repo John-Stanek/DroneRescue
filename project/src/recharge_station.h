@@ -1,10 +1,18 @@
 #ifndef RECHARGE_STATION_H_
 #define RECHARGE_STATION_H_
-#include "drone.h"
+
 
 class RechargeStation {
 
     public:
-        RechargeStation(Drone *drone);
+    
+    RechargeStation(){};
+    /**
+     * @brief Recharges the drone
+     * 
+     * @param drone 
+     */
+        virtual void Recharge();
+    
 };
 #endif

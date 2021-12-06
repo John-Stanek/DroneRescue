@@ -2,20 +2,25 @@
 // //#include "beeline.h"
 // #include "composite_factory.h"
 
-// class SearchTest : public ::testing::Test {
+// class MovementTest : public ::testing::Test {
 // public:
 //   void SetUp( ) { 
 //   }
 // protected:
 // };
 
-// TEST_F(SearchTest, beeline) {
+// TEST_F(MovementTest, beeline) {
 //   Drone* drone = CompositeFactory::CreateEntity("drone");
-//   Robot* robot = CompositeFactory::CreateEntity("robot");
-//   //drone.FindRobot();//Create 2 in positions where drone can see robot and 2 where it cant
-//   EXPECT_TRUE(false) << "FindRobot is not implemented";
-
+//   drone->Beeline();
+//   EXPECT_TRUE(false) << "Beeline is not implemented"; //need to check start and final pos
 // }
+
+// TEST_F(MovementTest, patrol) {
+//   Drone* drone = CompositeFactory::CreateEntity("drone");
+//   drone->Patrol();
+//   EXPECT_TRUE(false) << "Beeline is not implemented"; //need to check start and final pos
+// }
+
 // /*
 // TEST_F(FactoryTest, CreateR) {
 //   Date day5(2016, 1, 01); 

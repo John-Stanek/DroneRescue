@@ -51,17 +51,17 @@
 
 
     double Entity::GetX(){
-        return x;
+        return pos[0];
     }
 
 
     double Entity::GetY(){
-        return y;
+        return pos[1];
     }
 
 
     double Entity::GetZ(){
-        return z;
+        return pos[2];
     }
 
 
@@ -114,6 +114,10 @@
     void Entity::SetName(std::string n) {
 		name = n;
 	}
+
+    std::string Entity::GetName(){
+        return name;
+    }
 
     bool Entity::CheckForBattery(){
         if(hasBattery){
@@ -170,58 +174,6 @@
         id = -1;
 
     }
-
-
-
-	// Drone::Drone(){
- //        pos[0] = 0;
- //        pos[1] = 0;
- //        pos[2] = 0;
-
- //        dir[0] = 0;
- //        dir[1] = 0;
- //        dir[2] = 0;
- //        x=0;
- //        y=0;
- //        z=0;
- //        name = "";
- //        id = -1;
- //    }
-	
-	// Drone::Drone(char *n){
- //        pos[0] = 0;
- //        pos[1] = 0;
- //        pos[2] = 0;
-
- //        dir[0] = 0;
- //        dir[1] = 0;
- //        dir[2] = 0;
- //        x=0;
- //        y=0;
- //        z=0;
- //        name = n;
- //        id = -1;
- //    }
-	
-	// Drone::Drone(double x, double y, double z){
- //        pos[0] = x;
- //        pos[1] = y;
- //        pos[2] = z;
-
- //        dir[0] = 0;
- //        dir[1] = 0;
- //        dir[2] = 0;
- //        x=x;
- //        y=y;
- //        z=z;
- //        name = "";
- //        id = -1;
- //    }
-	
-	// void Drone::SetSpeed(double s){
- //        speed = s;
- //    }
-	
 
     Robot::Robot(){
         pos[0] = 0;
