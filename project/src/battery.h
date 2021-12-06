@@ -1,7 +1,8 @@
 #ifndef BATTERY_H_
 #define BATTERY_H_
+#include "recharge_station.h"
 
-class Battery {
+class Battery : public RechargeStation {
 
     public:
         /**
@@ -38,7 +39,7 @@ class Battery {
          * 
          * @param dt 
          */
-        void RechargeBatteryLife(float dt);
+        void Recharge();
 
     private:
 
