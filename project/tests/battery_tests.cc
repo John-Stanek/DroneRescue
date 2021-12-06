@@ -28,5 +28,5 @@ TEST_F(BatteryTest, ReduceBatteryLifeTests){
 TEST_F(BatteryTest, RechargeBatteryLifeTests){
     Battery new_battery(1000);
     new_battery.RechargeBatteryLife(100);
-    EXPECT_EQ(new_battery.GetBatteryLife(), 1100);s
+    EXPECT_EQ(new_battery.GetBatteryLife(), 1100);
 }
