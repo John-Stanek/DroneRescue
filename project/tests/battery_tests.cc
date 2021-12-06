@@ -9,8 +9,8 @@ class BatteryTest : public::testing::Test {
     }
     protected:
         Battery battery_test;
-
 };
+
 TEST_F(BatteryTest, SetBatteryLifeTests){
     Battery new_battery(500);
     new_battery.SetBatteryLife(1000);
