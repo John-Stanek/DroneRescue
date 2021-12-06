@@ -2,7 +2,6 @@
 #define CAMERA_H_ 
 #include "camera_controller.h"
 #include <fstream>
-#include "image_processor.h"
 
 /**
  * @brief Handles the logic for the drone's camera.
@@ -12,7 +11,6 @@
 class Camera : public ICameraObserver {
 private:
     ICameraController* controller;
-    ImageProcessorFacade* image_processor;
     int id;
 
 public:
@@ -30,7 +28,6 @@ public:
 
     Camera(int cameraId, ICameraController* controller) : id(id), controller(controller) {
         controller->AddObserver(*this);
-        image_processor = new ImageProcessorFacade();
     }
 
     /**
