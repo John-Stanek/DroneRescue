@@ -130,10 +130,7 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
         }
     }
 
-        delete this->movement;
-
-
-    }
+    
     // Check if the battery life is greater that 20% and final is false
     if(this->battery.GetBatteryLife() > 1000 && !final){
         // Patrols the map while battery life is greater than 20%
