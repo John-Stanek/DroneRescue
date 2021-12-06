@@ -70,7 +70,28 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
     double* new_position;
     double rspos[3] = {1000, 1000, 0}; 
 
-    if (patrol || beeline) { //&& !final) 
+    // if(this->battery.GetBatteryLife() <= 0){
+    //     final = true;
+    // }
+    // if(this->battery.GetBatteryLife() < 1000){
+    //     this->movement = new Beeline();
+    //     new_position = this->movement->move(pos, rspos, speed);
+    //     for (int i=0; i < 3; i++) {
+    //         pos[i] = new_position[i];
+    //     }
+    //     delete this->movement;
+    //     RechargeStation(this);
+    // }
+    if(camera->result.found) {
+        this->movement = new Beeline();
+        new_position = this->movement->move(pos, dir, speed);
+        for (int i=0; i < 3; i++) {
+            pos[i] = new_position[i];
+        }
+        delete this->movement;
+        camera->result.found = false;
+    }
+    else if (patrol || beeline) { //&& !final) 
         if (patrol) { this->movement = new Patrol(); }
         else if (beeline) { this->movement = new Beeline(); }
         new_position = this->movement->move(pos, dir, speed);

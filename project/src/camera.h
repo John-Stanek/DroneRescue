@@ -1,6 +1,7 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_ 
 #include "camera_controller.h"
+#include "image_processor.h"
 #include <fstream>
 
 /**
@@ -11,6 +12,7 @@
 class Camera : public ICameraObserver {
 private:
     ICameraController* controller;
+    ImageProcessorFacade* image_processor;
     int id;
 
 public:
@@ -18,7 +20,7 @@ public:
         bool found;
         double pos[3];
     };
-
+    CameraResult result;
     /**
      * @brief Construct a new Camera object
      * 
@@ -28,6 +30,7 @@ public:
 
     Camera(int cameraId, ICameraController* controller) : id(id), controller(controller) {
         controller->AddObserver(*this);
+        image_processor = new ImageProcessorFacade();
     }
 
     /**

@@ -2,8 +2,6 @@
 #include "factory.h"
 #include "composite_factory.h"
 #include <fstream>
-//#include "object.json"
-//#include "EntityFactory.h"
 
 class FactoryTest : public ::testing::Test {
 public:
