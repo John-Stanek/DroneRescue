@@ -21,6 +21,7 @@ public:
     bool final = false;
     bool patrol = false;
     bool beeline = false;
+    bool hasCamera = true;
     double time = 0.0;
     double lastPictureTime = 0.0; 
     Camera* camera;

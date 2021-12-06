@@ -31,6 +31,7 @@ Drone::Drone() {
     y=0;
     z=0;
     name = "drone";
+    hasCamera = false;
 }
 Drone::~Drone() {
     delete camera;
@@ -69,7 +70,6 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
     this->SetJoystick(arrows, moves);
     double* new_position;
     double rspos[3] = {1000, 1000, 0}; 
-
     // if(this->battery.GetBatteryLife() <= 0){
     //     final = true;
     // }
@@ -82,31 +82,49 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
     //     delete this->movement;
     //     RechargeStation(this);
     // }
-    if(camera->result.found) {
-        this->movement = new Beeline();
-        new_position = this->movement->move(pos, dir, speed);
-        for (int i=0; i < 3; i++) {
-            pos[i] = new_position[i];
+    if(hasCamera){
+        if(camera->result.found) {
+            this->movement = new Beeline();
+            new_position = this->movement->move(pos, dir, speed);
+            for (int i=0; i < 3; i++) {
+                pos[i] = new_position[i];
+            }
+            delete this->movement;
+            camera->result.found = false;
         }
-        delete this->movement;
-        camera->result.found = false;
-    }
-    else if (patrol || beeline) { //&& !final) 
-        if (patrol) { this->movement = new Patrol(); }
-        else if (beeline) { this->movement = new Beeline(); }
-        new_position = this->movement->move(pos, dir, speed);
+        else if (patrol || beeline) { //&& !final) 
+            if (patrol) { this->movement = new Patrol(); }
+            else if (beeline) { this->movement = new Beeline(); }
+            new_position = this->movement->move(pos, dir, speed);
 
-        for (int i=0; i < 3; i++) {
-            pos[i] = new_position[i];
+            for (int i=0; i < 3; i++) {
+                pos[i] = new_position[i];
+            }
+            delete this->movement;
         }
-        delete this->movement;
+        
+            for (int i = 0; i < 3; i++) {
+                pos[i] += speed*dir[i]*dt;
+                //std::cout << pos[i] << std::endl;
+            }
     }
-    
-        for (int i = 0; i < 3; i++) {
-            pos[i] += speed*dir[i]*dt;
-            //std::cout << pos[i] << std::endl;
+    else{
+        if (patrol || beeline) { //&& !final) 
+            if (patrol) { this->movement = new Patrol(); }
+            else if (beeline) { this->movement = new Beeline(); }
+            new_position = this->movement->move(pos, dir, speed);
+
+            for (int i=0; i < 3; i++) {
+                pos[i] = new_position[i];
+            }
+            delete this->movement;
         }
-    
+        
+            for (int i = 0; i < 3; i++) {
+                pos[i] += speed*dir[i]*dt;
+                //std::cout << pos[i] << std::endl;
+            }
+    }
     
     //pos[0] = 10;
     //std::cout << GetPosition(0) << std::endl;
