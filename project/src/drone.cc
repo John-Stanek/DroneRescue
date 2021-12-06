@@ -17,6 +17,7 @@ Drone::Drone(ICameraController& cameraController) {
     z=0;
     name = "drone";
     camera = new Camera(id, &cameraController);
+    hasCamera = true;
 }
 
 Drone::Drone() {
@@ -34,8 +35,10 @@ Drone::Drone() {
     hasCamera = false;
 }
 Drone::~Drone() {
-    delete camera;
-    delete movement;
+    if(hasCamera){
+        delete camera;
+    }
+
 }
 
 double Drone::GetPosition(int index) {
@@ -89,14 +92,17 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
         // Checks if the drone position is the same as the recharge station position
         if((int)pos[0] == (int)rspos[0] && (int)pos[1] == (int)rspos[1] && (int)pos[2] == (int)rspos[2]){
             // Once drone is at the recharge station position it will recharge the drones battery
-            Recharge(this);}
+            //Recharge(this);
+            battery.SetBatteryLife(5000);
+        }
     }
     if(hasCamera){
         if(camera->result.found) {
-        this->movement = new Beeline();
-        new_position = this->movement->move(pos, dir, speed);
-        for (int i=0; i < 3; i++) {
-            pos[i] = new_position[i];
+            this->movement = new Beeline();
+            new_position = this->movement->move(pos, dir, speed);
+            for (int i=0; i < 3; i++) {
+                pos[i] = new_position[i];
+            }
         }
         else if (patrol || beeline) { //&& !final) 
             if (patrol) { this->movement = new Patrol(); }
@@ -110,7 +116,6 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
         }
         delete this->movement;
 
-        }
     }
     // Check if the battery life is greater that 20% and final is false
     if(this->battery.GetBatteryLife() > 1000 && !final){
