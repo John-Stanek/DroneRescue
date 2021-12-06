@@ -8,10 +8,6 @@ Entity* HospitalFactory::CreateEntity(picojson::object &entityData, ICameraContr
 
 	//parse json object aka entityData
 
-    // Print out actual json:
-    // picojson::value val(entityData);
-    // std::cout << val.serialize() << std::endl;
-
     if ((entityData["name"].get<std::string>().compare (0, 8, "hospital")) == 0) {
 
     	Hospital* newHospital = new Hospital();
@@ -36,10 +32,6 @@ Entity* HospitalFactory::CreateEntity(picojson::object &entityData, ICameraContr
 Entity* HospitalFactory::CreateEntity(picojson::object &entityData){
 
 	//parse json object aka entityData
-
-    // Print out actual json:
-    // picojson::value val(entityData);
-    // std::cout << val.serialize() << std::endl;
 
     if ((entityData["name"].get<std::string>().compare (0, 8, "hospital")) == 0) {
 

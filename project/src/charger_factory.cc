@@ -8,9 +8,6 @@ Entity* ChargerFactory::CreateEntity(picojson::object &entityData, ICameraContro
 
 	//parse json object aka entityData
 
-    // Print out actual json:
-    // picojson::value val(entityData);
-    // std::cout << val.serialize() << std::endl;
 
     if ((entityData["name"].get<std::string>().compare (0, 16, "recharge station")) == 0) {
 
@@ -37,10 +34,6 @@ Entity* ChargerFactory::CreateEntity(picojson::object &entityData, ICameraContro
 Entity* ChargerFactory::CreateEntity(picojson::object &entityData){
 
 	//parse json object aka entityData
-
-    // Print out actual json:
-    // picojson::value val(entityData);
-    // std::cout << val.serialize() << std::endl;
 
     if ((entityData["name"].get<std::string>().compare (0, 16, "recharge station")) == 0) {
 

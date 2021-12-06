@@ -6,7 +6,6 @@ static std::vector<Factory*> factories;
 CompositeFactory::CompositeFactory(){
 //Create vector of factories upon its own creation
 
-	//std::vector<Factory*> factories;
 	droneFactory = new DroneFactory();
 	robotFactory = new RobotFactory();
 	rechargeFactory = new ChargerFactory();
@@ -29,12 +28,6 @@ CompositeFactory::~CompositeFactory(){
 
 
 Entity* CompositeFactory::CreateEntity(picojson::object &entityData, ICameraController& cameraController){
-	//parse json object aka entityData
-
-    // Print out actual json:
-    //picojson::value val(entityData);
-    //std::cout << picojson::value(entityData) << std::endl;
-    //std::cout << val.serialize() << std::endl;
 
     //check every factory for successful return
 	for(Factory* dfactory : factories){
@@ -48,12 +41,6 @@ Entity* CompositeFactory::CreateEntity(picojson::object &entityData, ICameraCont
 }
 
 Entity* CompositeFactory::CreateEntity(picojson::object &entityData){
-	//parse json object aka entityData
-
-    // Print out actual json:
-    //picojson::value val(entityData);
-    //std::cout << picojson::value(entityData) << std::endl;
-    //std::cout << val.serialize() << std::endl;
 
     //check every factory for successful return
 	for(Factory* dfactory : factories){

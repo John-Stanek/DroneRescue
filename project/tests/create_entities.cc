@@ -19,8 +19,6 @@ public:
   	const char* Chargerjson ="{\"name\":\"recharge station\", \"entityId\":2,\"position\":[0,0,0]}";
 
   	const char* Hospitaljson ="{\"name\":\"hospital\", \"entityId\":3,\"position\":[0,0,0]}";
-
-  	//picojson::value dObj= picojson::value(dStr);
   	
 	//parse drone json
 	std::string err;

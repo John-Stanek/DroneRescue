@@ -9,11 +9,6 @@ Entity* RobotFactory::CreateEntity(picojson::object &entityData, ICameraControll
 
 	//parse json object aka entityData
 
-    // Print out actual json:
-    // picojson::value val(entityData);
-    // std::cout << val.serialize() << std::endl;
-
-
     if ((entityData["name"].get<std::string>().compare (0, 5, "robot")) == 0) {
     	Robot* newRobot = new Robot();
     	
@@ -37,11 +32,6 @@ Entity* RobotFactory::CreateEntity(picojson::object &entityData, ICameraControll
 Entity* RobotFactory::CreateEntity(picojson::object &entityData){
 
 	//parse json object aka entityData
-
-    // Print out actual json:
-    // picojson::value val(entityData);
-    // std::cout << val.serialize() << std::endl;
-
 
     if ((entityData["name"].get<std::string>().compare (0, 5, "robot")) == 0) {
     	Robot* newRobot = new Robot();

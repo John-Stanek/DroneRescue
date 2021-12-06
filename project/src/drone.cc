@@ -88,7 +88,7 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
     
     
     //pos[0] = 10;
-    std::cout << GetPosition(0) << std::endl;
+    //std::cout << GetPosition(0) << std::endl;
 
     // Take a picture every 5 seconds with front camera
     time += dt;

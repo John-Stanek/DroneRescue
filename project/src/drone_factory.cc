@@ -7,19 +7,14 @@ DroneFactory::~DroneFactory(){}
 Entity* DroneFactory::CreateEntity(picojson::object &entityData, ICameraController& cameraController){
 
 	//parse json object aka entityData
-
-    // Print out actual json:
-    // picojson::value val(entityData);
-    // std::cout << val.serialize() << std::endl;
     
 	if ((entityData["name"].get<std::string>().compare (0, 5, "drone") == 0) ||
 	    (entityData["name"].get<std::string>().compare (0, 12, "rescue drone") == 0)) {
 
     	Drone* newDrone = new Drone(cameraController);
     	newDrone->SetName(entityData["name"].get<std::string>());
-    	
-
 		//newDrone->SetName((char*)entityData["name"].get<std::string>().c_str());
+
 	    newDrone->SetID(entityData["entityId"].get<double>());
 	    if(entityData["speed"].is<double>()){
 	    	newDrone->SetSpeed(entityData["speed"].get<double>());
@@ -52,18 +47,13 @@ Entity* DroneFactory::CreateEntity(picojson::object &entityData){
 
 	//parse json object aka entityData
 
-    // Print out actual json:
-    // picojson::value val(entityData);
-    // std::cout << val.serialize() << std::endl;
-    
 	if ((entityData["name"].get<std::string>().compare (0, 5, "drone") == 0) ||
 	    (entityData["name"].get<std::string>().compare (0, 12, "rescue drone") == 0)) {
 
     	Drone* newDrone = new Drone();
     	newDrone->SetName(entityData["name"].get<std::string>());
-    	
-
 		//newDrone->SetName((char*)entityData["name"].get<std::string>().c_str());
+		
 	    newDrone->SetID(entityData["entityId"].get<double>());
 	    if(entityData["speed"].is<double>()){
 	    	newDrone->SetSpeed(entityData["speed"].get<double>());
