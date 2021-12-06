@@ -99,15 +99,12 @@ ICameraResult* Camera::ProcessImages(int cameraId, double xPos, double yPos, dou
         
                     double ColorVec[3]={r,g,b};
                     double AbsDirVec = sqrt(pow(ColorVec[0],2)+pow(ColorVec[1],2)+pow(ColorVec[2],2));
-                }
-            }
-
-    //Direction
-    for (int i=0; i<3;i++){
-        Direction[i]=DirVec[i]/AbsDirVec;
-    }
-    //Distance 
-    Distance = ((1.0 - AbsDirVec)*50.0);
+                        //Direction
+                    for (int i=0; i<3;i++){
+                        Direction[i]=DirVec[i]/AbsDirVec;
+                    }
+                    //Distance 
+                    Distance = ((1.0 - AbsDirVec)*50.0);
                 }
             }
         } else {
