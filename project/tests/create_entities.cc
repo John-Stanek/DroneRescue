@@ -133,6 +133,7 @@ TEST_F(FactoryTest, CreateCharger) {
 
   EXPECT_EQ(charger->GetName(), "recharge station");
   delete charger;
+
 }
 
 
@@ -195,3 +196,4 @@ TEST_F(FactoryTest, CreateEachEntity) {
   delete charger;
   delete hospital;
 }
+
