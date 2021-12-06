@@ -2,7 +2,7 @@
 #include "entity.h"
 #include "composite_factory.h"
 
-//2 unit tests, 3 regression tests
+//2 unit tests, 4 regression tests
 class EntityTest : public ::testing::Test {
 public:
     void SetUp() {
@@ -115,5 +115,20 @@ TEST_F(EntityTest, EntitySetDir) {
 	EXPECT_EQ(5,robot->GetPos()[1]);
 	EXPECT_EQ(1,robot->GetPos()[2]);
 
+    delete robot;
+}
+
+TEST_F(EntityTest, EntityGetXYZ) {
+	if(!rValue.is<picojson::object>()){
+		ASSERT_EQ(true,false); // force fail test
+	}
+	  Robot* robot = static_cast<Robot*>(factory.CreateEntity(rValue.get<picojson::object>())); 
+	  if(robot == NULL){
+	  	ASSERT_EQ(false,true); // force fail test
+	  }
+	
+	EXPECT_EQ(0,robot->GetX());
+	EXPECT_EQ(0,robot->GetY());
+	EXPECT_EQ(0,robot->GetZ());
     delete robot;
 }
