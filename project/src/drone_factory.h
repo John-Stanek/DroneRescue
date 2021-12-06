@@ -25,7 +25,7 @@ public:
     /**
      * @brief A function to be create a new entity of type drone
      * 
-     * @param entityData - A reference to a picojson::object that contains data to be used for how an entity is created.
+     * @param entityData - A reference to a picojson::object that contains data to be used for how an entity is created.A camera controller object to deal with processing images and taking pictures.
      * @return A newly created drone object
      */
     Entity* CreateEntity(picojson::object &entityData, ICameraController& cameraController);
