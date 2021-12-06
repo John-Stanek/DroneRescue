@@ -38,8 +38,6 @@ protected:
         // loop over pixels
         for (int x = 0; x < input.GetWidth(); ++x) {
             for (int y = 0; y < input.GetHeight(); ++y) {
-                // do stuff
-                // Color pixel = input.GetPixel(x, y) etc...
                 Color pixel = input.GetPixel(x, y);
                 if ((pixel.Red() <= 265 && pixel.Red() >= 210) 
                     && (pixel.Green() <= 200 && pixel.Green() >= 110) 

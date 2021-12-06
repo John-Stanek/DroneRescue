@@ -171,58 +171,6 @@
 
     }
 
-
-
-	// Drone::Drone(){
- //        pos[0] = 0;
- //        pos[1] = 0;
- //        pos[2] = 0;
-
- //        dir[0] = 0;
- //        dir[1] = 0;
- //        dir[2] = 0;
- //        x=0;
- //        y=0;
- //        z=0;
- //        name = "";
- //        id = -1;
- //    }
-	
-	// Drone::Drone(char *n){
- //        pos[0] = 0;
- //        pos[1] = 0;
- //        pos[2] = 0;
-
- //        dir[0] = 0;
- //        dir[1] = 0;
- //        dir[2] = 0;
- //        x=0;
- //        y=0;
- //        z=0;
- //        name = n;
- //        id = -1;
- //    }
-	
-	// Drone::Drone(double x, double y, double z){
- //        pos[0] = x;
- //        pos[1] = y;
- //        pos[2] = z;
-
- //        dir[0] = 0;
- //        dir[1] = 0;
- //        dir[2] = 0;
- //        x=x;
- //        y=y;
- //        z=z;
- //        name = "";
- //        id = -1;
- //    }
-	
-	// void Drone::SetSpeed(double s){
- //        speed = s;
- //    }
-	
-
     Robot::Robot(){
         pos[0] = 0;
         pos[1] = 0;

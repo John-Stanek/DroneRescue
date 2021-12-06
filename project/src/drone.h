@@ -17,8 +17,6 @@
 class Drone : public Entity{
 public:
     int id; 
-    //double pos[3];
-    //double dir[3];
     double speed; 
     bool final = false;
     bool patrol = false;
@@ -81,7 +79,6 @@ public:
      */
 
     void SetJoystick(double arrows[4], bool moves[2]);
-    //void SetJoystick(double x, double y, double z, double a, bool p, bool b);
 
     /**
      * @brief Get the position of the drone
