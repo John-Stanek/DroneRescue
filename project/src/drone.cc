@@ -72,6 +72,28 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
         // Beelines to where the recharge station is
         this->movement = new Beeline();
         new_position = this->movement->move(pos, rspos, speed);
+        for (int i=0; i < 3; i++) {
+            pos[i] = new_position[i];
+        }
+        delete this->movement;
+        // Checks if the drone position is the same as the recharge station position
+        if((int)pos[0] == (int)rspos[0] && (int)pos[1] == (int)rspos[1] && (int)pos[2] == (int)rspos[2]){
+            // Once drone is at the recharge station position it will recharge the drones battery
+            Recharge(this);}
+    }
+    if(camera->result.found) {
+        this->movement = new Beeline();
+        new_position = this->movement->move(pos, dir, speed);
+        for (int i=0; i < 3; i++) {
+            pos[i] = new_position[i];
+        }
+        delete this->movement;
+        camera->result.found = false;
+    }
+    else if (patrol || beeline) { //&& !final) 
+        if (patrol) { this->movement = new Patrol(); }
+        else if (beeline) { this->movement = new Beeline(); }
+        new_position = this->movement->move(pos, dir, speed);
 
         for (int i=0; i < 3; i++) {
             pos[i] = new_position[i];
