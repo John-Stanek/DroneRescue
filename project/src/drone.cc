@@ -123,8 +123,15 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
                 pos[i] = new_position[i];
             }
             delete this->movement;
+        }       
+    else {
+        for (int i = 0; i < 3; i++) {
+            pos[i] += speed*dir[i]*dt;
         }
+    }
+
         delete this->movement;
+
 
     }
     // Check if the battery life is greater that 20% and final is false
@@ -137,7 +144,6 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
         }
         delete this->movement;
     }
-
 
 
     // Take a picture every 5 seconds with front camera

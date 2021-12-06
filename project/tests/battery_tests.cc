@@ -1,7 +1,7 @@
 #include "battery.h"
 #include "gtest/gtest.h"
 
-
+//4 unit tests
 class BatteryTest : public::testing::Test {
     public:
     void SetUp(){
