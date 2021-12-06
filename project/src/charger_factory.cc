@@ -10,8 +10,9 @@ Entity* ChargerFactory::CreateEntity(picojson::object &entityData, ICameraContro
 
 
     if ((entityData["name"].get<std::string>().compare (0, 16, "recharge station")) == 0) {
-
     	Charger* newCharger = new Charger();
+    	//if entity is charger:
+		//set all appropriate fields of charger from json data
     	
     	//newCharger->SetName((char*)entityData["name"].get<std::string>().c_str());
 	    newCharger->SetID(entityData["entityId"].get<double>());

@@ -20,6 +20,7 @@ CompositeFactory::CompositeFactory(){
 }
 
 CompositeFactory::~CompositeFactory(){
+	//remove all factories from heap
 	delete droneFactory;
 	delete robotFactory;
 	delete rechargeFactory;
@@ -37,6 +38,7 @@ Entity* CompositeFactory::CreateEntity(picojson::object &entityData, ICameraCont
 		}
 		
 	}
+	//if no factories successfully return, return null
 	return NULL;
 }
 
@@ -50,6 +52,7 @@ Entity* CompositeFactory::CreateEntity(picojson::object &entityData){
 		}
 		
 	}
+	//if no factories successfully return, return null
 	return NULL;
 }
 

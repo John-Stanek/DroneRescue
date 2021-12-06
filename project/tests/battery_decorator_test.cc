@@ -3,8 +3,6 @@
 #include "composite_factory.h"
 #include <fstream>
 #include "battery_decorator.h"
-//#include "object.json"
-//#include "EntityFactory.h"
 
 class BatteryDecoratorTest : public ::testing::Test {
   public:
@@ -42,13 +40,13 @@ TEST_F(BatteryDecoratorTest, AddBattery) {
 
   EXPECT_EQ(electricEntity->battery->GetBatteryLife() > 0,true);
 
-  EXPECT_EQ(drone->GetPosition(0),electricEntity->GetPosition(0));
+  EXPECT_EQ(drone->GetPosition(0),electricEntity->GetPosition(0)); //inital positions should be equal
 
   double arrows[4] = {1.0, 0.0, 0.0, 0.0};
   bool moves[2] = {false, false};
   electricEntity->Update(0.01, arrows, moves); //check update function
 
-  EXPECT_EQ(drone->GetPosition(0),electricEntity->GetPosition(0));
+  EXPECT_EQ(drone->GetPosition(0),electricEntity->GetPosition(0)); //updated positions should be equal
 
   delete electricEntity;
   delete drone;

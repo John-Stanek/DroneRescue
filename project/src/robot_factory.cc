@@ -11,7 +11,9 @@ Entity* RobotFactory::CreateEntity(picojson::object &entityData, ICameraControll
 
     if ((entityData["name"].get<std::string>().compare (0, 5, "robot")) == 0) {
     	Robot* newRobot = new Robot();
-    	
+    	//if entity is robot:
+		//set all appropriate fields of robot from json data
+
     	//newRobot->SetName((char*)entityData["name"].get<std::string>().c_str());
 	    newRobot->SetID(entityData["entityId"].get<double>());
 	    newRobot->SetName(entityData["name"].get<std::string>());
@@ -35,7 +37,9 @@ Entity* RobotFactory::CreateEntity(picojson::object &entityData){
 
     if ((entityData["name"].get<std::string>().compare (0, 5, "robot")) == 0) {
     	Robot* newRobot = new Robot();
-    	
+    	//if entity is robot:
+		//set all appropriate fields of robot from json data
+		
     	//newRobot->SetName((char*)entityData["name"].get<std::string>().c_str());
 	    newRobot->SetID(entityData["entityId"].get<double>());
 	    newRobot->SetName(entityData["name"].get<std::string>());
