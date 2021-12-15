@@ -109,10 +109,11 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
             for (int i=0; i < 3; i++) {
                 pos[i] = new_position[i];
             }
+            delete this->movement;
+        	camera->result.found = false;
         }
-        delete this->movement;
-        camera->result.found = false;
-    }
+        
+    
     else if (patrol || beeline) { //&& !final) 
         if (patrol) { this->movement = new Patrol(); }
         else if (beeline) { this->movement = new Beeline(); }
@@ -129,11 +130,10 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
             pos[i] += speed*dir[i]*dt;
         }
     }
-
+}
         delete this->movement;
 
 
-    }
     // Check if the battery life is greater that 20% and final is false
     if(this->battery.GetBatteryLife() > 1000 && !final){
         // Patrols the map while battery life is greater than 20%
@@ -152,5 +152,4 @@ void Drone::Update(double dt, double arrows[4], bool moves[2]) {
         camera->TakePicture();
         lastPictureTime = time;
     }
-}
 
