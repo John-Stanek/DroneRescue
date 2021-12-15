@@ -63,8 +63,8 @@ RUN echo DEP_DIR=${DEP_DIR} > config/settings
 RUN make 
 
 # uncomment if you have docs
-# WORKDIR /home/user/repo/project/docs
-# RUN doxygen Doxyfile
+WORKDIR /home/user/repo/project/docs
+RUN doxygen Doxyfile
 
 # image for the project
 FROM ubuntu:18.04 as sim
@@ -87,7 +87,7 @@ COPY --from=builder ${DEP_DIR}/lib/libimageio.so /sim/lib/
 COPY --from=builder /home/user/repo/project/web /sim/web
 COPY --from=builder /home/user/repo/project/data /sim/data
 # uncomment if you have docs
-# COPY --from=builder /home/user/repo/project/docs/html /sim/web/docs
+COPY --from=builder /home/user/repo/project/docs/html /sim/web/docs
 COPY --from=builder /home/user/repo/project/build/web-app /sim/bin
 COPY --from=builder /home/user/repo/project/build/test-app /sim/bin
 
