@@ -15,7 +15,6 @@ Entity* DroneFactory::CreateEntity(picojson::object &entityData, ICameraControll
 
     	Drone* newDrone = new Drone(cameraController);
     	newDrone->SetName(entityData["name"].get<std::string>());
-		//newDrone->SetName((char*)entityData["name"].get<std::string>().c_str());
 
 	    newDrone->SetID(entityData["entityId"].get<double>());
 	    if(entityData["speed"].is<double>()){
@@ -56,7 +55,6 @@ Entity* DroneFactory::CreateEntity(picojson::object &entityData){
 
     	Drone* newDrone = new Drone();
     	newDrone->SetName(entityData["name"].get<std::string>());
-		//newDrone->SetName((char*)entityData["name"].get<std::string>().c_str());
 
 	    newDrone->SetID(entityData["entityId"].get<double>());
 	    if(entityData["speed"].is<double>()){
